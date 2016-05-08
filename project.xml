@@ -13,10 +13,13 @@
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 	
 	<!-- classpath, haxe libs -->
+
 	<source path="src" />
+	<set name="openfl-legacy" />
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
-	
+	<haxelib name="swf" />
+
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
 	<assets path="assets/img" rename="img" />
