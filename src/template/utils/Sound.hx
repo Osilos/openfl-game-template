@@ -52,7 +52,7 @@ class Sound {
 		}
 
 		var channel:SoundChannel = sound.play();
-		// todo change volume in according to json sounds
+		// todo change volume in according to json soun ds
 		channel.soundTransform = new SoundTransform(1);
 	}
 
