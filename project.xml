@@ -25,6 +25,7 @@
 	<assets path="assets/fonts" rename="fonts" />
 	<assets path="assets/sounds" rename="sounds" />
 	<assets path="assets/swf" rename="swf" />
+	<assets path="assets/localization" rename="localization"/>
 
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
