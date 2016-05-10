@@ -17,17 +17,17 @@ class Localization
 {
 	private static var localizationSource:Map<String, Map<String, Dynamic>> = new Map<String, Map<String, Dynamic>> ();
 	
-	private static var language:String;
-	private static var localizationPath:String = "localization/";
-	
+	private static var language:String;	
 	
 	/**
 	 * Init the localization source
 	 */
 	public static function init () : Void {
 		parseSource();
-		// TO DO get default language from Device language/config file
-		changeSelectLanguage("fr");
+		// TO DO get language from Device language/config file
+		// FallBack to "en" language if don't find
+		changeSelectLanguage("en");
+		
 	}
 	
 	/**
@@ -57,19 +57,19 @@ class Localization
 	}
 	
 	private static function parseSource () : Void {
-		var jsonSources:String = Localization.getLocalizationSources();
-		var sources:Json = Json.parse(jsonSources);
+		var sources:String = Localization.getLocalizationSources();
+		var parsedSources:Json = Json.parse(sources);
 		
-		for (lang in Reflect.fields(sources)) {
+		for (lang in Reflect.fields(parsedSources)) {
 			localizationSource.set(lang, new Map<String, Dynamic>());
-			for (json in Reflect.fields(Reflect.field(sources, lang))) {
+			for (json in Reflect.fields(Reflect.field(parsedSources, lang))) {
 				localizationSource.get(lang)
-					.set(json, Reflect.field(Reflect.field(sources, lang), json));
+					.set(json, Reflect.field(Reflect.field(parsedSources, lang), json));
 			}
 		}
 	}
 
-	macro public static function getLocalizationSources() {
+	macro public static function getLocalizationSources() : Dynamic {
 		var sources:Dynamic = {};
 		var sourcesStringified;
 
