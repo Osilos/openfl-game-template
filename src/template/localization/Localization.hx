@@ -23,7 +23,34 @@ class Localization
 	 */
 	public static function init () : Void {
 		parseSource();
+		// TO DO get default language from Device language/config file
+		changeSelectLanguage("fr");
+	}
+	
+	/**
+	 * Set the language of localization
+	 * @param	language
+	 */
+	public static function changeSelectLanguage(language:String) : Void {
+		Localization.language = language;
+	}
+	
+	/**
+	 * Get text source from label
+	 * @param	label 
+	 * @return source of label
+	 * @default return label if source do not exists
+	 */
+	public static function getText(label:String) : String {
 		
+		for (source in localizationSource.get(language)) {
+			if (Reflect.hasField(source, label))
+				return Reflect.field(source, label);
+		}
+		
+		trace("Localization : get Text, try to access label do not exists");
+		
+		return label;
 	}
 	
 	private static function parseSource () : Void {
@@ -38,52 +65,37 @@ class Localization
 			}
 		}
 		
-		trace (localizationSource);
 	}
 	
-	macro public static function getLocalizationSources() {
+	macro private static function getLocalizationSources() {
 		var sources:String =  '{';
 		
-		var comaLang:Bool = false;
-		var comaJson:Bool = false;
+		var setComaAfterLang:Bool = false;
+		var setComaAfterJson:Bool = false;
 		
 		for (lang in FileSystem.readDirectory("assets/localization/")) {
-			if (comaLang) {
+			if (setComaAfterLang) {
 				sources += ',';
 			}
-			comaLang = true;
+			setComaAfterLang = true;
 			
 			sources += '"' + lang + '":{';
 			
 			for (json in FileSystem.readDirectory("assets/localization/" + lang)) {
-				if (comaJson) {
+				if (setComaAfterJson) {
 					sources += ',';
 				}
-				comaJson = true;
+				setComaAfterJson = true;
 				
 				sources += '"' + json + '":';
-				sources += File.getContent("assets/localization/" + lang +"/" + json);				
+				sources += File.getContent("assets/localization/" + lang + "/" + json);				
 			}
 			sources += "}";	
-			comaJson = false;
+			setComaAfterJson = false;
 		}
 		
 		sources += '}';
 		
 		return macro $v{sources};
-	}
-	
-	/**
-	 * Set the language of localization
-	 * @param	language
-	 */
-	public static function changeSelectLanguage(language:String) : Void {
-		language = Localization.language;
-	}
-	
-	public static function getText(label:String) : String {
-		return null;
-	}
-	
-	
+	}	
 }
