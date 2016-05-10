@@ -22,9 +22,23 @@ class Localization
 	 * Init the localization source
 	 */
 	public static function init () : Void {
-		var jsonSources:String = Localization.getLocalizationSources();
-		trace(Json.parse(jsonSources));
+		parseSource();
 		
+	}
+	
+	private static function parseSource () : Void {
+		var jsonSources:String = Localization.getLocalizationSources();
+		var sources:Json = Json.parse(jsonSources);
+		
+		for (lang in Reflect.fields(sources)) {
+			localizationSource.set(lang, new Map<String, Dynamic>());
+			for (json in Reflect.fields(Reflect.field(sources, lang))) {
+				localizationSource.get(lang)
+					.set(json, Reflect.field(Reflect.field(sources, lang), json));
+			}
+		}
+		
+		trace (localizationSource);
 	}
 	
 	macro public static function getLocalizationSources() {
@@ -67,6 +81,9 @@ class Localization
 		language = Localization.language;
 	}
 	
+	public static function getText(label:String) : String {
+		return null;
+	}
 	
 	
 }
