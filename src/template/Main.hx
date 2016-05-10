@@ -3,6 +3,7 @@ package template;
 import template.utils.metadata.Metadatas;
 import template.utils.Sound;
 import openfl.display.Sprite;
+import template.utils.localization.Localization;
 
 /**
  * ...
