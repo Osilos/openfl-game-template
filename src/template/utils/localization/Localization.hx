@@ -1,4 +1,4 @@
-package src.template.localization;
+package template.utils.localization;
 
 import haxe.Json;
 import Reflect;
