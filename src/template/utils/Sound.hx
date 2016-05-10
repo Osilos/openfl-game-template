@@ -1,5 +1,6 @@
 package template.utils;
 
+import template.utils.metadata.Metadatas;
 import openfl.media.SoundTransform;
 import openfl.media.SoundChannel;
 import openfl.Assets;
@@ -67,8 +68,9 @@ class Sound {
 		}
 
 		var channel:SoundChannel = sound.play();
-		// todo change volume in according to json sounds
-		channel.soundTransform = new SoundTransform(1);
+		var soundLevel:Float = Metadatas.sound[name];
+		channel.soundTransform = new SoundTransform(soundLevel);
+
 		return channel;
 	}
 
