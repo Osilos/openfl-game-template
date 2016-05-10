@@ -10,6 +10,8 @@ class Sound {
 	private inline static var MUSIC_PATH:String = "musics";
 	private inline static var SFX_PATH:String = "sfxs";
 
+	private static var currentMusicPlaying:SoundChannel;
+	private static var lastPlayedMusicName:String;
 	private static var isMusicMuted:Bool = false;
 	private static var isSfxMuted:Bool = false;
 
@@ -17,11 +19,17 @@ class Sound {
 	}
 
 	public static function muteMusic():Void {
-		isMusicMuted = false;
+		isMusicMuted = true;
+		if (currentMusicPlaying != null) {
+			currentMusicPlaying.stop();
+		}
 	}
 
 	public static function unmuteMusic():Void {
-		isMusicMuted = true;
+		isMusicMuted = false;
+		if (lastPlayedMusicName != null) {
+			playMusic(lastPlayedMusicName);
+		}
 	}
 
 	public static function muteSfx():Void {
@@ -32,19 +40,26 @@ class Sound {
 		isSfxMuted = false;
 	}
 
-	public static function playMusic(name:String):Void {
+	public static function playMusic(name:String, loop:Bool = true):SoundChannel {
 		if (!isMusicMuted) {
-			play(name, MUSIC_PATH);
+			lastPlayedMusicName = name;
+			if (currentMusicPlaying != null) {
+				currentMusicPlaying.stop();
+			}
+			currentMusicPlaying = play(name, loop, MUSIC_PATH);
+			return currentMusicPlaying;
 		}
+		return null;
 	}
 
-	public static function playSfx(name:String):Void {
+	public static function playSfx(name:String, loop:Bool = false):SoundChannel {
 		if (!isSfxMuted) {
-			play(name, SFX_PATH);
+			return play(name, loop, SFX_PATH);
 		}
+		return null;
 	}
 
-	private static function play(name:String, typePath:String):Void {
+	private static function play(name:String, loop:Bool, typePath:String):SoundChannel {
 		var sound:openfl.media.Sound = Assets.getSound(SOUND_PATH + '/' + typePath + '/' + name + '.' + SOUND_EXTENSION);
 
 		if (sound == null) {
@@ -54,6 +69,7 @@ class Sound {
 		var channel:SoundChannel = sound.play();
 		// todo change volume in according to json sounds
 		channel.soundTransform = new SoundTransform(1);
+		return channel;
 	}
 
 	private static function throwSoundNotFoundExeption():Void {
