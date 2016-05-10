@@ -25,11 +25,50 @@ class Localization
 	 * Init the localization source
 	 */
 	public static function init () : Void {
-		var jsonSources:String = Localization.getLocalizationSources();
-		trace(Json.parse(jsonSources));
-		
+		parseSource();
+		// TO DO get default language from Device language/config file
+		changeSelectLanguage("fr");
 	}
 	
+	/**
+	 * Set the language of localization
+	 * @param	language
+	 */
+	public static function changeSelectLanguage(language:String) : Void {
+		Localization.language = language;
+	}
+	
+	/**
+	 * Get text source from label
+	 * @param	label 
+	 * @return source of label
+	 * @default return label if source do not exists
+	 */
+	public static function getText(label:String) : String {
+		
+		for (source in localizationSource.get(language)) {
+			if (Reflect.hasField(source, label))
+				return Reflect.field(source, label);
+		}
+		
+		trace("Localization : get Text, try to access label do not exists");
+		
+		return label;
+	}
+	
+	private static function parseSource () : Void {
+		var jsonSources:String = Localization.getLocalizationSources();
+		var sources:Json = Json.parse(jsonSources);
+		
+		for (lang in Reflect.fields(sources)) {
+			localizationSource.set(lang, new Map<String, Dynamic>());
+			for (json in Reflect.fields(Reflect.field(sources, lang))) {
+				localizationSource.get(lang)
+					.set(json, Reflect.field(Reflect.field(sources, lang), json));
+			}
+		}
+	}
+
 	macro public static function getLocalizationSources() {
 		var sources:Dynamic = {};
 		var sourcesStringified;
@@ -45,18 +84,7 @@ class Localization
 		}
 
 		sourcesStringified = Json.stringify(sources);
-		
+
 		return macro $v{sourcesStringified};
 	}
-	
-	/**
-	 * Set the language of localization
-	 * @param	language
-	 */
-	public static function changeSelectLanguage(language:String) : Void {
-		language = Localization.language;
-	}
-	
-	
-	
 }
