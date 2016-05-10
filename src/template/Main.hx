@@ -14,8 +14,6 @@ class Main extends Sprite
 	public function new() {
 		super();
 
-		// Assets:
-		// openfl.Assets.getBitmapData("img/assetname.jpg");
 		Game.start();
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
 	}
