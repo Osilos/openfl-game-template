@@ -1,4 +1,7 @@
 package src.template.localization;
+
+import haxe.Json;
+import Reflect;
 import haxe.Json;
 
 #if macro 
@@ -28,35 +31,22 @@ class Localization
 	}
 	
 	macro public static function getLocalizationSources() {
-		var sources:String =  '{';
-		
-		var comaLang:Bool = false;
-		var comaJson:Bool = false;
-		
+		var sources:Dynamic = {};
+		var sourcesStringified;
+
 		for (lang in FileSystem.readDirectory("assets/localization/")) {
-			if (comaLang) {
-				sources += ',';
+			if (Reflect.field(sources, lang) == null) {
+				Reflect.setField(sources, lang, {});
 			}
-			comaLang = true;
-			
-			sources += '"' + lang + '":{';
-			
 			for (json in FileSystem.readDirectory("assets/localization/" + lang)) {
-				if (comaJson) {
-					sources += ',';
-				}
-				comaJson = true;
-				
-				sources += '"' + json + '":';
-				sources += File.getContent("assets/localization/" + lang +"/" + json);				
+				var keyValue = File.getContent("assets/localization/" + lang +"/" + json);
+				Reflect.setField(Reflect.field(sources, lang), json, keyValue);
 			}
-			sources += "}";	
-			comaJson = false;
 		}
+
+		sourcesStringified = Json.stringify(sources);
 		
-		sources += '}';
-		
-		return macro $v{sources};
+		return macro $v{sourcesStringified};
 	}
 	
 	/**
