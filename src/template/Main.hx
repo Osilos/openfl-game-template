@@ -1,9 +1,9 @@
 package template;
 
+import openfl.events.Event;
+import template.game.Game;
 import template.utils.metadata.Metadatas;
-import template.utils.sound.Sound;
 import openfl.display.Sprite;
-import template.utils.localization.Localization;
 
 /**
  * ...
@@ -15,6 +15,8 @@ class Main extends Sprite
 	public function new() {
 		super();
 
+		addEventListener(Event.ENTER_FRAME, Game.gameloop);
 		Metadatas.load();
+		Game.start();
 	}
 }
