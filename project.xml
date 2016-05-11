@@ -6,7 +6,8 @@
 	<meta title="openfl-game-template" package="template.openfl-game-template" version="1.0.0" company="Flavien" />
 	
 	<!-- output -->
-	<app main="template.Main" file="openfl-game-template" path="bin" />
+	<app main="template.Main" file="openfl-game-template" path="bin" 
+		 preloader="template.utils.preloader.CustomePreloader" />
 	
 	<window background="#000000" fps="60" />
 	<window width="800" height="480" unless="mobile" />
