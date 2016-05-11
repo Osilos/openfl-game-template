@@ -1,4 +1,4 @@
-package template.utils;
+package template.utils.sound;
 
 import template.utils.metadata.Metadatas;
 import openfl.media.SoundTransform;
