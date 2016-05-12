@@ -1,6 +1,5 @@
 package template.utils.debug;
 
-import openfl.text.TextFieldAutoSize;
 import openfl.display.Sprite;
 import openfl.display.DisplayObject;
 import template.utils.debug.Debug;
@@ -61,8 +60,6 @@ class Debug {
 				container.removeChild(element);
 			}
 		}
-		trace(debugPoints);
-		trace(debugTexts);
 	}
 
 	private static function throwContainerNotInitializedException():Void {

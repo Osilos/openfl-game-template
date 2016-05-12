@@ -6,7 +6,9 @@ class Game {
 	}
 
 	public static function start():Void {
+		#if showdebuginfo
 
+		#end
 	}
 
 	public static function gameloop(event:Dynamic):Void {
