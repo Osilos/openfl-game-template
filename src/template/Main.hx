@@ -20,7 +20,7 @@ class Main extends Sprite
 		
 		var gameStage:GameStage = new GameStage();
 		addChild(gameStage);
-		gameStage.addGameChild(Assets.getMovieClip("TitleCard:TitleCard"));
+		gameStage.addScreen(Assets.getMovieClip("TitleCard:TitleCard"));
 		gameStage.alignMode = GameStageAlign.CENTER;
 		gameStage.scaleMode = StageScaleMode.SHOW_ALL;
 		gameStage.gameContainerAlignMode = GameStageAlign.CENTER;

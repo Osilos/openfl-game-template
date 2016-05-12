@@ -23,6 +23,9 @@ class GameStage extends DisplayObjectContainer
 	private var _safeZone:Rectangle 	  = new Rectangle(0, 0, SAFE_ZONE_WIDTH, SAFE_ZONE_HEIGHT);
 	
 	private var gameContainer:DisplayObjectContainer;
+	private var hudContainer:DisplayObjectContainer;
+	private var screenContainer:DisplayObjectContainer;
+	private var popinContainer:DisplayObjectContainer;
 	
 	/**
 	 * Alignment style for view
@@ -45,6 +48,21 @@ class GameStage extends DisplayObjectContainer
 	public var gameContainerAlignMode(default, set):GameStageAlign;
 	
 	/**
+	 * Determines align mode of hud container (result depends of GameStage align mode [GameStageAlign.CENTER advisable])
+	 */
+	public var hudContainerAlignMode(default, set):GameStageAlign;
+	
+	/**
+	 * Determines align mode of screen container (result depends of GameStage align mode [GameStageAlign.CENTER advisable])
+	 */
+	public var screenContainerAlignMode(default, set):GameStageAlign;
+	
+	/**
+	 * Determines align mode of popin container (result depends of GameStage align mode [GameStageAlign.CENTER advisable])
+	 */
+	public var popinContainerAlignMode(default, set):GameStageAlign;
+	
+	/**
 	 * Determines the width of the safezone
 	 */
 	public var safeZoneWidth(get, set):UInt;
@@ -58,8 +76,21 @@ class GameStage extends DisplayObjectContainer
 	{
 		super();
 		
-		gameContainer = new DisplayObjectContainer();
+		gameContainer   = new DisplayObjectContainer();
+		hudContainer    = new DisplayObjectContainer();
+		screenContainer = new DisplayObjectContainer();
+		popinContainer  = new DisplayObjectContainer();
+		
 		addChild(gameContainer);
+		addChild(hudContainer);
+		addChild(screenContainer);
+		addChild(popinContainer);
+		
+		gameContainerAlignMode   = GameStageAlign.CENTER;
+		hudContainerAlignMode    = GameStageAlign.TOP_LEFT;
+		screenContainerAlignMode = GameStageAlign.CENTER;
+		popinContainerAlignMode  = GameStageAlign.CENTER;
+		
 		addEventListener(Event.ADDED_TO_STAGE, onAddToStage);
 		addEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStage);
 	}
@@ -75,20 +106,67 @@ class GameStage extends DisplayObjectContainer
 	
 	/**
 	 * Add child to gameContainer
-	 * @param   game
+	 * @param   displayObj
 	 */
-	public function addGameChild(game:DisplayObject):Void {
-		gameContainer.addChild(game);
+	public function addGameChild(displayObj:DisplayObject):Void {
+		gameContainer.addChild(displayObj);
 	}
 	
 	/**
 	 * Remove child from gameContainer
-	 * @param	game
+	 * @param	displayObj
 	 */
-	public function removeGameChild(game:DisplayObject):Void {
-		gameContainer.removeChild(game);
+	public function removeGameChild(displayObj:DisplayObject):Void {
+		gameContainer.removeChild(displayObj);
 	}
 	
+	/**
+	 * Add screen child to screenContainer
+	 * @param   game
+	 */
+	public function addScreen(screen:DisplayObject):Void {
+		screenContainer.addChild(screen);
+	}
+	
+	/**
+	 * Remove screen child from screenContainer
+	 * @param	game
+	 */
+	public function removeScreen(screen:DisplayObject):Void {
+		screenContainer.removeChild(screen);
+	}
+	
+	/**
+	 * Add popin child to popinContainer
+	 * @param   game
+	 */
+	public function addPopin(popin:DisplayObject):Void {
+		popinContainer.addChild(popin);
+	}
+	
+	/**
+	 * Remove popin child from popinContainer
+	 * @param	game
+	 */
+	public function removePopin(popin:DisplayObject):Void {
+		popinContainer.removeChild(popin);
+	}
+	
+	/**
+	 * Add hud child to hudContainer
+	 * @param   game
+	 */
+	public function addHud(hud:DisplayObject):Void {
+		hudContainer.addChild(hud);
+	}
+	
+	/**
+	 * Remove hud child from hudContainer
+	 * @param	game
+	 */
+	public function removeHud(hud:DisplayObject):Void {
+		hudContainer.removeChild(hud);
+	}
 	
 	/**
 	 * Resize scene from window's size
@@ -132,6 +210,21 @@ class GameStage extends DisplayObjectContainer
 	private function set_gameContainerAlignMode(alignMode:GameStageAlign):GameStageAlign {
 		setContainerAlignMode(gameContainer, alignMode);
 		return gameContainerAlignMode = alignMode;
+	}
+	
+	private function set_hudContainerAlignMode(alignMode:GameStageAlign):GameStageAlign {
+		setContainerAlignMode(hudContainer, alignMode);
+		return hudContainerAlignMode = alignMode;
+	}
+	
+	private function set_screenContainerAlignMode(alignMode:GameStageAlign):GameStageAlign {
+		setContainerAlignMode(screenContainer, alignMode);
+		return screenContainerAlignMode = alignMode;
+	}
+	
+	private function set_popinContainerAlignMode(alignMode:GameStageAlign):GameStageAlign {
+		setContainerAlignMode(popinContainer, alignMode);
+		return popinContainerAlignMode = alignMode;
 	}
 	
 	private function get_alignMode():GameStageAlign { 
@@ -183,6 +276,9 @@ class GameStage extends DisplayObjectContainer
 	private function replaceAll():Void {
 		resize();
 		setContainerAlignMode(gameContainer, gameContainerAlignMode);
+		setContainerAlignMode(hudContainer, hudContainerAlignMode);
+		setContainerAlignMode(popinContainer, popinContainerAlignMode);
+		setContainerAlignMode(screenContainer, screenContainerAlignMode);
 	}
 	
 	/**
