@@ -66,6 +66,7 @@ class GameStage extends DisplayObjectContainer
 	
 	private function onAddToStage(event:Event):Void {
 		parent.stage.addEventListener(Event.RESIZE, resize);
+		resize();
 	}
 	
 	private function onRemoveFromStage(event:Event):Void {
