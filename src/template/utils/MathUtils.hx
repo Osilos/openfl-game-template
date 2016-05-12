@@ -25,7 +25,8 @@ class MathUtils
 	 * @return
 	 */
 	public static function getDistance(pointA:Point, pointB:Point):Float {
-		return Math.sqrt(Math.pow(pointA.x - pointB.x, 2) + Math.pow(pointA.y - pointB.y, 2));
+		return Math.sqrt((pointA.x - pointB.x) * (pointA.x - pointB.x) 
+			+ (pointA.y - pointB.y)* (pointA.y - pointB.y));
 	}
 	
 	/**
