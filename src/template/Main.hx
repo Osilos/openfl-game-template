@@ -1,13 +1,13 @@
 package template;
 
 import openfl.Assets;
+import openfl.display.Sprite;
 import openfl.display.StageScaleMode;
 import openfl.events.Event;
 import template.game.Game;
 import template.utils.game.GameStage;
 import template.utils.game.GameStageAlign;
 import template.utils.metadata.Metadatas;
-import openfl.display.Sprite;
 
 /**
  * ...
@@ -15,7 +15,6 @@ import openfl.display.Sprite;
  */
 class Main extends Sprite 
 {
-
 	public function new() {
 		super();
 		
