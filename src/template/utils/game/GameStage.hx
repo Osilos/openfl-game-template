@@ -9,8 +9,8 @@ import openfl.geom.Rectangle;
 import template.utils.game.GameStageAlign;
 
 /**
- * Classe en charge de mettre en place la structure graphique du jeu (conteneurs divers)
- * et la gestion du redimensionnement de la zone de jeu en fonction du contexte
+ * Class used for graphics structure (various Containers)
+ * and resize management related to context
  * @author Théo Sabattié
  */
 class GameStage extends DisplayObjectContainer
@@ -25,32 +25,32 @@ class GameStage extends DisplayObjectContainer
 	private var gameContainer:DisplayObjectContainer;
 	
 	/**
-	 * style d'alignement au sein de l'écran
+	 * Alignment style for view
 	 */
 	public var alignMode(get, set):GameStageAlign;
 	
 	/**
-	 * style de redimensionnement au sein de l'écran
+	 * Resize mode for view
 	 */
 	public var scaleMode(get, set):StageScaleMode;
 	
 	/**
-	 * Rectangle délimitant le contenu minimum visible
+	 * Rectangle wich delimits viewed area
 	 */
 	public var safeZone(get, never):Rectangle;
 	
 	/**
-	 * Determine si le gameContainer se place au centre (ou en haut à gauche)
+	 * Determines if the gameContainer is on the center (or top left)
 	 */
 	public var centerGameContainer(default, set):Bool;
 	
 	/**
-	 * Détermine la largeur de la zone qui sera toujours affichée
+	 * Determines the width of the safezone
 	 */
 	public var safeZoneWidth(get, set):UInt;
 	
 	/**
-	 * Détermine la hauteur de la zone qui sera toujours affichée
+	 * Determines the height of the safezone
 	 */
 	public var safeZoneHeight(get, set):UInt;
 	
@@ -73,7 +73,7 @@ class GameStage extends DisplayObjectContainer
 	}
 	
 	/**
-	 * Ajoute un un élément de jeu
+	 * Add child to gameContainer
 	 * @param   game
 	 */
 	public function addGameChild(game:DisplayObject):Void {
@@ -81,7 +81,7 @@ class GameStage extends DisplayObjectContainer
 	}
 	
 	/**
-	 * Retire un élément de jeu
+	 * Remove child from gameContainer
 	 * @param	game
 	 */
 	public function removeGameChild(game:DisplayObject):Void {
@@ -90,7 +90,7 @@ class GameStage extends DisplayObjectContainer
 	
 	
 	/**
-	 * Redimensionne la scène du jeu en fonction de la taille disponible pour l'affichage
+	 * Resize scene from window's size
 	 */
 	public function resize(?event:Event = null):Void {
 		var lWidth:Float  = parent.stage.stageWidth;
@@ -176,7 +176,7 @@ class GameStage extends DisplayObjectContainer
 	}
 	
 	/**
-	 * Détruit le GameStage (retire ses listeners et le retire de la scène)
+	 * Destroy GameStage instance (remove listeners and remove from scene)
 	 */
 	public function destroy():Void {
 		if (parent != null) {
