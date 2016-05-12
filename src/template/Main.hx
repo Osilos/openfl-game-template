@@ -16,6 +16,7 @@ class Main extends Sprite
 		super();
 
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
+
 		Metadatas.load();
 		Game.start();
 	}
