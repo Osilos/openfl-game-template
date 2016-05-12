@@ -9,13 +9,13 @@
 	<app main="template.Main" file="openfl-game-template" path="bin" />
 	
 	<window background="#000000" fps="60" />
-	<window width="800" height="480" unless="mobile" />
+	<!-- <window width="800" height="450" fps="60" /> -->
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 	
 	<!-- classpath, haxe libs -->
 
 	<source path="src" />
-	<set name="openfl-legacy" />
+	<!--<set name="openfl-legacy" /> -->
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="swf" />
@@ -27,6 +27,8 @@
 	<assets path="assets/swf" rename="swf" />
 	<assets path="assets/localization" rename="localization"/>
 
+	<library path="assets/swf/TitleCard.swf" id="TitleCard" type="swflite" preload="true"/>
+	
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
 	
