@@ -24,7 +24,7 @@ class Main extends Sprite
 		gameStage.addGameChild(Assets.getMovieClip("TitleCard:TitleCard"));
 		gameStage.alignMode = GameStageAlign.CENTER;
 		gameStage.scaleMode = StageScaleMode.SHOW_ALL;
-		gameStage.centerGameContainer = true;
+		gameStage.gameContainerAlignMode = GameStageAlign.CENTER;
 		
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
 		Metadatas.load();

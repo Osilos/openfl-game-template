@@ -40,9 +40,9 @@ class GameStage extends DisplayObjectContainer
 	public var safeZone(get, never):Rectangle;
 	
 	/**
-	 * Determines if the gameContainer is on the center (or top left)
+	 * Determines align mode of game container (result depends of GameStage align mode [GameStageAlign.CENTER advisable])
 	 */
-	public var centerGameContainer(default, set):Bool;
+	public var gameContainerAlignMode(default, set):GameStageAlign;
 	
 	/**
 	 * Determines the width of the safezone
@@ -111,18 +111,27 @@ class GameStage extends DisplayObjectContainer
 		else y = (lHeight - safeZone.height * scaleY) / 2;
 	}
 	
-	private function setCenter(container:DisplayObjectContainer, isCenter:Bool):Void {
-		if (isCenter) {
-			container.x = safeZone.width / 2;
+	private function setContainerAlignMode(container:DisplayObjectContainer, alignMode:GameStageAlign):Void {
+		if (alignMode == GameStageAlign.CENTER || alignMode == GameStageAlign.LEFT || alignMode == GameStageAlign.RIGHT) {
 			container.y = safeZone.height / 2;	
-		} else {
-			container.x = container.y = 0;
+		} else if (alignMode == GameStageAlign.TOP || alignMode == GameStageAlign.TOP_LEFT || alignMode == GameStageAlign.TOP_RIGHT) {
+			container.y = safeZone.y;
+		} else if (alignMode == GameStageAlign.BOTTOM || alignMode == GameStageAlign.BOTTOM_LEFT || alignMode == GameStageAlign.BOTTOM_RIGHT) {
+			container.y = safeZone.height;
+		}
+		
+		if (alignMode == GameStageAlign.CENTER || alignMode == GameStageAlign.TOP || alignMode == GameStageAlign.BOTTOM) {
+			container.x = safeZone.width / 2;
+		} else if (alignMode == GameStageAlign.BOTTOM_LEFT || alignMode == GameStageAlign.LEFT || alignMode == GameStageAlign.TOP_LEFT) {
+			container.x = safeZone.x;
+		} else if (alignMode == GameStageAlign.RIGHT || alignMode == GameStageAlign.TOP_RIGHT || alignMode == GameStageAlign.BOTTOM_RIGHT) {
+			container.x = safeZone.width;
 		}
 	}
 	
-	private function set_centerGameContainer(isCenter:Bool):Bool {
-		setCenter(gameContainer, isCenter);
-		return centerGameContainer = isCenter;
+	private function set_gameContainerAlignMode(alignMode:GameStageAlign):GameStageAlign {
+		setContainerAlignMode(gameContainer, alignMode);
+		return gameContainerAlignMode = alignMode;
 	}
 	
 	private function get_alignMode():GameStageAlign { 
@@ -173,7 +182,7 @@ class GameStage extends DisplayObjectContainer
 	
 	private function replaceAll():Void {
 		resize();
-		setCenter(gameContainer, centerGameContainer);
+		setContainerAlignMode(gameContainer, gameContainerAlignMode);
 	}
 	
 	/**
