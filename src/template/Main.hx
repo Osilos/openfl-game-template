@@ -2,6 +2,7 @@ package template;
 
 import openfl.events.Event;
 import template.game.Game;
+import template.utils.localization.Localization;
 import template.utils.metadata.Metadatas;
 import openfl.display.Sprite;
 
@@ -16,7 +17,7 @@ class Main extends Sprite
 		super();
 
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
-
+		
 		Metadatas.load();
 		Game.start();
 	}
