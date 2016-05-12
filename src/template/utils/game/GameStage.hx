@@ -65,11 +65,11 @@ class GameStage extends DisplayObjectContainer
 	}
 	
 	private function onAddToStage(event:Event):Void {
-		parent.addEventListener(Event.RESIZE, resize);
+		parent.stage.addEventListener(Event.RESIZE, resize);
 	}
 	
 	private function onRemoveFromStage(event:Event):Void {
-		parent.removeEventListener(Event.RESIZE, resize);
+		parent.stage.removeEventListener(Event.RESIZE, resize);
 	}
 	
 	/**
