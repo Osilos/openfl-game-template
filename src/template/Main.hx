@@ -1,5 +1,7 @@
 package template;
 
+import openfl.geom.Point;
+import template.utils.debug.Debug;
 import openfl.events.Event;
 import template.game.Game;
 import template.utils.metadata.Metadatas;

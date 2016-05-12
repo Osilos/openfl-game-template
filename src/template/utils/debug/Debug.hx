@@ -1,5 +1,9 @@
 package template.utils.debug;
 
+import openfl.text.TextFieldAutoSize;
+import openfl.display.Sprite;
+import openfl.display.DisplayObject;
+import template.utils.debug.Debug;
 import openfl.text.TextFormat;
 import openfl.text.TextField;
 import openfl.display.DisplayObjectContainer;
@@ -7,50 +11,58 @@ import openfl.display.Graphics;
 import openfl.geom.Point;
 
 class Debug {
-	private static var debugPoints:Array<Graphics> = new Array<Graphics>();
-	private static var debugTexts:Array<Graphics> = new Array<Graphics>();
+	private static var debugPoints:Array<Sprite> = new Array<Sprite>();
+	private static var debugTexts:Array<TextField> = new Array<TextField>();
 	private static var container:DisplayObjectContainer;
 
 	public static function initContainer(container:DisplayObjectContainer):Void {
-		this.container = container;
+		Debug.container = container;
 	}
 
-	public static function addDebugPointAt(position:Point, color:Int = 0xFF0000):Graphics {
+	public static function addDebugPointAt(position:Point, color:Int = 0xFF0000):Sprite {
 		if (container == null) {
 			throwContainerNotInitializedException();
 		}
-		var debugPoint = new Graphics();
-		debugPoint.beginFill(color);
-		debugPoint.drawCircle(0, 0, 5);
-		debugPoint.moveTo(position.x, position.y);
+		var debugPoint = new Sprite();
+		debugPoint.graphics.beginFill(color);
+		debugPoint.graphics.drawCircle(0, 0, 2);
+		debugPoint.x = position.x;
+		debugPoint.y = position.y;
 		debugPoints.push(debugPoint);
 		container.addChild(debugPoint);
 		return debugPoint;
 	}
 
-	public static function addDebugTextAt(position:Point, text:String, color:Int = 0xff1010):TextField {
+	public static function addDebugTextAt(position:Point, text:String, color:Int = 0xFF000):TextField {
 		if (container == null) {
 			throwContainerNotInitializedException();
 		}
-		var text = new TextField();
-		text.selectable = false;
-		text.defaultTextFormat = new TextFormat("_sans", 12, color);
-		text.x = position.x;
-		text.y = position.y;
-		container.addChild(text);
-		return text;
+		var textField = new TextField();
+		textField.selectable = false;
+		textField.defaultTextFormat = new TextFormat("_sans", 12, color);
+		textField.x = position.x;
+		textField.y = position.y;
+		textField.text = text;
+		textField.width = 9999;
+		debugTexts.push(textField);
+		container.addChild(textField);
+		return textField;
 	}
 
 	public static function removeDebugElements():Void {
-		for (debugPoint in debugPoints) {
-			debugPoints.splice(debugPoints.indexOf(debugPoint), 1);
-			container.removeChild(debugPoint);
-		}
+		var elementsOfElements:Array<Array<Dynamic>> = [debugPoints, debugTexts];
 
-		for (debugText in debugTexts) {
-			debugPoints.splice(debugPoints.indexOf(debugText), 1);
-			container.removeChild(debugText);
+		for (elements in elementsOfElements) {
+			var elementsToRemoveCount:Int = elements.length;
+			for (i in 0...elementsToRemoveCount) {
+				var inversedIndex:Int = (elementsToRemoveCount - 1) - i;
+				var element:Dynamic = elements[inversedIndex];
+				elements.splice(inversedIndex, 1);
+				container.removeChild(element);
+			}
 		}
+		trace(debugPoints);
+		trace(debugTexts);
 	}
 
 	private static function throwContainerNotInitializedException():Void {
