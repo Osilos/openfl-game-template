@@ -11,9 +11,7 @@ import openfl.display.Sprite;
  * ...
  * @author Flavien
  */
-class Main extends Sprite 
-{
-
+class Main extends Sprite {
 	public function new() {
 		super();
 
