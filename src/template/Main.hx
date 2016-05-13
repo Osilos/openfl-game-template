@@ -21,6 +21,7 @@ class Main extends Sprite
 		Metadatas.load();
 		Game.start();
 
+		// todo : move to Game.hx when we have GameStage
 		#if showdebuginfo
 			var debugInfo:DebugInfo = new DebugInfo();
 			addChild(debugInfo);
