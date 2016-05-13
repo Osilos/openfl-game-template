@@ -17,7 +17,7 @@ class Main extends Sprite
 	public function new() {
 		super();
 
-		Debug.initContainer(this); //todo : create debug container
+		Debug.initDefaultContainer(this); //todo : create debug container
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
 		Metadatas.load();
 		Game.start();

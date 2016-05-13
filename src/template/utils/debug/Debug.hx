@@ -1,5 +1,6 @@
 package template.utils.debug;
 
+import lime.system.Display;
 import openfl.display.Sprite;
 import openfl.display.DisplayObject;
 import template.utils.debug.Debug;
@@ -14,14 +15,12 @@ class Debug {
 	private static var debugTexts:Array<TextField> = new Array<TextField>();
 	private static var container:DisplayObjectContainer;
 
-	public static function initContainer(container:DisplayObjectContainer):Void {
+	public static function initDefaultContainer(container:DisplayObjectContainer):Void {
 		Debug.container = container;
 	}
 
-	public static function addDebugPointAt(position:Point, color:Int = 0xFF0000):Sprite {
-		if (container == null) {
-			throwContainerNotInitializedException();
-		}
+	public static function addDebugPointAt(position:Point, color:Int = 0xFF0000, ?sourceContainer:DisplayObjectContainer):Sprite {
+		var container:DisplayObjectContainer = getAvailableContainer(sourceContainer);
 		var debugPoint = new Sprite();
 		debugPoint.graphics.beginFill(color);
 		debugPoint.graphics.drawCircle(0, 0, 2);
@@ -32,10 +31,8 @@ class Debug {
 		return debugPoint;
 	}
 
-	public static function addDebugTextAt(position:Point, text:String, color:Int = 0xFF000):TextField {
-		if (container == null) {
-			throwContainerNotInitializedException();
-		}
+	public static function addDebugTextAt(position:Point, text:String, color:Int = 0xFF000, ?sourceContainer:DisplayObjectContainer):TextField {
+		var container:DisplayObjectContainer = getAvailableContainer(sourceContainer);
 		var textField = new TextField();
 		textField.selectable = false;
 		textField.defaultTextFormat = new TextFormat("_sans", 12, color);
@@ -62,7 +59,20 @@ class Debug {
 		}
 	}
 
-	private static function throwContainerNotInitializedException():Void {
-		throw 'Debug.hx : Container has not been initialized, use initContainer(container:DisplayObjectContainer):Void';
+	private static function getAvailableContainer(sourceContainer:DisplayObjectContainer):DisplayObjectContainer {
+		if (sourceContainer != null) {
+			return sourceContainer;
+		}
+		if (container != null) {
+			return container;
+		}
+		throw containerNotFoundException();
+	}
+
+	private static function containerNotFoundException():String {
+		return (
+			'Debug.hx : Container to add debug element was not found, ' +
+			'pass container in method argument or use initContainer(container:DisplayObjectContainer):Void'
+		);
 	}
 }
