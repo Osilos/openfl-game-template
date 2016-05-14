@@ -27,6 +27,7 @@
 	<assets path="assets/swf" rename="swf" />
 	<assets path="assets/localization" rename="localization"/>
 
+	<library path="assets/swf/assets.swf" />
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
 	
