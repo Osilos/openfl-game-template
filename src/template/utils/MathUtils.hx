@@ -56,7 +56,7 @@ class MathUtils
 	 * @return
 	 */
 	public static function getPercent (number:Float, total:Float) : Float {
-		return 100 / total * number;
+		return number / total;
 	}
 	
 }

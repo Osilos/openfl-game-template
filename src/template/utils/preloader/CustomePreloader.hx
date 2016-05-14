@@ -28,7 +28,8 @@ class CustomePreloader extends NMEPreloader
 	private static inline var BASE_PERCENT_TEXT:String = "0%";
 	private static inline var BASE_LOADING_TEXT_LABEL:String = "loading";
 	
-	private static inline var TOP_OFFSET:Float = 25;
+	private static inline var TOP_OFFSET_X:Float = 50;
+	private static inline var TOP_OFFSET_Y:Float = 25;
 	
 	private static var website = "http://www.openfl.org/";
 	
@@ -59,97 +60,28 @@ class CustomePreloader extends NMEPreloader
 		addChild(percentText);
 		addChild(loadingText);
 		
-		placeTopLeftCorner(loadingText, TOP_OFFSET);
-		placeTopLeftCorner(percentText, TOP_OFFSET * 2);
+		placeTextOnTopLeftCorner(loadingText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y));
+		placeTextOnTopLeftCorner(percentText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y * 2));
 		
 		changeBackgroundColor(PRELOAD_BACKGROUND_COLOR);
 		
-		Lib.current.stage.addEventListener(Event.RESIZE, onResize);
-        Lib.current.stage.addEventListener(Event.ENTER_FRAME, onFrame);
-        Lib.current.stage.addEventListener(MouseEvent.CLICK, gotoWebsite, false, 0, true);
-		
+        addEventListener(Event.ENTER_FRAME, onFrame);
+        addEventListener(MouseEvent.CLICK, gotoWebsite, false, 0, true);
 		addEventListener(Event.COMPLETE, onComplete);
-	}
-	
-	override public function onUpdate(bytesLoaded:Int, bytesTotal:Int):Void 
-	{
-		var percent:Float = MathUtils.getPercent(bytesLoaded, bytesTotal);
-		setPercentText(Std.string(Math.ceil(percent)));
-		
-		updateProgressBar(percent);
-		
-		trace(bytesLoaded + " / " + bytesTotal);
-
-	}
-	
-	public function onComplete (event:Event):Void {
-		changeBackgroundColor(getBackgroundColor());
-		
-		Lib.current.stage.removeEventListener(Event.RESIZE, onResize);
-        Lib.current.stage.removeEventListener(Event.ENTER_FRAME, onFrame);
-        Lib.current.stage.removeEventListener(MouseEvent.CLICK, gotoWebsite);
-    }
-	
-	private function updateProgressBar (percent:Float) : Void {
-		
-		progress.scaleX = percent / 100;
-		
-		progress.graphics.clear();
-		progress.graphics.beginFill(PROGRESS_BAR_COLOR, 0.9);
-        progress.graphics.drawRoundRect(0, 0, outline.width, 
-			outline.height * 0.5 , progressBarRadiusBorder, progressBarRadiusBorder);
-		progress.graphics.endFill();
-	}
-	
-	private function setPercentText (text:String) : Void {
-		percentText.text = text + " %";
-	}
-	
-	private function gotoWebsite(event:MouseEvent):Void
-    {
-        Lib.getURL(new URLRequest (website));
-    }
-	
-	private function onResize (event:Event) : Void {
-		updatePosition();
-	}
-	
-	private function onFrame (event:Event) : Void {
-		updatePosition();
-	}
-	
-	private function updatePosition () : Void {
-		updateScreenSize();
-		centerSplashImage();
-		placeTopLeftCorner(loadingText, TOP_OFFSET);
-		placeTopLeftCorner(percentText, TOP_OFFSET * 2);
-	}
-	
-	private function updateScreenSize () : Void {
-		screenSize.setTo(Lib.current.stage.width, Lib.current.stage.height);
-	}
-	
-	private function changeBackgroundColor (color:Int) : Void {
-		Lib.current.stage.color = color;
-	}
-	
-	private function hideOutline () : Void {
-		outline.visible = false;
-	}
-	
-	private function createSplashImage () : Void {
-		splash = new Bitmap(new Splash(Std.int(splashSize.x), Std.int(splashSize.y)));
-        splash.smoothing = true;
-        addChild(splash);
 	}
 	
 	private function centerSplashImage () : Void {
 		splash.x = screenSize.x / 2 - splashSize.x / 2;
 	}
 	
-	private function placeTopLeftCorner (text:TextField, topOffset:Float) : Void {
-		text.x = 50;
-		text.y = topOffset + text.height;
+	private function changeBackgroundColor (color:Int) : Void {
+		Lib.current.stage.color = color;
+	}
+	
+	private function createSplashImage () : Void {
+		splash = new Bitmap(new Splash(Std.int(splashSize.x), Std.int(splashSize.y)));
+        splash.smoothing = true;
+        addChild(splash);
 	}
 	
 	private function createTextField (?text:String = null) : TextField {
@@ -163,5 +95,64 @@ class CustomePreloader extends NMEPreloader
 		textField.autoSize = TextFieldAutoSize.CENTER;
 		
 		return textField;
+	}
+	
+	private function gotoWebsite(event:MouseEvent):Void {
+        Lib.getURL(new URLRequest (website));
+    }
+	
+	private function hideOutline () : Void {
+		outline.visible = false;
+	}
+	
+	public function onComplete (event:Event):Void {
+		changeBackgroundColor(getBackgroundColor());
+		
+		removeEventListener(Event.COMPLETE, onComplete);
+        removeEventListener(Event.ENTER_FRAME, onFrame);
+        removeEventListener(MouseEvent.CLICK, gotoWebsite);
+    }
+	
+	private function onFrame (event:Event) : Void {
+		updatePosition();
+	}
+	
+	override public function onUpdate(bytesLoaded:Int, bytesTotal:Int):Void 
+	{
+		var percent:Float = MathUtils.getPercent(bytesLoaded, bytesTotal);
+		setPercentText(Std.string(Math.ceil(percent * 100)));
+		
+		updateProgressBar(percent);	
+	}
+	
+	private function placeTextOnTopLeftCorner (text:TextField, topOffset:Point) : Void {
+		text.x = topOffset.x;
+		text.y = topOffset.y + text.height;
+	}
+	
+	private function setPercentText (text:String) : Void {
+		percentText.text = text + " %";
+	}
+	
+	private function updatePosition () : Void {
+		updateScreenSize();
+		centerSplashImage();
+		placeTextOnTopLeftCorner(loadingText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y));
+		placeTextOnTopLeftCorner(percentText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y * 2));
+	}
+	
+	private function updateProgressBar (percent:Float) : Void {
+		
+		progress.scaleX = percent;
+		
+		progress.graphics.clear();
+		progress.graphics.beginFill(PROGRESS_BAR_COLOR, 0.9);
+        progress.graphics.drawRoundRect(0, 0, outline.width, 
+		outline.height * 0.5 , progressBarRadiusBorder, progressBarRadiusBorder);
+		progress.graphics.endFill();
+	}
+	
+	private function updateScreenSize () : Void {
+		screenSize.setTo(Lib.current.stage.width, Lib.current.stage.height);
 	}
 }
