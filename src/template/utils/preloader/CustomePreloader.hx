@@ -13,7 +13,7 @@ import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 import template.utils.localization.Localization;
 
-@:bitmap("assets/preloader/logo.png") class Splash extends BitmapData {}
+@:bitmap("assets/preloader/splashScreen.png") class Splash extends BitmapData {}
 
 /**
  * ...
@@ -21,11 +21,12 @@ import template.utils.localization.Localization;
  */
 class CustomePreloader extends NMEPreloader
 {	
-	private static inline var preloadBackgroundColor:Int = 0x87CEEB;
-	private static inline var baseBackgroundColor:Int = 0xFFFFFF;
+	private static inline var OUTLINE_BAR_COLOR:Int = 0x000000;
+	private static inline var PRELOAD_BACKGROUND_COLOR:Int = 0x87CEEB;
+	private static inline var PROGRESS_BAR_COLOR:Int = 0xFF0000;
 	
-	private static inline var basePercentText:String = "0%";
-	private static inline var baseLoadingTextLabel:String = "loading";
+	private static inline var BASE_PERCENT_TEXT:String = "0%";
+	private static inline var BASE_LOADING_TEXT_LABEL:String = "loading";
 	
 	private static inline var TOP_OFFSET:Float = 25;
 	
@@ -39,6 +40,8 @@ class CustomePreloader extends NMEPreloader
 	private var percentText:TextField;
 	private var loadingText:TextField;
 	
+	private var progressBarRadiusBorder:Float = 5;
+	
 	public function new() 
 	{
 		super();
@@ -50,8 +53,8 @@ class CustomePreloader extends NMEPreloader
 		createSplashImage();
 		centerSplashImage();
 		
-		percentText = createTextField(basePercentText);
-		loadingText = createTextField(Localization.getText(baseLoadingTextLabel));
+		percentText = createTextField(BASE_PERCENT_TEXT);
+		loadingText = createTextField(Localization.getText(BASE_LOADING_TEXT_LABEL));
 		
 		addChild(percentText);
 		addChild(loadingText);
@@ -59,9 +62,7 @@ class CustomePreloader extends NMEPreloader
 		placeTopLeftCorner(loadingText, TOP_OFFSET);
 		placeTopLeftCorner(percentText, TOP_OFFSET * 2);
 		
-		hideOutline();
-		//changeBackgroundColor(preloadBackgroundColor);
-		
+		changeBackgroundColor(PRELOAD_BACKGROUND_COLOR);
 		
 		Lib.current.stage.addEventListener(Event.RESIZE, onResize);
         Lib.current.stage.addEventListener(Event.ENTER_FRAME, onFrame);
@@ -74,15 +75,31 @@ class CustomePreloader extends NMEPreloader
 	{
 		var percent:Float = MathUtils.getPercent(bytesLoaded, bytesTotal);
 		setPercentText(Std.string(Math.ceil(percent)));
+		
+		updateProgressBar(percent);
+		
+		trace(bytesLoaded + " / " + bytesTotal);
+
 	}
 	
 	public function onComplete (event:Event):Void {
-		changeBackgroundColor(baseBackgroundColor);
+		changeBackgroundColor(getBackgroundColor());
 		
 		Lib.current.stage.removeEventListener(Event.RESIZE, onResize);
         Lib.current.stage.removeEventListener(Event.ENTER_FRAME, onFrame);
         Lib.current.stage.removeEventListener(MouseEvent.CLICK, gotoWebsite);
     }
+	
+	private function updateProgressBar (percent:Float) : Void {
+		
+		progress.scaleX = percent / 100;
+		
+		progress.graphics.clear();
+		progress.graphics.beginFill(PROGRESS_BAR_COLOR, 0.9);
+        progress.graphics.drawRoundRect(0, 0, outline.width, 
+			outline.height * 0.5 , progressBarRadiusBorder, progressBarRadiusBorder);
+		progress.graphics.endFill();
+	}
 	
 	private function setPercentText (text:String) : Void {
 		percentText.text = text + " %";
