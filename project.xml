@@ -42,5 +42,4 @@
 
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
-	
 </project>
