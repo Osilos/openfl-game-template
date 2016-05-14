@@ -1,7 +1,7 @@
 package template;
 
 import template.utils.debug.DebugInfo;
-import openfl.display.FPS;
+import template.utils.debug.Debug;
 import openfl.events.Event;
 import template.game.Game;
 import template.utils.metadata.Metadatas;
@@ -15,6 +15,7 @@ class Main extends Sprite {
 	public function new() {
 		super();
 
+		Debug.initDefaultContainer(this); //todo : create debug container
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
 		Metadatas.load();
 		Game.start();

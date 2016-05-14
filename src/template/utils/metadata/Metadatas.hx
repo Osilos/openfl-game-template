@@ -1,6 +1,5 @@
 package template.utils.metadata;
 
-import Std;
 import Reflect;
 import haxe.Json;
 import openfl.Assets;
