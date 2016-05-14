@@ -7,15 +7,20 @@
 	
 	<!-- output -->
 	<app main="template.Main" file="openfl-game-template" path="bin" />
-	
-	<window background="#000000" fps="60" />
-	<window width="800" height="480" unless="mobile" />
-	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
-	
-	<!-- classpath, haxe libs -->
 
+	 <!-- Window configuration -->
+	<window fps="60" />
+	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
+
+
+	<!-- sources path -->
 	<source path="src" />
-	<set name="openfl-legacy" />
+
+	<!-- options vars -->
+	<set name="openfl-legacy" if="mac" />
+	<set name="openfl-legacy" if="ios" />
+
+	<!-- Libraries -->
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="swf" />
@@ -27,7 +32,14 @@
 	<assets path="assets/swf" rename="swf" />
 	<assets path="assets/localization" rename="localization"/>
 
+	<!-- swf -->
+
+	<!--Example :-->
+	<!--<library path="Assets/nestedmc.swf" type="swflite" if="html5" preload="true" />-->
+	<!--<library path="Assets/nestedmc.swf" type="swf" unless="html5" preload="true" />-->
+	<!--<library path="Assets/pnj.swf" type="swflite" if="html5" preload="true" />-->
+	<!--<library path="Assets/pnj.swf" type="swf" unless="html5" preload="true" />-->
+
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
-	
 </project>
