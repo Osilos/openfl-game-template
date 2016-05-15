@@ -31,7 +31,12 @@ class ResizeComp
 	
 	/**
 	 * Scale mode on resize
-	 * Note : SHOW_ALL uses safeZone for ratio
+	 * ScaleMode.KEEP_ASPECT conserve aspect even if parents have different scales
+	 * ScaleMode.NO_SCALE    do not scale 
+	 * ScaleMode.SHOW_ALL    use safeZone for ratio
+	 * ScaleMode.FIT_WIDTH 	 fit all width
+	 * ScaleMode.FIT_HEIGHT  fit all height
+	 * ScaleMode.FIT_ALL 	 fit all screen
 	 */
 	public var scaleMode(default, set):ScaleMode = ScaleMode.SHOW_ALL;
 	
@@ -252,6 +257,10 @@ class ResizeComp
 	}
 	
 	private function set_alignOrigin(alignOrigin:AlignOrigin):AlignOrigin {
+		if (alignOrigin = AlignOrigin.FROM_PARENT) {
+			throw "AlignOrigin.FROM_PARENT is not implemented for the moment!";
+		}
+		
 		var isChanged:Bool = this.alignOrigin != alignOrigin;
 		this.alignOrigin = alignOrigin;
 		
@@ -333,7 +342,7 @@ class ResizeComp
 
 @:enum abstract AlignOrigin(Int){
 	public var FROM_STAGE = 0;
-	public var FROM_PARENT = 1;
+	//public var FROM_PARENT = 1;
 }
 
 @:enum abstract AlignMode(Int){
