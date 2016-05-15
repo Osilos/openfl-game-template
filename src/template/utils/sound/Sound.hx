@@ -64,7 +64,7 @@ class Sound {
 		var sound:openfl.media.Sound = Assets.getSound(SOUND_PATH + '/' + typePath + '/' + name + '.' + SOUND_EXTENSION);
 
 		if (sound == null) {
-			throwSoundNotFoundExeption();
+			throw soundNotFoundExeption();
 		}
 
 		var channel:SoundChannel = sound.play();
@@ -74,7 +74,7 @@ class Sound {
 		return channel;
 	}
 
-	private static function throwSoundNotFoundExeption():Void {
-		throw 'Sound.hx: sound name does not exist';
+	private static function soundNotFoundExeption():String {
+		return 'Sound.hx: sound name does not exist';
 	}
 }
