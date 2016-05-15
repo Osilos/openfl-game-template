@@ -16,7 +16,7 @@ import template.utils.localization.Localization;
 @:bitmap("assets/preloader/splashScreen.png") class Splash extends BitmapData {}
 
 /**
- * ...
+ * Custome Preloader
  * @author Flavien
  */
 class CustomePreloader extends NMEPreloader
@@ -70,18 +70,18 @@ class CustomePreloader extends NMEPreloader
 		addEventListener(Event.COMPLETE, onComplete);
 	}
 	
-	private function centerSplashImage () : Void {
-		splash.x = screenSize.x / 2 - splashSize.x / 2;
-	}
-	
-	private function changeBackgroundColor (color:Int) : Void {
-		Lib.current.stage.color = color;
+	private function updateScreenSize () : Void {
+		screenSize.setTo(Lib.current.stage.width, Lib.current.stage.height);
 	}
 	
 	private function createSplashImage () : Void {
 		splash = new Bitmap(new Splash(Std.int(splashSize.x), Std.int(splashSize.y)));
         splash.smoothing = true;
         addChild(splash);
+	}
+	
+	private function centerSplashImage () : Void {
+		splash.x = screenSize.x / 2 - splashSize.x / 2;
 	}
 	
 	private function createTextField (?text:String = null) : TextField {
@@ -95,26 +95,15 @@ class CustomePreloader extends NMEPreloader
 		textField.autoSize = TextFieldAutoSize.CENTER;
 		
 		return textField;
+	}	
+	
+	private function placeTextOnTopLeftCorner (text:TextField, topOffset:Point) : Void {
+		text.x = topOffset.x;
+		text.y = topOffset.y + text.height;
 	}
 	
-	private function gotoWebsite(event:MouseEvent):Void {
-        Lib.getURL(new URLRequest (website));
-    }
-	
-	private function hideOutline () : Void {
-		outline.visible = false;
-	}
-	
-	public function onComplete (event:Event):Void {
-		changeBackgroundColor(getBackgroundColor());
-		
-		removeEventListener(Event.COMPLETE, onComplete);
-        removeEventListener(Event.ENTER_FRAME, onFrame);
-        removeEventListener(MouseEvent.CLICK, gotoWebsite);
-    }
-	
-	private function onFrame (event:Event) : Void {
-		updatePosition();
+	private function changeBackgroundColor (color:Int) : Void {
+		Lib.current.stage.color = color;
 	}
 	
 	override public function onUpdate(bytesLoaded:Int, bytesTotal:Int):Void 
@@ -125,20 +114,8 @@ class CustomePreloader extends NMEPreloader
 		updateProgressBar(percent);	
 	}
 	
-	private function placeTextOnTopLeftCorner (text:TextField, topOffset:Point) : Void {
-		text.x = topOffset.x;
-		text.y = topOffset.y + text.height;
-	}
-	
 	private function setPercentText (text:String) : Void {
 		percentText.text = text + " %";
-	}
-	
-	private function updatePosition () : Void {
-		updateScreenSize();
-		centerSplashImage();
-		placeTextOnTopLeftCorner(loadingText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y));
-		placeTextOnTopLeftCorner(percentText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y * 2));
 	}
 	
 	private function updateProgressBar (percent:Float) : Void {
@@ -152,7 +129,30 @@ class CustomePreloader extends NMEPreloader
 		progress.graphics.endFill();
 	}
 	
-	private function updateScreenSize () : Void {
-		screenSize.setTo(Lib.current.stage.width, Lib.current.stage.height);
+	private function onFrame (event:Event) : Void {
+		updatePosition();
+	}
+	
+	private function updatePosition () : Void {
+		updateScreenSize();
+		centerSplashImage();
+		placeTextOnTopLeftCorner(loadingText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y));
+		placeTextOnTopLeftCorner(percentText, new Point(TOP_OFFSET_X, TOP_OFFSET_Y * 2));
+	}
+	
+	private function gotoWebsite(event:MouseEvent):Void {
+        Lib.getURL(new URLRequest (website));
+    }
+	
+	public function onComplete (event:Event):Void {
+		changeBackgroundColor(getBackgroundColor());
+		
+		removeEventListener(Event.COMPLETE, onComplete);
+        removeEventListener(Event.ENTER_FRAME, onFrame);
+        removeEventListener(MouseEvent.CLICK, gotoWebsite);
+    }
+	
+	private function hideOutline () : Void {
+		outline.visible = false;
 	}
 }
