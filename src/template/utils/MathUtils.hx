@@ -49,4 +49,14 @@ class MathUtils
 		return Math.ceil(number / step) * step;
 	}
 	
+	/**
+	 * percent of number in total
+	 * @param	number
+	 * @param	total
+	 * @return
+	 */
+	public static function getPercent (number:Float, total:Float) : Float {
+		return number / total;
+	}
+	
 }
