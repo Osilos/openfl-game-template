@@ -3,26 +3,24 @@ package template;
 import haxe.Timer;
 import openfl.Assets;
 import openfl.display.Sprite;
-import openfl.display.StageScaleMode;
 import openfl.events.Event;
 import openfl.geom.Point;
 import template.game.Game;
 import template.utils.game.ResizeComp;
-import template.utils.game.GameStage;
-import template.utils.game.GameStageAlign;
+import template.utils.debug.Debug;
+import template.utils.debug.DebugInfo;
 import template.utils.metadata.Metadatas;
-import template.utils.debug.GraphicPoint;
 
 /**
  * ...
  * @author Flavien
  */
-class Main extends Sprite 
-{
+class Main extends Sprite {
 	public function new() {
 		super();
-		
+		Debug.initDefaultContainer(this); //todo : create debug container
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
+		
 		Metadatas.load();
 		Game.start();
 		
@@ -46,5 +44,10 @@ class Main extends Sprite
 		
 		addChild(sprite3);
 		sprite2.addChild(sprite);
+		// todo : move to Game.hx when we have GameStage
+		#if showdebuginfo
+			var debugInfo:DebugInfo = new DebugInfo();
+			addChild(debugInfo);
+		#end
 	}
 }

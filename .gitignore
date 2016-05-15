@@ -2,4 +2,4 @@
 bin
 *.hxproj
 *.iml
-*.fla
+compile.sh

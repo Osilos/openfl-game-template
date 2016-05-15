@@ -6,16 +6,23 @@
 	<meta title="openfl-game-template" package="template.openfl-game-template" version="1.0.0" company="Flavien" />
 	
 	<!-- output -->
-	<app main="template.Main" file="openfl-game-template" path="bin" />
+	<app main="template.Main" file="openfl-game-template" path="bin" preloader="template.utils.preloader.CustomPreloader" />
 	
+	 <!-- Window configuration -->
+	<window fps="60" />
 	<window background="#000000" fps="60" />
 	<!-- <window width="800" height="450" fps="60" /> -->
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
-	
-	<!-- classpath, haxe libs -->
 
+
+	<!-- sources path -->
 	<source path="src" />
-	<!--<set name="openfl-legacy" /> -->
+
+	<!-- options vars -->
+	<set name="openfl-legacy" if="mac" />
+	<set name="openfl-legacy" if="ios" />
+
+	<!-- Libraries -->
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="swf" />
@@ -27,9 +34,16 @@
 	<assets path="assets/swf" rename="swf" />
 	<assets path="assets/localization" rename="localization"/>
 
+	
+	<!-- swf -->
+
+	<!--Example :-->
 	<library path="assets/swf/TitleCard.swf" id="TitleCard" type="swflite" preload="true"/>
+	<!--<library path="Assets/nestedmc.swf" type="swflite" if="html5" preload="true" />-->
+	<!--<library path="Assets/nestedmc.swf" type="swf" unless="html5" preload="true" />-->
+	<!--<library path="Assets/pnj.swf" type="swflite" if="html5" preload="true" />-->
+	<!--<library path="Assets/pnj.swf" type="swf" unless="html5" preload="true" />-->
 	
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
-	
 </project>
