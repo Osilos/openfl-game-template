@@ -5,6 +5,9 @@ import openfl.display.DisplayObjectContainer;
 import openfl.events.Event;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
+import template.utils.game.AlignMode;
+import template.utils.game.AlignOrigin;
+import template.utils.game.ScaleMode;
 
 /**
  * Manage behaviour of display object on resize.
@@ -12,7 +15,7 @@ import openfl.geom.Rectangle;
  * Note : if you change transform (position or scale) of parents, use forceUpdate method 
  * @author Théo Sabattié
  */
-class ResizeComp
+class ResizeComponent
 {
 	/**
 	 * Alignment style
@@ -123,8 +126,8 @@ class ResizeComp
 				}
 				
 				if (scaleMode == ScaleMode.SHOW_ALL) {
-					target.scaleX    = lRatio / getTargetWorldScaleX();
-					target.scaleY    = lRatio / getTargetWorldScaleY();
+					target.scaleX = lRatio / getTargetWorldScaleX();
+					target.scaleY = lRatio / getTargetWorldScaleY();
 				}
 			}
 		}
@@ -166,7 +169,7 @@ class ResizeComp
 		}
 		
 		if (target.stage == null && alignOrigin == AlignOrigin.FROM_STAGE) {
-			throw "Comp :: Child is not added on stage, you can not set align position on this context";
+			throwExceptionNotOnStage();
 		}
 		
 		if (offset == null) {
@@ -224,8 +227,13 @@ class ResizeComp
 			target.x = basePos.x;
 			target.y = basePos.y;
 		} else {
-			
+			//TODO : FROM_PARENT
 		}
+	}
+	
+	private function throwExceptionNotOnStage():Void 
+	{
+		throw "Comp :: Child is not added on stage, you can not set align position on this context";
 	}
 	
 	private function updateSafeZonePosition():Void 
@@ -354,31 +362,4 @@ class ResizeComp
 		target.removeEventListener(Event.ADDED_TO_STAGE, onAddToStage);
 		target.removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStage);
 	}
-}
-
-@:enum abstract AlignOrigin(Int){
-	public var FROM_STAGE = 0;
-	public var FROM_PARENT = 1;
-}
-
-@:enum abstract AlignMode(Int){
-	public var NO_ALIGN 	= 0;
-	public var TOP 			= 1;
-	public var TOP_LEFT 	= 2;
-	public var TOP_RIGHT 	= 3;
-	public var CENTER 		= 4;
-	public var LEFT 		= 5;
-	public var RIGHT 		= 6;
-	public var BOTTOM 		= 7;
-	public var BOTTOM_LEFT  = 8;
-	public var BOTTOM_RIGHT = 9;
-}
-
-@:enum abstract ScaleMode(Int){
-	public var KEEP_ASPECT 	= 0;
-	public var NO_SCALE     = 1;
-	public var SHOW_ALL 	= 2;
-	public var FIT_WIDTH 	= 3;
-	public var FIT_HEIGHT 	= 4;
-	public var FIT_ALL 		= 5;
 }
