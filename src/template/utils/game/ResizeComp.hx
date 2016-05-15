@@ -123,8 +123,8 @@ class ResizeComp
 				}
 				
 				if (scaleMode == ScaleMode.SHOW_ALL) {
-					target.scaleX    = lRatio / getTargetWorldScaleX();
-					target.scaleY    = lRatio / getTargetWorldScaleY();
+					target.scaleX = lRatio / getTargetWorldScaleX();
+					target.scaleY = lRatio / getTargetWorldScaleY();
 				}
 			}
 		}
