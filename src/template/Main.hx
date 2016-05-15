@@ -1,8 +1,12 @@
 package template;
 
+import haxe.Timer;
+import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import openfl.geom.Point;
 import template.game.Game;
+import template.utils.game.ResizeComp;
 import template.utils.debug.Debug;
 import template.utils.debug.DebugInfo;
 import template.utils.metadata.Metadatas;
@@ -20,7 +24,6 @@ class Main extends Sprite {
 		Metadatas.load();
 		Game.start();
 		
-		// todo : move to Game.hx when we have GameStage
 		#if showdebuginfo
 			var debugInfo:DebugInfo = new DebugInfo();
 			addChild(debugInfo);
