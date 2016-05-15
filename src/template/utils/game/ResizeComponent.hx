@@ -77,6 +77,63 @@ class ResizeComponent
 		}
 	}
 	
+	/**
+	 * Force update when parents are transformed
+	 */
+	public function forceUpdate():Void {
+		onResize();
+	}
+	
+	/**
+	 * Align directly target display object
+	 * @param	alignMode 
+	 * @param	useSafeZone 
+	 * @param	alignOrigin 
+	 * @param	offset 
+	 */
+	public function setAlignPos(alignMode:AlignMode, ?useSafeZone:Bool = false, ?alignOrigin:AlignOrigin = AlignOrigin.FROM_STAGE, ?offset:Point = null):Void {
+		if (alignMode == AlignMode.NO_ALIGN) {
+			return;
+		}
+		
+		if (target.stage == null && alignOrigin == AlignOrigin.FROM_STAGE) {
+			throwExceptionNotOnStage();
+		}
+		
+		if (offset == null) {
+			offset = new Point(0, 0);
+		}
+		
+		target.__updateTransforms();
+		
+		if (alignOrigin == AlignOrigin.FROM_STAGE) {
+			alignPosFromStage(alignMode, useSafeZone, offset);
+		} else {
+			alignPosFromParent(alignMode, useSafeZone, offset);
+		}
+	}
+	
+	/**
+	 * Set the size of safeZone
+	 * @param	safeZone
+	 */
+	public function setSafeZone(safeZone:Rectangle):Void {
+		this.safeZone = safeZone;
+		
+		if (useSafeZone || scaleMode == ScaleMode.SHOW_ALL) {
+			resizeIfOnStage();
+		}
+	}
+	
+	/**
+	 * Destroy component (component removes all its listeners)
+	 */
+	public function destroy():Void {
+		removeResizeListener();
+		target.removeEventListener(Event.ADDED_TO_STAGE, onAddToStage);
+		target.removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStage);
+	}
+	
 	private function addResizeListener():Void 
 	{
 		target.stage.addEventListener(Event.RESIZE, onResize);
@@ -170,86 +227,73 @@ class ResizeComponent
 		return target.__worldTransform.b + target.__worldTransform.d;
 	}
 	
-	/**
-	 * Force update when parents are transformed
-	 */
-	public function forceUpdate():Void {
-		onResize();
+	private function alignPosFromParent(alignMode:AlignMode, useSafeZone:Bool, offset:Point):Void 
+	{
+		//TODO
+		throw "Not implemented";
 	}
 	
-	/**
-	 * Align directly target display object
-	 * @param	alignMode 
-	 * @param	useSafeZone 
-	 * @param	alignOrigin 
-	 * @param	offset 
-	 */
-	public function setAlignPos(alignMode:AlignMode, ?useSafeZone:Bool = false, ?alignOrigin:AlignOrigin = AlignOrigin.FROM_STAGE, ?offset:Point = null):Void {
-		if (alignMode == AlignMode.NO_ALIGN) {
-			return;
-		}
+	private function alignPosFromStage(alignMode:AlignMode, useSafeZone:Bool, offset:Point) 
+	{
+		var parent:DisplayObjectContainer = target.parent;
 		
-		if (target.stage == null && alignOrigin == AlignOrigin.FROM_STAGE) {
-			throwExceptionNotOnStage();
-		}
+		// position x:0 y:0 from stage
+		var basePos:Point = parent.globalToLocal(new Point(0, 0));
+		var lScaleX:Float = (parent.__worldTransform.a + parent.__worldTransform.c);
+		var lScaleY:Float = (parent.__worldTransform.b + parent.__worldTransform.d);
 		
-		if (offset == null) {
-			offset = new Point(0, 0);
-		}
+		// offset
+		basePos.x += offset.x / lScaleX;
+		basePos.y += offset.y / lScaleY;
 		
-		target.__updateTransforms();
-		
-		if (alignOrigin == AlignOrigin.FROM_STAGE) {
-			// position x:0 y:0 from stage
-			var parent:DisplayObjectContainer = target.parent;
-			var basePos:Point = parent.globalToLocal(new Point(0, 0));
-			
-			var lScaleX:Float = (parent.__worldTransform.a + parent.__worldTransform.c);
-			var lScaleY:Float = (parent.__worldTransform.b + parent.__worldTransform.d);
-			
-			// offset
-			basePos.x += offset.x / lScaleX;
-			basePos.y += offset.y / lScaleY;
-			
-			if (useSafeZone) {
-				updateSafeZonePosition();
-				
-				var lRatio:Float  = getRatioStageToSafeZone();
-				var lWidth:Float  = safeZone.width * lRatio;
-				var lHeight:Float = safeZone.height * lRatio;
-				
-				if (alignModeIsOnVecticalMiddle(alignMode)) {
-					basePos.y += (lHeight / 2) / lScaleY + safeZone.y / lScaleY;
-				} else if (alignModeIsOnBottom(alignMode)) {
-					basePos.y += (lHeight) / lScaleY + safeZone.y / lScaleY;
-				} else {
-					basePos.y += safeZone.y / lScaleY;
-				}
-				
-				if (alignModeIsOnHorizontalMiddle(alignMode)) {
-					basePos.x += (lWidth / 2) / lScaleX + safeZone.x / lScaleX;
-				} else if (alignModeIsOnRight(alignMode)) {
-					basePos.x += (lWidth) / lScaleX + safeZone.x / lScaleX;
-				}
-			} else {
-				if (alignModeIsOnVecticalMiddle(alignMode)) {
-					basePos.y += (parent.stage.stageHeight / 2) / lScaleY;
-				} else if (alignModeIsOnBottom(alignMode)) {
-					basePos.y += (parent.stage.stageHeight) / lScaleY;
-				}
-				
-				if (alignModeIsOnHorizontalMiddle(alignMode)) {
-					basePos.x += (parent.stage.stageWidth / 2) / lScaleX;
-				} else if (alignModeIsOnRight(alignMode)) {
-					basePos.x += (parent.stage.stageWidth) / lScaleX;
-				}
-			}
-			
-			target.x = basePos.x;
-			target.y = basePos.y;
+		if (useSafeZone) {
+			alignPosFromStageUsingSafeZone(alignMode, basePos, lScaleX, lScaleY);
 		} else {
-			//TODO : FROM_PARENT
+			alignPosFromStageUsingScreen(alignMode, basePos, parent, lScaleX, lScaleY);
 		}
+	}
+	
+	private function alignPosFromStageUsingScreen(alignMode:AlignMode, basePos:Point, parent:DisplayObjectContainer, lScaleX:Float, lScaleY:Float):Void 
+	{
+		if (alignModeIsOnVecticalMiddle(alignMode)) {
+			basePos.y += (parent.stage.stageHeight / 2) / lScaleY;
+		} else if (alignModeIsOnBottom(alignMode)) {
+			basePos.y += (parent.stage.stageHeight) / lScaleY;
+		}
+		
+		if (alignModeIsOnHorizontalMiddle(alignMode)) {
+			basePos.x += (parent.stage.stageWidth / 2) / lScaleX;
+		} else if (alignModeIsOnRight(alignMode)) {
+			basePos.x += (parent.stage.stageWidth) / lScaleX;
+		}
+		
+		target.x = basePos.x;
+		target.y = basePos.y;
+	}
+	
+	private function alignPosFromStageUsingSafeZone(alignMode:AlignMode, basePos:Point, lScaleX:Float, lScaleY:Float):Void {
+		updateSafeZonePosition();
+		
+		var lRatio:Float  = getRatioStageToSafeZone();
+		var lWidth:Float  = safeZone.width * lRatio;
+		var lHeight:Float = safeZone.height * lRatio;
+		
+		if (alignModeIsOnVecticalMiddle(alignMode)) {
+			basePos.y += (lHeight / 2) / lScaleY + safeZone.y / lScaleY;
+		} else if (alignModeIsOnBottom(alignMode)) {
+			basePos.y += (lHeight) / lScaleY + safeZone.y / lScaleY;
+		} else {
+			basePos.y += safeZone.y / lScaleY;
+		}
+		
+		if (alignModeIsOnHorizontalMiddle(alignMode)) {
+			basePos.x += (lWidth / 2) / lScaleX + safeZone.x / lScaleX;
+		} else if (alignModeIsOnRight(alignMode)) {
+			basePos.x += (lWidth) / lScaleX + safeZone.x / lScaleX;
+		}
+		
+		target.x = basePos.x;
+		target.y = basePos.y;
 	}
 	
 	private function throwExceptionNotOnStage():Void 
@@ -282,11 +326,11 @@ class ResizeComponent
 		return alignMode == AlignMode.TOP || alignMode == AlignMode.TOP_LEFT || alignMode == AlignMode.TOP_RIGHT;
 	}
 	
-	private function alignModeIsOnVecticalMiddle(alignMode:AlignMode):Bool {
+	private function alignModeIsOnBottom(alignMode:AlignMode):Bool {
 		return alignMode == AlignMode.BOTTOM || alignMode == AlignMode.BOTTOM_LEFT || alignMode == AlignMode.BOTTOM_RIGHT;
 	}
 	
-	private function alignModeIsOnBottom(alignMode:AlignMode):Bool {
+	private function alignModeIsOnVecticalMiddle(alignMode:AlignMode):Bool {
 		return alignMode == AlignMode.CENTER || alignMode == AlignMode.LEFT || alignMode == AlignMode.RIGHT;
 	}
 	
@@ -300,18 +344,6 @@ class ResizeComponent
 	
 	private function alignModeIsOnRight(alignMode:AlignMode):Bool {
 		return alignMode == AlignMode.RIGHT || alignMode == AlignMode.TOP_RIGHT || alignMode == AlignMode.BOTTOM_RIGHT;
-	}
-	
-	/**
-	 * Set the size of safeZone
-	 * @param	safeZone
-	 */
-	public function setSafeZone(safeZone:Rectangle):Void {
-		this.safeZone = safeZone;
-		
-		if (useSafeZone || scaleMode == ScaleMode.SHOW_ALL) {
-			resizeIfOnStage();
-		}
 	}
 	
 	private function set_safeZoneAlignMode(alignMode:AlignMode):AlignMode {
@@ -397,14 +429,5 @@ class ResizeComponent
 	
 	private function get_offsetY():Float {
 		return offset.y;
-	}
-	
-	/**
-	 * Destroy component (component removes all its listeners)
-	 */
-	public function destroy():Void {
-		removeResizeListener();
-		target.removeEventListener(Event.ADDED_TO_STAGE, onAddToStage);
-		target.removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStage);
 	}
 }
