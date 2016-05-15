@@ -1,32 +1,32 @@
 package template;
 
-import openfl.Assets;
 import openfl.display.Sprite;
-import openfl.display.StageScaleMode;
+import template.utils.debug.DebugInfo;
+import template.utils.debug.Debug;
 import openfl.events.Event;
 import template.game.Game;
-import template.utils.game.GameStage;
-import template.utils.game.GameStageAlign;
+import template.utils.debug.DebugInfo;
+import template.utils.localization.Localization;
 import template.utils.metadata.Metadatas;
 
 /**
  * ...
  * @author Flavien
  */
-class Main extends Sprite 
-{
+class Main extends Sprite {
 	public function new() {
 		super();
-		
-		var gameStage:GameStage = new GameStage();
-		addChild(gameStage);
-		gameStage.addScreen(Assets.getMovieClip("TitleCard:TitleCard"));
-		gameStage.alignMode = GameStageAlign.CENTER;
-		gameStage.scaleMode = StageScaleMode.SHOW_ALL;
-		gameStage.gameContainerAlignMode = GameStageAlign.CENTER;
-		
+
+		Debug.initDefaultContainer(this); //todo : create debug container
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
+		
 		Metadatas.load();
 		Game.start();
+
+		// todo : move to Game.hx when we have GameStage
+		#if showdebuginfo
+			var debugInfo:DebugInfo = new DebugInfo();
+			addChild(debugInfo);
+		#end
 	}
 }
