@@ -4,6 +4,7 @@ import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
 import openfl.events.Event;
 import template.game.Game;
+import template.utils.debug.DebugInfo;
 import template.utils.localization.Localization;
 import template.utils.metadata.Metadatas;
 import openfl.display.Sprite;
