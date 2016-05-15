@@ -7,7 +7,9 @@ import openfl.geom.Point;
 import openfl.geom.Rectangle;
 
 /**
- * Note : if you change transform (position or scale) of parents update it 
+ * Manage behaviour of display object on resize.
+ * Manage Alignment and scaling.
+ * Note : if you change transform (position or scale) of parents, use forceUpdate method 
  * @author Théo Sabattié
  */
 class ResizeComp
