@@ -98,8 +98,8 @@ class ResizeComp
 			target.__updateTransforms();
 			
 			if (scaleMode == ScaleMode.KEEP_ASPECT) {
-				target.scaleX = 1 / (target.__worldTransform.a + target.__worldTransform.c);
-				target.scaleY = 1 / (target.__worldTransform.b + target.__worldTransform.d);
+				target.scaleX = 1 / getTargetWorldScaleX();
+				target.scaleY = 1 / getTargetWorldScaleY();
 			} else {
 				var lRatio:Float  = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
 				
@@ -122,9 +122,8 @@ class ResizeComp
 				}
 				
 				if (scaleMode == ScaleMode.SHOW_ALL) {
-					var lRatio:Float = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
-					target.scaleX    = lRatio / (target.__worldTransform.a + target.__worldTransform.c);
-					target.scaleY    = lRatio / (target.__worldTransform.b + target.__worldTransform.d);
+					target.scaleX    = lRatio / getTargetWorldScaleX();
+					target.scaleY    = lRatio / getTargetWorldScaleY();
 				}
 			}
 		}
@@ -132,6 +131,14 @@ class ResizeComp
 		if (alignModeOnResize != AlignMode.NO_ALIGN) {
 			setAlignPos(alignModeOnResize, useSafeZone, alignOrigin, offset);
 		}
+	}
+	
+	private function getTargetWorldScaleX():Float {
+		return target.__worldTransform.a + target.__worldTransform.c;
+	}
+	
+	private function getTargetWorldScaleY():Float {
+		return target.__worldTransform.b + target.__worldTransform.d;
 	}
 	
 	/**
