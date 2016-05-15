@@ -12,7 +12,7 @@ import openfl.geom.Rectangle;
  * Note : if you change transform (position or scale) of parents, use forceUpdate method 
  * @author Théo Sabattié
  */
-class ResizeComp
+class ResizeComponent
 {
 	/**
 	 * Alignment style
@@ -166,7 +166,7 @@ class ResizeComp
 		}
 		
 		if (target.stage == null && alignOrigin == AlignOrigin.FROM_STAGE) {
-			throw "Comp :: Child is not added on stage, you can not set align position on this context";
+			throwExceptionNotOnStage();
 		}
 		
 		if (offset == null) {
@@ -226,6 +226,11 @@ class ResizeComp
 		} else {
 			
 		}
+	}
+	
+	private function throwExceptionNotOnStage():Void 
+	{
+		throw "Comp :: Child is not added on stage, you can not set align position on this context";
 	}
 	
 	private function updateSafeZonePosition():Void 
