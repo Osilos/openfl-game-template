@@ -218,29 +218,29 @@ class ResizeComponent
 				var lWidth:Float  = safeZone.width * lRatio;
 				var lHeight:Float = safeZone.height * lRatio;
 				
-				if (alignMode == AlignMode.CENTER || alignMode == AlignMode.LEFT || alignMode == AlignMode.RIGHT) {
+				if (alignModeIsOnVecticalMiddle(alignMode)) {
 					basePos.y += (lHeight / 2) / lScaleY + safeZone.y / lScaleY;
-				} else if (alignMode == AlignMode.BOTTOM || alignMode == AlignMode.BOTTOM_LEFT || alignMode == AlignMode.BOTTOM_RIGHT) {
+				} else if (alignModeIsOnBottom(alignMode)) {
 					basePos.y += (lHeight) / lScaleY + safeZone.y / lScaleY;
 				} else {
 					basePos.y += safeZone.y / lScaleY;
 				}
 				
-				if (alignMode == AlignMode.CENTER || alignMode == AlignMode.TOP || alignMode == AlignMode.BOTTOM) {
+				if (alignModeIsOnHorizontalMiddle(alignMode)) {
 					basePos.x += (lWidth / 2) / lScaleX + safeZone.x / lScaleX;
-				} else if (alignMode == AlignMode.RIGHT || alignMode == AlignMode.TOP_RIGHT || alignMode == AlignMode.BOTTOM_RIGHT) {
+				} else if (alignModeIsOnRight(alignMode)) {
 					basePos.x += (lWidth) / lScaleX + safeZone.x / lScaleX;
 				}
 			} else {
-				if (alignMode == AlignMode.CENTER || alignMode == AlignMode.LEFT || alignMode == AlignMode.RIGHT) {
+				if (alignModeIsOnVecticalMiddle(alignMode)) {
 					basePos.y += (parent.stage.stageHeight / 2) / lScaleY;
-				} else if (alignMode == AlignMode.BOTTOM || alignMode == AlignMode.BOTTOM_LEFT || alignMode == AlignMode.BOTTOM_RIGHT) {
+				} else if (alignModeIsOnBottom(alignMode)) {
 					basePos.y += (parent.stage.stageHeight) / lScaleY;
 				}
 				
-				if (alignMode == AlignMode.CENTER || alignMode == AlignMode.TOP || alignMode == AlignMode.BOTTOM) {
+				if (alignModeIsOnHorizontalMiddle(alignMode)) {
 					basePos.x += (parent.stage.stageWidth / 2) / lScaleX;
-				} else if (alignMode == AlignMode.RIGHT || alignMode == AlignMode.TOP_RIGHT || alignMode == AlignMode.BOTTOM_RIGHT) {
+				} else if (alignModeIsOnRight(alignMode)) {
 					basePos.x += (parent.stage.stageWidth) / lScaleX;
 				}
 			}
@@ -261,21 +261,45 @@ class ResizeComponent
 	{
 		var lRatio:Float  = getRatioStageToSafeZone();
 		
-		if (safeZoneAlignMode == AlignMode.TOP || safeZoneAlignMode == AlignMode.TOP_LEFT || safeZoneAlignMode == AlignMode.TOP_RIGHT) {
+		if (alignModeIsOnTop(safeZoneAlignMode)) {
 			safeZone.y = 0;
-		} else if (safeZoneAlignMode == AlignMode.BOTTOM || safeZoneAlignMode == AlignMode.BOTTOM_LEFT || safeZoneAlignMode == AlignMode.BOTTOM_RIGHT) {
+		} else if (alignModeIsOnBottom(safeZoneAlignMode)) {
 			safeZone.y = target.stage.stageHeight - safeZone.height * lRatio; 
-		} else if (safeZoneAlignMode == AlignMode.CENTER || safeZoneAlignMode == AlignMode.LEFT || safeZoneAlignMode == AlignMode.RIGHT) {
+		} else if (alignModeIsOnVecticalMiddle(safeZoneAlignMode)) {
 			safeZone.y = (target.stage.stageHeight - safeZone.height * lRatio) / 2;
 		}
 		
-		if (safeZoneAlignMode == AlignMode.LEFT || safeZoneAlignMode == AlignMode.TOP_LEFT || safeZoneAlignMode == AlignMode.BOTTOM_LEFT) {
+		if (alignModeIsOnLeft(safeZoneAlignMode)) {
 			safeZone.x = 0;
-		} else if (safeZoneAlignMode == AlignMode.TOP || safeZoneAlignMode == AlignMode.CENTER || safeZoneAlignMode == AlignMode.BOTTOM) {
+		} else if (alignModeIsOnHorizontalMiddle(safeZoneAlignMode)) {
 			safeZone.x = (target.stage.stageWidth - safeZone.width * lRatio) / 2;
-		} else if (safeZoneAlignMode == AlignMode.RIGHT || safeZoneAlignMode == AlignMode.TOP_RIGHT || safeZoneAlignMode == AlignMode.BOTTOM_RIGHT) {
+		} else if (alignModeIsOnRight(safeZoneAlignMode)) {
 			safeZone.x = target.stage.stageWidth - safeZone.width * lRatio;
 		}
+	}
+	
+	private function alignModeIsOnTop(alignMode:AlignMode):Bool {
+		return alignMode == AlignMode.TOP || alignMode == AlignMode.TOP_LEFT || alignMode == AlignMode.TOP_RIGHT;
+	}
+	
+	private function alignModeIsOnVecticalMiddle(alignMode:AlignMode):Bool {
+		return alignMode == AlignMode.BOTTOM || alignMode == AlignMode.BOTTOM_LEFT || alignMode == AlignMode.BOTTOM_RIGHT;
+	}
+	
+	private function alignModeIsOnBottom(alignMode:AlignMode):Bool {
+		return alignMode == AlignMode.CENTER || alignMode == AlignMode.LEFT || alignMode == AlignMode.RIGHT;
+	}
+	
+	private function alignModeIsOnLeft(alignMode:AlignMode):Bool {
+		return alignMode == AlignMode.LEFT || alignMode == AlignMode.TOP_LEFT || alignMode == AlignMode.BOTTOM_LEFT;
+	}
+	
+	private function alignModeIsOnHorizontalMiddle(alignMode:AlignMode):Bool {
+		return alignMode == AlignMode.TOP || alignMode == AlignMode.CENTER || alignMode == AlignMode.BOTTOM;
+	}
+	
+	private function alignModeIsOnRight(alignMode:AlignMode):Bool {
+		return alignMode == AlignMode.RIGHT || alignMode == AlignMode.TOP_RIGHT || alignMode == AlignMode.BOTTOM_RIGHT;
 	}
 	
 	/**
