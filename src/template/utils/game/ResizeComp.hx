@@ -101,7 +101,7 @@ class ResizeComp
 				target.scaleX = 1 / getTargetWorldScaleX();
 				target.scaleY = 1 / getTargetWorldScaleY();
 			} else {
-				var lRatio:Float           = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
+				var lRatio:Float           = getRatioStageToSafeZone();
 				var targetBounds:Rectangle = target.getBounds(target.stage); 
 				
 				if (scaleMode == ScaleMode.FIT_WIDTH || scaleMode == ScaleMode.FIT_ALL) {
@@ -132,6 +132,10 @@ class ResizeComp
 		if (alignModeOnResize != AlignMode.NO_ALIGN) {
 			setAlignPos(alignModeOnResize, useSafeZone, alignOrigin, offset);
 		}
+	}
+	
+	private function getRatioStageToSafeZone():Float {
+		return Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
 	}
 	
 	private function getTargetWorldScaleX():Float {
@@ -186,7 +190,7 @@ class ResizeComp
 			if (useSafeZone) {
 				updateSafeZonePosition();
 				
-				var lRatio:Float  = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
+				var lRatio:Float  = getRatioStageToSafeZone();
 				var lWidth:Float  = safeZone.width * lRatio;
 				var lHeight:Float = safeZone.height * lRatio;
 				
@@ -226,7 +230,7 @@ class ResizeComp
 	
 	private function updateSafeZonePosition():Void 
 	{
-		var lRatio:Float  = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
+		var lRatio:Float  = getRatioStageToSafeZone();
 		
 		if (safeZoneAlignMode == AlignMode.TOP || safeZoneAlignMode == AlignMode.TOP_LEFT || safeZoneAlignMode == AlignMode.TOP_RIGHT) {
 			safeZone.y = 0;
