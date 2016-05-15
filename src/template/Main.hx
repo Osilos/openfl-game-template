@@ -6,9 +6,11 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.geom.Point;
 import template.game.Game;
+import template.utils.game.AlignMode;
 import template.utils.game.ResizeComponent;
 import template.utils.debug.Debug;
 import template.utils.debug.DebugInfo;
+import template.utils.game.ScaleMode;
 import template.utils.metadata.Metadatas;
 
 /**
