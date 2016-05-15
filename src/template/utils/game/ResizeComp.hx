@@ -113,8 +113,9 @@ class ResizeComp
 				}
 				
 				if (scaleMode == ScaleMode.SHOW_ALL) {
-					var lRatio:Float  = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
-					target.scaleX     = target.scaleY = lRatio;
+					var lRatio:Float = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
+					target.scaleX    = lRatio / (target.__worldTransform.a + target.__worldTransform.c);
+					target.scaleY    = lRatio / (target.__worldTransform.b + target.__worldTransform.d);
 				}
 			}
 		}
