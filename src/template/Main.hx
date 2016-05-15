@@ -35,7 +35,7 @@ class Main extends Sprite {
 		var sprite:Sprite = Assets.getMovieClip("TitleCard:TitleCard");
 		
 		var comp:ResizeComp 	= new ResizeComp(sprite);
-		comp.scaleMode 		    = ScaleMode.SHOW_ALL;
+		comp.scaleMode 		    = ScaleMode.FIT_ALL;
 		comp.useSafeZone        = true;
 		comp.safeZoneAlignMode  = AlignMode.CENTER;
 		comp.alignModeOnResize  = AlignMode.CENTER;
