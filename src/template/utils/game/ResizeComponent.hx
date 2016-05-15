@@ -224,7 +224,7 @@ class ResizeComponent
 			target.x = basePos.x;
 			target.y = basePos.y;
 		} else {
-			
+			//TODO : FROM_PARENT
 		}
 	}
 	
