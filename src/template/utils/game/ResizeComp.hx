@@ -1,9 +1,7 @@
 package template.utils.game;
 
-import flash.display.Stage;
 import openfl.display.DisplayObject;
 import openfl.display.DisplayObjectContainer;
-import openfl.display.StageScaleMode;
 import openfl.events.Event;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
@@ -257,7 +255,7 @@ class ResizeComp
 	}
 	
 	private function set_alignOrigin(alignOrigin:AlignOrigin):AlignOrigin {
-		if (alignOrigin = AlignOrigin.FROM_PARENT) {
+		if (alignOrigin == AlignOrigin.FROM_PARENT) {
 			throw "AlignOrigin.FROM_PARENT is not implemented for the moment!";
 		}
 		
@@ -342,7 +340,7 @@ class ResizeComp
 
 @:enum abstract AlignOrigin(Int){
 	public var FROM_STAGE = 0;
-	//public var FROM_PARENT = 1;
+	public var FROM_PARENT = 1;
 }
 
 @:enum abstract AlignMode(Int){
