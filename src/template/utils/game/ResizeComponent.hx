@@ -101,40 +101,61 @@ class ResizeComponent
 			target.__updateTransforms();
 			
 			if (scaleMode == ScaleMode.KEEP_ASPECT) {
-				target.scaleX = 1 / getTargetWorldScaleX();
-				target.scaleY = 1 / getTargetWorldScaleY();
+				scaleToKeepAspect();
+			} else if (scaleMode == ScaleMode.SHOW_ALL) {
+				scaleToShowAll();
 			} else {
-				var lRatio:Float           = getRatioStageToSafeZone();
-				var targetBounds:Rectangle = target.getBounds(target.stage); 
+				var ratioStageToSafeZone:Float  = getRatioStageToSafeZone();
+				var targetBounds:Rectangle      = target.getBounds(target.stage);
 				
-				if (scaleMode == ScaleMode.FIT_WIDTH || scaleMode == ScaleMode.FIT_ALL) {
-					if (useSafeZone) {
-						var lWidth:Float = safeZone.width * lRatio;
-						target.scaleX 	 = lWidth / targetBounds.width;
-					} else {
-						target.scaleX = target.stage.stageWidth / targetBounds.width;
-					}
+				if (scaleMode == ScaleMode.FIT_WIDTH) {
+					scaleToFitWidth(ratioStageToSafeZone, targetBounds);
+				} else if (scaleMode == ScaleMode.FIT_ALL) {
+					scaleToFitAll(ratioStageToSafeZone, targetBounds);
+				} else if (scaleMode == ScaleMode.FIT_HEIGHT) {
+					scaleToFitHeight(ratioStageToSafeZone, targetBounds);
 				}
-				
-				if (scaleMode == ScaleMode.FIT_HEIGHT || scaleMode == ScaleMode.FIT_ALL) {
-					if (useSafeZone) {
-						var lHeight:Float = safeZone.height * lRatio;
-						target.scaleY 	  = lHeight / targetBounds.height;
-					} else {
-						target.scaleY = target.stage.stageHeight / targetBounds.height;
-					}
-				}
-				
-				if (scaleMode == ScaleMode.SHOW_ALL) {
-					target.scaleX = lRatio / getTargetWorldScaleX();
-					target.scaleY = lRatio / getTargetWorldScaleY();
-				}
-			}
+			} 
 		}
 			
 		if (alignModeOnResize != AlignMode.NO_ALIGN) {
 			setAlignPos(alignModeOnResize, useSafeZone, alignOrigin, offset);
 		}
+	}
+	
+	private function scaleToFitWidth(ratioStageToSafeZone:Float, targetBounds:Rectangle):Void {
+		if (useSafeZone) {
+			var lWidth:Float = safeZone.width * ratioStageToSafeZone;
+			target.scaleX 	 = lWidth / targetBounds.width;
+		} else {
+			target.scaleX = target.stage.stageWidth / targetBounds.width;
+		}
+	}
+	
+	private function scaleToFitHeight(ratioStageToSafeZone:Float, targetBounds:Rectangle):Void {
+		if (useSafeZone) {
+			var lHeight:Float = safeZone.height * ratioStageToSafeZone;
+			target.scaleY 	  = lHeight / targetBounds.height;
+		} else {
+			target.scaleY = target.stage.stageHeight / targetBounds.height;
+		}
+	}
+	
+	private function scaleToFitAll(ratioStageToSafeZone:Float, targetBounds:Rectangle):Void {
+		scaleToFitHeight(ratioStageToSafeZone, targetBounds);
+		scaleToFitWidth(ratioStageToSafeZone, targetBounds);
+	}
+	
+	private function scaleToShowAll():Void {
+		var lRatio:Float = getRatioStageToSafeZone();
+		target.scaleX    = lRatio / getTargetWorldScaleX();
+		target.scaleY    = lRatio / getTargetWorldScaleY();
+	}
+	
+	private function scaleToKeepAspect():Void 
+	{
+		target.scaleX = 1 / getTargetWorldScaleX();
+		target.scaleY = 1 / getTargetWorldScaleY();
 	}
 	
 	private function getRatioStageToSafeZone():Float {
