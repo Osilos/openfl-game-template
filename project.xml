@@ -6,7 +6,7 @@
 	<meta title="openfl-game-template" package="template.openfl-game-template" version="1.0.0" company="Flavien" />
 	
 	<!-- output -->
-	<app main="template.Main" file="openfl-game-template" path="bin" preloader="template.utils.preloader.CustomePreloader" />
+	<app main="template.Main" file="openfl-game-template" path="bin" preloader="template.utils.preloader.CustomPreloader" />
 	
 	 <!-- Window configuration -->
 	<window fps="60" />
