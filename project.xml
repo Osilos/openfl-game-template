@@ -7,7 +7,7 @@
 	
 	<!-- output -->
 	<app main="template.Main" file="openfl-game-template" path="bin" 
-		 preloader="template.utils.preloader.CustomePreloader" />
+		 preloader="template.utils.preloader.CustomPreloader" />
 	
 	 <!-- Window configuration -->
 	<window fps="60" />
