@@ -101,9 +101,12 @@ class ResizeComp
 				target.scaleX = 1 / (target.__worldTransform.a + target.__worldTransform.c);
 				target.scaleY = 1 / (target.__worldTransform.b + target.__worldTransform.d);
 			} else {
+				var lRatio:Float  = Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
+				
 				if (scaleMode == ScaleMode.FIT_WIDTH || scaleMode == ScaleMode.FIT_ALL) {
 					if (useSafeZone) {
-						target.scaleX = target.stage.stageWidth / safeZone.width;
+						var lWidth:Float = safeZone.width * lRatio;
+						target.scaleX 	 = lWidth / target.getBounds(target.stage).width;
 					} else {
 						target.scaleX = target.stage.stageWidth / target.getBounds(target.stage).width;
 					}
@@ -111,7 +114,8 @@ class ResizeComp
 				
 				if (scaleMode == ScaleMode.FIT_HEIGHT || scaleMode == ScaleMode.FIT_ALL) {
 					if (useSafeZone) {
-						target.scaleY = target.stage.stageHeight / safeZone.height;
+						var lHeight:Float = safeZone.height * lRatio;
+						target.scaleY 	  = lHeight / target.getBounds(target.stage).height;
 					} else {
 						target.scaleY = target.stage.stageHeight / target.getBounds(target.stage).height;
 					}
