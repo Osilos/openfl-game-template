@@ -220,11 +220,11 @@ class ResizeComponent
 	}
 	
 	private function getTargetWorldScaleX():Float {
-		return target.__worldTransform.a + target.__worldTransform.c;
+		return target.getBounds(target.stage).width / target.width;
 	}
 	
 	private function getTargetWorldScaleY():Float {
-		return target.__worldTransform.b + target.__worldTransform.d;
+		return target.getBounds(target.stage).height / target.height;
 	}
 	
 	private function alignPosFromParent(alignMode:AlignMode, useSafeZone:Bool, offset:Point):Void 
@@ -239,8 +239,8 @@ class ResizeComponent
 		
 		// position x:0 y:0 from stage
 		var basePos:Point = parent.globalToLocal(new Point(0, 0));
-		var lScaleX:Float = (parent.__worldTransform.a + parent.__worldTransform.c);
-		var lScaleY:Float = (parent.__worldTransform.b + parent.__worldTransform.d);
+		var lScaleX:Float = getTargetWorldScaleX();
+		var lScaleY:Float = getTargetWorldScaleY();
 		
 		// offset
 		basePos.x += offset.x / lScaleX;
