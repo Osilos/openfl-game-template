@@ -104,8 +104,6 @@ class ResizeComponent
 			offset = new Point(0, 0);
 		}
 		
-		target.__updateTransforms();
-		
 		if (alignOrigin == AlignOrigin.FROM_STAGE) {
 			alignPosFromStage(alignMode, useSafeZone, offset);
 		} else {
@@ -155,7 +153,6 @@ class ResizeComponent
 	private function onResize(?event:Event = null):Void {
 		if (scaleMode != ScaleMode.NO_SCALE) {
 			target.scaleX = target.scaleY = 1;
-			target.__updateTransforms();
 			
 			if (scaleMode == ScaleMode.KEEP_ASPECT) {
 				scaleToKeepAspect();
