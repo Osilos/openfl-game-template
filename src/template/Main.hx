@@ -32,17 +32,5 @@ class Main extends Sprite {
 			var debugInfo:DebugInfo = new DebugInfo();
 			addChild(debugInfo);
 		#end
-		
-		var screen:MovieClip = Assets.getMovieClip("TitleCard:TitleCard");
-		addChild(screen);
-		
-		var scaleHandler:ScaleHandler  = new ScaleHandler(screen);
-		//scaleHandler.useSafeZone       = true;
-		scaleHandler.scaleMode = ScaleMode.FIT_ALL;
-		
-		var alignHandler:AlignHandler  = new AlignHandler(screen);
-		alignHandler.alignModeOnResize = AlignMode.CENTER;
-		alignHandler.useSafeZone       = true;
-		alignHandler.safeZoneAlignMode = AlignMode.CENTER;
 	}
 }
