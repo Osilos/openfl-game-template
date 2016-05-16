@@ -8,8 +8,8 @@
 	<!-- output -->
 	<app main="template.Main" file="openfl-game-template" path="bin" />
 	
-	<window background="#000000" fps="60" />
-	<window width="800" height="480" unless="mobile" />
+	<window background="#ffffff" fps="60" />
+	<!--<window width="800" height="480" unless="mobile" />-->
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 	
 	<!-- classpath, haxe libs -->
@@ -27,7 +27,9 @@
 	<assets path="assets/swf" rename="swf" />
 	<assets path="assets/localization" rename="localization"/>
 
-	<library path="assets/swf/assets.swf" />
+	<library path="assets/swf/assets.swf" type="swflite" if="html5" preload="true" />
+	<library path="assets/swf/assets.swf" type="swf" unless="html5" preload="true" />
+	
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
 	
