@@ -13,7 +13,6 @@
 	<window fps="60" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 
-
 	<!-- sources path -->
 	<source path="src" />
 
