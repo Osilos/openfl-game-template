@@ -1,17 +1,52 @@
 package template.utils.game;
+
 import openfl.Assets;
+import openfl.display.DisplayObject;
 import openfl.display.MovieClip;
+import openfl.display.Sprite;
+import openfl.geom.Point;
+import openfl.Lib;
 
 /**
  * ...
  * @author Flavien
  */
-class GameObject extends MovieClip
+class GameObject extends Sprite
 {
-
-	public function new() 
+	private var anim:MovieClip;
+	
+	/**
+	 * Create a GameObect
+	 * @param	library where the movieClip has to be load
+	 * @param	movieClipName the name of the MovieClip to load
+	 */
+	public function new(library:String, movieClipName:String) 
 	{
 		super();
+		
+		anim = createAnim(library, movieClipName);
+		addChild(anim);
 	}
 	
+	/**
+	 * Destroy the GameObejct
+	 */
+	public function destroy () : Void  {
+		removeChild(anim);
+		anim = null;
+	}
+	
+	/**
+	 * Get the anim MovieClip of the GameObject
+	 * @return anim
+	 */
+	public function getAnim () : MovieClip {
+		return anim;
+	}
+	
+	private function createAnim (library:String, movieClipName:String) : MovieClip {
+		return Assets.getMovieClip(library+":"+movieClipName);
+	}
+	
+
 }
