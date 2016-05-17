@@ -6,16 +6,21 @@
 	<meta title="openfl-game-template" package="template.openfl-game-template" version="1.0.0" company="Flavien" />
 	
 	<!-- output -->
-	<app main="template.Main" file="openfl-game-template" path="bin" />
+	<app main="template.Main" file="openfl-game-template" path="bin" 
+		 preloader="template.utils.preloader.CustomPreloader" />
 	
-	<window background="#ffffff" fps="60" />
-	<!--<window width="800" height="480" unless="mobile" />-->
+	 <!-- Window configuration -->
+	<window fps="60" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
-	
-	<!-- classpath, haxe libs -->
 
+	<!-- sources path -->
 	<source path="src" />
-	<set name="openfl-legacy" />
+
+	<!-- options vars -->
+	<set name="openfl-legacy" if="mac" />
+	<set name="openfl-legacy" if="ios" />
+
+	<!-- Libraries -->
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="swf" />
@@ -25,12 +30,15 @@
 	<assets path="assets/fonts" rename="fonts" />
 	<assets path="assets/sounds" rename="sounds" />
 	<assets path="assets/swf" rename="swf" />
-	<assets path="assets/localization" rename="localization"/>
 
-	<library path="assets/swf/assets.swf" type="swflite" if="html5" preload="true" />
-	<library path="assets/swf/assets.swf" type="swf" unless="html5" preload="true" />
-	
+	<!-- swf -->
+
+	<!--Example :-->
+	<!--<library path="Assets/nestedmc.swf" type="swflite" if="html5" preload="true" />-->
+	<!--<library path="Assets/nestedmc.swf" type="swf" unless="html5" preload="true" />-->
+	<!--<library path="Assets/pnj.swf" type="swflite" if="html5" preload="true" />-->
+	<!--<library path="Assets/pnj.swf" type="swf" unless="html5" preload="true" />-->
+
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
-	
 </project>

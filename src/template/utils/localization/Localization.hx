@@ -64,7 +64,7 @@ class Localization
 			localizationSource.set(lang, new Map<String, Dynamic>());
 			for (json in Reflect.fields(Reflect.field(parsedSources, lang))) {
 				localizationSource.get(lang)
-					.set(json, Reflect.field(Reflect.field(parsedSources, lang), json));
+					.set(json, Json.parse(Reflect.field(Reflect.field(parsedSources, lang), json)));
 			}
 		}
 	}
