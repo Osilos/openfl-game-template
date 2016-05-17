@@ -3,10 +3,10 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="openfl-game-template" package="template.openfl-game-template" version="1.0.0" company="Flavien" />
+	<meta title="template" package="com.template.openfl-game-template" version="1.0.0" company="Flavien" />
 	
 	<!-- output -->
-	<app main="template.Main" file="openfl-game-template" path="bin" 
+	<app main="template.Main" file="template" path="bin" 
 		 preloader="template.utils.preloader.CustomPreloader" />
 	
 	 <!-- Window configuration -->
