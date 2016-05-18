@@ -20,16 +20,8 @@ import openfl.display.Sprite;
  */
 class Main extends Sprite {
 	
-	private static var instance:Main;
-	
-	public static function getInstance () : Main {
-		return instance;
-	}
-	
 	public function new() {
 		super();
-
-		instance = this;
 		
 		Debug.initDefaultContainer(this); //todo : create debug container
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
