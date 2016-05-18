@@ -6,14 +6,12 @@
 	<meta title="openfl-game-template" package="template.openfl-game-template" version="1.0.0" company="Flavien" />
 	
 	<!-- output -->
-	<app main="template.Main" file="openfl-game-template" path="bin" preloader="template.utils.preloader.CustomPreloader" />
+	<app main="template.Main" file="openfl-game-template" path="bin" 
+		 preloader="template.utils.preloader.CustomPreloader" />
 	
 	 <!-- Window configuration -->
 	<window fps="60" />
-	<window background="#000000" fps="60" />
-	<!-- <window width="800" height="450" fps="60" /> -->
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
-
 
 	<!-- sources path -->
 	<source path="src" />
