@@ -1,21 +1,21 @@
 package template.utils.game;
 
+import openfl.display.Sprite;
 import openfl.Lib;
-import openfl.display.MovieClip;
 
 class Containers {
-	public static var main:MovieClip;
-	public static var menu:MovieClip;
-	public static var game:MovieClip;
-	public static var hud:MovieClip;
-	public static var debug:MovieClip;
+	public static var main:Sprite;
+	public static var menu:Sprite;
+	public static var game:Sprite;
+	public static var hud:Sprite;
+	public static var debug:Sprite;
 
 	public static function createContainers():Void {
-		main = new MovieClip();
-		menu = new MovieClip();
-		game = new MovieClip();
-		hud = new MovieClip();
-		debug = new MovieClip();
+		main = new Sprite();
+		menu = new Sprite();
+		game = new Sprite();
+		hud = new Sprite();
+		debug = new Sprite();
 
 		Lib.current.stage.addChild(main);
 		main.addChild(menu);
