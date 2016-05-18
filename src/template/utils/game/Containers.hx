@@ -12,9 +12,9 @@ class Containers {
 
 	public static function createContainers():Void {
 		main = new MovieClip();
-		menu = new MovieClip()
-		game = new MovieClip()
-		hud = new MovieClip()
+		menu = new MovieClip();
+		game = new MovieClip();
+		hud = new MovieClip();
 		debug = new MovieClip();
 
 		Lib.current.stage.addChild(main);
