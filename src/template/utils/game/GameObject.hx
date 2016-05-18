@@ -49,6 +49,15 @@ class GameObject extends Sprite
 		return anim;
 	}
 	
+	/**
+	 * Set the position of the GameObject from a point
+	 * @param	position
+	 */
+	public function setPositionAt (position:Point) : Void {
+		x = position.x;
+		y = position.y;
+	}
+	
 	private function createAnim (libraryName:String, movieClipName:String) : MovieClip {
 		var movieClip:MovieClip = Assets.getMovieClip(libraryName + ":" + movieClipName);
 		if (movieClip == null) throwRessourceNotFoundException(libraryName + ":" + movieClipName);

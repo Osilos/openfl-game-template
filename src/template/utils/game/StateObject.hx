@@ -29,9 +29,13 @@ class StateObject extends GameObject
 	public function setState(state:String) : Void {
 		if (state == currentState) return;
 		
+		movieClipName = getMovieClipNameWithoutState() + "_" + state;
+		
 		removeChild(anim);
-		anim = createAnim(libraryName, movieClipName + "_" + state);
+		anim = createAnim(libraryName, movieClipName);
 		addChild(anim);
+		
+		currentState = state;
 	}
 	
 	/**
@@ -40,6 +44,10 @@ class StateObject extends GameObject
 	 */
 	public function getState () : String {
 		return currentState;
+	}
+	
+	private function getMovieClipNameWithoutState () : String {
+		return movieClipName.substring(0, movieClipName.indexOf("_"));
 	}
 	
 }
