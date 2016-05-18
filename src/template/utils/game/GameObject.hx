@@ -20,11 +20,11 @@ class GameObject extends Sprite
 	 * @param	library where the movieClip has to be load
 	 * @param	movieClipName the name of the MovieClip to load
 	 */
-	public function new(library:String, movieClipName:String) 
+	public function new(libraryName:String, movieClipName:String) 
 	{
 		super();
 		
-		anim = createAnim(library, movieClipName);
+		anim = createAnim(libraryName, movieClipName);
 		addChild(anim);
 	}
 	
@@ -44,8 +44,8 @@ class GameObject extends Sprite
 		return anim;
 	}
 	
-	private function createAnim (library:String, movieClipName:String) : MovieClip {
-		return Assets.getMovieClip(library+":"+movieClipName);
+	private function createAnim (libraryName:String, movieClipName:String) : MovieClip {
+		return Assets.getMovieClip(libraryName+":"+movieClipName);
 	}
 	
 
