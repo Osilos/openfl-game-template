@@ -19,9 +19,10 @@ import openfl.display.Sprite;
  * @author Flavien
  */
 class Main extends Sprite {
+	
 	public function new() {
 		super();
-
+		
 		Debug.initDefaultContainer(this); //todo : create debug container
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
 		

@@ -1,9 +1,11 @@
 package template.game;
+import flash.geom.Point;
+import haxe.Timer;
+import template.utils.game.GameObject;
+import template.utils.game.StateObject;
+import template.utils.metadata.LibrariesNames;
 
 class Game {
-
-	public function new() {
-	}
 
 	public static function start():Void {
 		#if showdebuginfo

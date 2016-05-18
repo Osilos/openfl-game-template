@@ -13,6 +13,9 @@ import openfl.Lib;
  */
 class GameObject extends Sprite
 {
+	private var libraryName:String;
+	private var movieClipName:String;
+	
 	private var anim:MovieClip;
 	
 	/**
@@ -20,9 +23,11 @@ class GameObject extends Sprite
 	 * @param	library where the movieClip has to be load
 	 * @param	movieClipName the name of the MovieClip to load
 	 */
-	public function new(libraryName:String, movieClipName:String) 
-	{
+	public function new(libraryName:String, movieClipName:String) {
 		super();
+		
+		this.libraryName = libraryName;
+		this.movieClipName = movieClipName;
 		
 		anim = createAnim(libraryName, movieClipName);
 		addChild(anim);
@@ -44,8 +49,23 @@ class GameObject extends Sprite
 		return anim;
 	}
 	
+	/**
+	 * Set the position of the GameObject from a point
+	 * @param	position
+	 */
+	public function setPositionAt (position:Point) : Void {
+		x = position.x;
+		y = position.y;
+	}
+	
 	private function createAnim (libraryName:String, movieClipName:String) : MovieClip {
-		return Assets.getMovieClip(libraryName+":"+movieClipName);
+		var movieClip:MovieClip = Assets.getMovieClip(libraryName + ":" + movieClipName);
+		if (movieClip == null) throwRessourceNotFoundException(libraryName + ":" + movieClipName);
+		return movieClip;
+	}
+	
+	private function throwRessourceNotFoundException (resourceName:String) : Void {
+		throw "Resource : " + resourceName + " don't find in any load ressource";
 	}
 	
 
