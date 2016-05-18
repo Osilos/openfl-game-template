@@ -33,6 +33,7 @@
 	<assets path="assets/sounds" rename="sounds" />
 	<assets path="assets/swf" rename="swf" />
 
+	
 	<!-- swf -->
 
 	<library path="assets/swf/portraitUi.swf" type="swflite" if="html5" preload="true" />
@@ -42,11 +43,12 @@
 	<library path="assets/swf/landscapeUi.swf" type="swf" unless="html5" preload="true" />
 	
 	<!--Example :-->
+	<library path="assets/swf/TitleCard.swf" id="TitleCard" type="swflite" preload="true"/>
 	<!--<library path="Assets/nestedmc.swf" type="swflite" if="html5" preload="true" />-->
 	<!--<library path="Assets/nestedmc.swf" type="swf" unless="html5" preload="true" />-->
 	<!--<library path="Assets/pnj.swf" type="swflite" if="html5" preload="true" />-->
 	<!--<library path="Assets/pnj.swf" type="swf" unless="html5" preload="true" />-->
-
+	
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
 </project>

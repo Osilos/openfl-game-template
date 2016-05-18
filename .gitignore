@@ -1,5 +1,5 @@
 .idea
 bin
-openfl-game-template.hxproj
-openfl-game-template.iml
+*.hxproj
+*.iml
 compile.sh

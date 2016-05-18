@@ -1,6 +1,6 @@
 package template;
 
-import pixi.core.display.Container;
+import openfl.display.Sprite;
 import template.utils.game.Containers;
 import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
@@ -12,9 +12,9 @@ import openfl.ui.Mouse;
 import template.game.Game;
 import template.utils.game.GameObject;
 import template.utils.debug.DebugInfo;
-import template.utils.localization.Localization;
+import template.utils.game.ScaleHandler;
+import template.utils.game.ScaleMode;
 import template.utils.metadata.Metadatas;
-import openfl.display.Sprite;
 
 /**
  * ...
@@ -35,8 +35,7 @@ class Main extends Sprite {
 		
 		Metadatas.load();
 		Game.start();
-
-		// todo : move to Game.hx when we have GameStage
+		
 		#if showdebuginfo
 			var debugInfo:DebugInfo = new DebugInfo();
 			addChild(debugInfo);
