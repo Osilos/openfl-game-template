@@ -12,8 +12,6 @@ class ScaleHandler extends HandlerOnResize
 {
 	/**
 	 * Scale mode on resize
-	 * ScaleMode.KEEP_ASPECT conserve aspect even if parents have different scales
-	 * ScaleMode.NO_SCALE    do not scale 
 	 * ScaleMode.SHOW_ALL    use safeZone for ratio
 	 * ScaleMode.FIT_WIDTH 	 fit all width
 	 * ScaleMode.FIT_HEIGHT  fit all height
