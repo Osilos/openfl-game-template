@@ -1,5 +1,7 @@
 package template;
 
+import pixi.core.display.Container;
+import template.utils.game.Containers;
 import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
 import openfl.events.Event;
@@ -17,7 +19,8 @@ class Main extends Sprite {
 	public function new() {
 		super();
 
-		Debug.initDefaultContainer(this); //todo : create debug container
+		Containers.createContainers();
+		Debug.initDefaultContainer(Containers.debug);
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
 		
 		Metadatas.load();
