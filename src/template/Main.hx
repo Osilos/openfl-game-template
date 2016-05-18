@@ -1,15 +1,16 @@
 package template;
 
-import haxe.Timer;
-import openfl.Assets;
-import openfl.display.MovieClip;
 import openfl.display.Sprite;
-import openfl.events.Event;
-import openfl.geom.Point;
-import template.game.Game;
-import template.utils.game.AlignHandler;
-import template.utils.game.AlignMode;
+import template.utils.game.Containers;
+import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
+import openfl.events.Event;
+import openfl.events.MouseEvent;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
+import openfl.ui.Mouse;
+import template.game.Game;
+import template.utils.game.GameObject;
 import template.utils.debug.DebugInfo;
 import template.utils.game.ScaleHandler;
 import template.utils.game.ScaleMode;
@@ -20,10 +21,17 @@ import template.utils.metadata.Metadatas;
  * @author Flavien
  */
 class Main extends Sprite {
+	
 	public function new() {
 		super();
-		Debug.initDefaultContainer(this); //todo : create debug container
+
+		Containers.createContainers();
+		Debug.initDefaultContainer(Containers.debug);
 		addEventListener(Event.ENTER_FRAME, Game.gameloop);
+		
+		#if !html5 
+			Localization.init();
+		#end
 		
 		Metadatas.load();
 		Game.start();

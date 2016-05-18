@@ -3,11 +3,13 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="openfl-game-template" package="template.openfl-game-template" version="1.0.0" company="Flavien" />
+	<meta title="template" package="com.template.template" version="1.0.0" company="Flavien" />
 	
 	<!-- output -->
-	<app main="template.Main" file="openfl-game-template" path="bin" 
-		 preloader="template.utils.preloader.CustomPreloader" />
+	<app main="template.Main" file="template" path="bin" 
+		 preloader="template.utils.preloader.CustomPreloader" if="html5"/>
+	
+	<app main="template.Main" file="template" path="bin" unless="html5"/>
 	
 	 <!-- Window configuration -->
 	<window fps="60" />
@@ -30,11 +32,16 @@
 	<assets path="assets/fonts" rename="fonts" />
 	<assets path="assets/sounds" rename="sounds" />
 	<assets path="assets/swf" rename="swf" />
-	<assets path="assets/localization" rename="localization"/>
 
 	
 	<!-- swf -->
 
+	<library path="assets/swf/portraitUi.swf" type="swflite" if="html5" preload="true" />
+	<library path="assets/swf/portraitUi.swf" type="swf" unless="html5" preload="true" />	
+	
+	<library path="assets/swf/landscapeUi.swf" type="swflite" if="html5" preload="true" />
+	<library path="assets/swf/landscapeUi.swf" type="swf" unless="html5" preload="true" />
+	
 	<!--Example :-->
 	<library path="assets/swf/TitleCard.swf" id="TitleCard" type="swflite" preload="true"/>
 	<!--<library path="Assets/nestedmc.swf" type="swflite" if="html5" preload="true" />-->
