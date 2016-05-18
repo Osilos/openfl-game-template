@@ -47,7 +47,9 @@ class CustomPreloader extends NMEPreloader
 	{
 		super();
 		
-		Localization.init();
+		#if html5
+			Localization.init();
+		#end
 		
 		updateScreenSize();
 		
