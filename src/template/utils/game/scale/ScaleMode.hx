@@ -1,4 +1,4 @@
-package template.utils.game;
+package template.utils.game.scale;
 
 /**
  * ...

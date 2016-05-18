@@ -12,8 +12,10 @@ import openfl.ui.Mouse;
 import template.game.Game;
 import template.utils.game.GameObject;
 import template.utils.debug.DebugInfo;
-import template.utils.game.ScaleHandler;
-import template.utils.game.ScaleMode;
+import template.utils.game.scale.ScaleHandler;
+import template.utils.game.scale.ScaleMode;
+import template.utils.game.StateObject;
+import template.utils.localization.Localization;
 import template.utils.metadata.Metadatas;
 
 /**

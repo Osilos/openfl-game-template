@@ -1,9 +1,11 @@
-package template.utils.game;
+package template.utils.game.alignement;
 import openfl.display.DisplayObject;
 import openfl.display.DisplayObjectContainer;
+import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.geom.Point;
-import template.utils.game.AlignMode;
+import template.utils.screen.ScreenPositions;
+import template.utils.game.alignement.AlignOrigin;
 
 /**
  * ...
@@ -14,12 +16,12 @@ class AlignHandler extends HandlerOnResize
 	/**
 	 * Alignment style
 	 */
-	public var alignModeOnResize(default, set):AlignMode = AlignMode.TOP_LEFT;
+	public var alignModeOnResize(default, set):ScreenPositions = ScreenPositions.TOP_LEFT;
 	
 	/**
 	 * Alignement style for safeZone
 	 */
-	public var safeZoneAlignMode(default, set):AlignMode = AlignMode.CENTER;
+	public var safeZoneAlignMode(default, set):ScreenPositions = ScreenPositions.CENTER;
 	
 	/**
 	 * Align origin (FROM_PARENT not implemented)
@@ -53,17 +55,9 @@ class AlignHandler extends HandlerOnResize
 	 * @param	alignOrigin 
 	 * @param	offset 
 	 */
-	public function setAlignPos(alignMode:AlignMode, ?useSafeZone:Bool = false, ?alignOrigin:AlignOrigin = AlignOrigin.FROM_STAGE, ?offset:Point = null):Void {
-		if (alignMode == AlignMode.NO_ALIGN) {
-			return;
-		}
-		
+	private function setAlignPos(alignMode:ScreenPositions, ?useSafeZone:Bool = false, ?alignOrigin:AlignOrigin = AlignOrigin.FROM_STAGE):Void {
 		if (target.stage == null && alignOrigin == AlignOrigin.FROM_STAGE) {
 			throwExceptionNotOnStage();
-		}
-		
-		if (offset == null) {
-			offset = new Point(0, 0);
 		}
 		
 		if (alignOrigin == AlignOrigin.FROM_STAGE) {
@@ -75,38 +69,36 @@ class AlignHandler extends HandlerOnResize
 	
 	override function onResize(?event:Event = null):Void 
 	{
-		if (alignModeOnResize != AlignMode.NO_ALIGN) {
-			setAlignPos(alignModeOnResize, useSafeZone, alignOrigin, offset);
-		}
+		setAlignPos(alignModeOnResize, useSafeZone, alignOrigin, offset);
 	}
 	
-	private function alignPosFromParent(alignMode:AlignMode, useSafeZone:Bool, offset:Point):Void 
+	private function alignPosFromParent(alignMode:ScreenPositions, useSafeZone:Bool, offset:Point):Void 
 	{
 		//TODO
 		throw "Not implemented";
 	}
 	
-	private function alignPosFromStage(alignMode:AlignMode, useSafeZone:Bool, offset:Point) 
+	private function alignPosFrom(container:Sprite) : Void
 	{
-		var parent:DisplayObjectContainer = target.parent;
+		var parent:DisplayObjectContainer = container;
 		
 		// position x:0 y:0 from stage
 		var basePos:Point = parent.globalToLocal(new Point(0, 0));
-		var lScaleX:Float = getTargetWorldScaleX();
-		var lScaleY:Float = getTargetWorldScaleY();
+		var targetScaleX:Float = getTargetWorldScaleX();
+		var targetScaleY:Float = getTargetWorldScaleY();
 		
 		// offset
-		basePos.x += offset.x / lScaleX;
-		basePos.y += offset.y / lScaleY;
+		basePos.x += offset.x / targetScaleX;
+		basePos.y += offset.y / targetScaleY;
 		
 		if (useSafeZone) {
-			alignPosFromStageUsingSafeZone(alignMode, basePos, lScaleX, lScaleY);
+			alignPosFromStageUsingSafeZone(alignMode, basePos, targetScaleX, targetScaleY);
 		} else {
-			alignPosFromStageUsingScreen(alignMode, basePos, parent, lScaleX, lScaleY);
+			alignPosFromStageUsingScreen(alignMode, basePos, parent, targetScaleX, targetScaleY);
 		}
 	}
 	
-	private function alignPosFromStageUsingScreen(alignMode:AlignMode, basePos:Point, parent:DisplayObjectContainer, lScaleX:Float, lScaleY:Float):Void 
+	private function alignPosFromStageUsingScreen(alignMode:ScreenPositions, basePos:Point, parent:DisplayObjectContainer, lScaleX:Float, lScaleY:Float):Void 
 	{
 		if (alignModeIsOnVecticalMiddle(alignMode)) {
 			basePos.y += (parent.stage.stageHeight / 2) / lScaleY;
@@ -124,11 +116,10 @@ class AlignHandler extends HandlerOnResize
 		target.y = basePos.y;
 	}
 	
-	private function alignPosFromStageUsingSafeZone(alignMode:AlignMode, basePos:Point, lScaleX:Float, lScaleY:Float):Void {
+	private function alignPosFromStageUsingSafeZone(alignMode:ScreenPositions, basePos:Point, lScaleX:Float, lScaleY:Float):Void {
 		updateSafeZonePosition();
 		
-		var lRatio:Float  = getRatioStageToSafeZone();
-		var lWidth:Float  = safeZone.width * lRatio;
+		var lRatio:Float  = getRatioStageToSafeZone();var lWidth:Float  = safeZone.width * lRatio;
 		var lHeight:Float = safeZone.height * lRatio;
 		
 		if (alignModeIsOnVecticalMiddle(alignMode)) {
@@ -170,31 +161,31 @@ class AlignHandler extends HandlerOnResize
 		}
 	}
 	
-	private function alignModeIsOnTop(alignMode:AlignMode):Bool {
-		return alignMode == AlignMode.TOP || alignMode == AlignMode.TOP_LEFT || alignMode == AlignMode.TOP_RIGHT;
+	private function alignModeIsOnTop(alignMode:ScreenPositions):Bool {
+		return alignMode == ScreenPositions.TOP || alignMode == ScreenPositions.TOP_LEFT || alignMode == ScreenPositions.TOP_RIGHT;
 	}
 	
-	private function alignModeIsOnBottom(alignMode:AlignMode):Bool {
-		return alignMode == AlignMode.BOTTOM || alignMode == AlignMode.BOTTOM_LEFT || alignMode == AlignMode.BOTTOM_RIGHT;
+	private function alignModeIsOnBottom(alignMode:ScreenPositions):Bool {
+		return alignMode == ScreenPositions.BOTTOM || alignMode == ScreenPositions.BOTTOM_LEFT || alignMode == ScreenPositions.BOTTOM_RIGHT;
 	}
 	
-	private function alignModeIsOnVecticalMiddle(alignMode:AlignMode):Bool {
-		return alignMode == AlignMode.CENTER || alignMode == AlignMode.LEFT || alignMode == AlignMode.RIGHT;
+	private function alignModeIsOnVecticalMiddle(alignMode:ScreenPositions):Bool {
+		return alignMode == ScreenPositions.CENTER || alignMode == ScreenPositions.LEFT || alignMode == ScreenPositions.RIGHT;
 	}
 	
-	private function alignModeIsOnLeft(alignMode:AlignMode):Bool {
-		return alignMode == AlignMode.LEFT || alignMode == AlignMode.TOP_LEFT || alignMode == AlignMode.BOTTOM_LEFT;
+	private function alignModeIsOnLeft(alignMode:ScreenPositions):Bool {
+		return alignMode == ScreenPositions.LEFT || alignMode == ScreenPositions.TOP_LEFT || alignMode == ScreenPositions.BOTTOM_LEFT;
 	}
 	
-	private function alignModeIsOnHorizontalMiddle(alignMode:AlignMode):Bool {
-		return alignMode == AlignMode.TOP || alignMode == AlignMode.CENTER || alignMode == AlignMode.BOTTOM;
+	private function alignModeIsOnHorizontalMiddle(alignMode:ScreenPositions):Bool {
+		return alignMode == ScreenPositions.TOP || alignMode == ScreenPositions.CENTER || alignMode == ScreenPositions.BOTTOM;
 	}
 	
-	private function alignModeIsOnRight(alignMode:AlignMode):Bool {
-		return alignMode == AlignMode.RIGHT || alignMode == AlignMode.TOP_RIGHT || alignMode == AlignMode.BOTTOM_RIGHT;
+	private function alignModeIsOnRight(alignMode:ScreenPositions):Bool {
+		return alignMode == ScreenPositions.RIGHT || alignMode == ScreenPositions.TOP_RIGHT || alignMode == ScreenPositions.BOTTOM_RIGHT;
 	}
 	
-	private function set_safeZoneAlignMode(alignMode:AlignMode):AlignMode {
+	private function set_safeZoneAlignMode(alignMode:ScreenPositions):ScreenPositions {
 		var isChanged = safeZoneAlignMode != alignMode;
 		safeZoneAlignMode = alignMode;
 		
@@ -220,7 +211,7 @@ class AlignHandler extends HandlerOnResize
 		return this.alignOrigin;
 	}
 	
-	private function set_alignModeOnResize(alignMode:AlignMode):AlignMode {
+	private function set_alignModeOnResize(alignMode:ScreenPositions):ScreenPositions {
 		var isChanged:Bool = alignModeOnResize != alignMode;
 		alignModeOnResize = alignMode;
 		

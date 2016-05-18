@@ -15,6 +15,18 @@ class HandlerOnResize extends DisplayObjectHandler
 	 */
 	public var useSafeZone(default, set):Bool = false;
 	
+	private function set_useSafeZone(useSafeZone:Bool):Bool {
+		var isChanged:Bool = useSafeZone != this.useSafeZone;
+		this.useSafeZone   = useSafeZone;
+		
+		if (isChanged) {
+			resizeIfOnStage();
+		}
+		
+		return this.useSafeZone;
+	}
+	
+	//to do get from config file
 	private var safeZone:Rectangle = new Rectangle(0, 0, 2048, 1366);
 	
 	
@@ -46,18 +58,18 @@ class HandlerOnResize extends DisplayObjectHandler
 		}
 	}
 	
-	private function onResize(?event:Event = null):Void {
-		
-	}
-	
-	private function addResizeListener():Void 
-	{
-		target.stage.addEventListener(Event.RESIZE, onResize);
-	}
-	
-	private function removeResizeListener():Void {
-		target.stage.removeEventListener(Event.RESIZE, onResize);	
-	}
+	//private function onResize(?event:Event = null):Void {
+		//
+	//}
+	//
+	//private function addResizeListener():Void 
+	//{
+		//target.stage.addEventListener(Event.RESIZE, onResize);
+	//}
+	//
+	//private function removeResizeListener():Void {
+		//target.stage.removeEventListener(Event.RESIZE, onResize);	
+	//}
 	
 	override private function onAddToStage(?e:Event = null):Void 
 	{
@@ -76,6 +88,12 @@ class HandlerOnResize extends DisplayObjectHandler
 		removeResizeListener();
 	}
 	
+	private function resizeIfOnStage():Void {
+		if (target.stage != null) {
+			onResize();
+		}
+	}
+	
 	private function getTargetWorldScaleX():Float {
 		return target.getBounds(target.stage).width / target.width;
 	}
@@ -84,24 +102,7 @@ class HandlerOnResize extends DisplayObjectHandler
 		return target.getBounds(target.stage).height / target.height;
 	}
 	
-	private function resizeIfOnStage():Void {
-		if (target.stage != null) {
-			onResize();
-		}
-	}
-	
 	private function getRatioStageToSafeZone():Float {
 		return Math.round(10000 * Math.min(target.stage.stageWidth / safeZone.width, target.stage.stageHeight / safeZone.height)) / 10000;
-	}
-	
-	private function set_useSafeZone(useSafeZone:Bool):Bool {
-		var isChanged:Bool = useSafeZone != this.useSafeZone;
-		this.useSafeZone   = useSafeZone;
-		
-		if (isChanged) {
-			resizeIfOnStage();
-		}
-		
-		return this.useSafeZone;
 	}
 }

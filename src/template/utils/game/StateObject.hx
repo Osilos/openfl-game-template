@@ -1,5 +1,6 @@
 package template.utils.game;
 import openfl.display.MovieClip;
+import openfl.display.Sprite;
 
 /**
  * ...
@@ -18,7 +19,7 @@ class StateObject extends GameObject
 	 */
 	public function new(libraryName:String, movieClipName:String) {
 		super(libraryName, movieClipName + "_" + DEFAULT_STATE);
-		
+
 		currentState = DEFAULT_STATE;
 	}
 	

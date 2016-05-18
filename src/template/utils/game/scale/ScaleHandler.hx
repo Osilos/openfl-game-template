@@ -1,7 +1,8 @@
-package template.utils.game;
+package template.utils.game.scale;
 import openfl.display.DisplayObject;
 import openfl.events.Event;
 import openfl.geom.Rectangle;
+import template.utils.game.scale.ScaleMode;
 
 /**
  * ...
