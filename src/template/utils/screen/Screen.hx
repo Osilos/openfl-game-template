@@ -1,6 +1,8 @@
 package template.utils.screen;
-import Math;
-import Math;
+
+import template.utils.screen.const.ScreenFits;
+import template.utils.screen.const.ScreenFits;
+import template.utils.screen.const.ScreenPositions;
 import flash.media.Video;
 import openfl.display.Sprite;
 import openfl.geom.Point;
@@ -13,7 +15,7 @@ import template.utils.game.GameObject;
  */
 class Screen
 {
-	public static function getPositionBy(normalizedPosition:Point) : Point {
+	public static function getPositionAt(normalizedPosition:ScreenPositions) : Point {
 		var screenSize:Point = getScreenSize();
 		var position:Point = new Point(screenSize.x / 2, screenSize.y / 2);
 
@@ -29,14 +31,14 @@ class Screen
 		return position;
 	}
 
-	public static function getTargetScaleToFit(fit:Point, target:Sprite) : Point {
+	public static function getTargetScaleToFit(fitCoef:ScreenFits, target:Sprite) : Point {
 		var screenSize:Point = getScreenSize();
 		var targetOriginalSize:Point = new Point(
 			target.width / target.scaleX,
 			target.height / target.scaleY );
 
-		var scaleX:Float = (screenSize.x / targetOriginalSize.x) * fit.x;
-		var scaleY:Float = (screenSize.y / targetOriginalSize.y) * fit.y;
+		var scaleX:Float = (screenSize.x / targetOriginalSize.x) * fitCoef.x;
+		var scaleY:Float = (screenSize.y / targetOriginalSize.y) * fitCoef.y;
 
 		scaleX = scaleX == 0 ? 1 : scaleX;
 		scaleY = scaleY == 0 ? 1 : scaleY;

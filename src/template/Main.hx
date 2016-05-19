@@ -1,7 +1,5 @@
 package template;
 
-import openfl.Assets;
-import openfl.display.MovieClip;
 import openfl.display.Sprite;
 import template.utils.game.Containers;
 import template.utils.debug.DebugInfo;

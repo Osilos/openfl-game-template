@@ -1,6 +1,5 @@
 package template.utils.debug;
 
-import lime.system.Display;
 import openfl.display.Sprite;
 import openfl.display.DisplayObject;
 import template.utils.debug.Debug;
