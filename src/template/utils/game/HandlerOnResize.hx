@@ -58,18 +58,18 @@ class HandlerOnResize extends DisplayObjectHandler
 		}
 	}
 	
-	//private function onResize(?event:Event = null):Void {
-		//
-	//}
-	//
-	//private function addResizeListener():Void 
-	//{
-		//target.stage.addEventListener(Event.RESIZE, onResize);
-	//}
-	//
-	//private function removeResizeListener():Void {
-		//target.stage.removeEventListener(Event.RESIZE, onResize);	
-	//}
+	private function onResize(?event:Event = null):Void {
+		
+	}
+	
+	private function addResizeListener():Void 
+	{
+		target.stage.addEventListener(Event.RESIZE, onResize);
+	}
+	
+	private function removeResizeListener():Void {
+		target.stage.removeEventListener(Event.RESIZE, onResize);	
+	}
 	
 	override private function onAddToStage(?e:Event = null):Void 
 	{
