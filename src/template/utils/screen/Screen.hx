@@ -13,8 +13,16 @@ class Screen
 {
 	public static function getPositionBy(normalizedPosition:Point) : Point {
 		var screenSize:Point = getScreenSize();
-
 		var position:Point = new Point(screenSize.x / 2, screenSize.y / 2);
+
+		if (
+			normalizedPosition.x > 1 ||
+			normalizedPosition.x < -1 ||
+			normalizedPosition.y > 1 ||
+			normalizedPosition.y < -1
+		) {
+			throw positionOutOfRangeException();
+		}
 
 		position.setTo(
 			position.x + position.x * normalizedPosition.x,
@@ -44,5 +52,9 @@ class Screen
 			Lib.current.stage.width,
 			Lib.current.stage.height
 		);
+	}
+
+	private static function positionOutOfRangeException():String {
+		return 'Screen.hx : position parameter value is incorrect (must be between -1, 1)';
 	}
 }
