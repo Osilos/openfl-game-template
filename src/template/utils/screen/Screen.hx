@@ -1,4 +1,6 @@
 package template.utils.screen;
+import Math;
+import Math;
 import flash.media.Video;
 import openfl.display.Sprite;
 import openfl.geom.Point;
@@ -15,12 +17,7 @@ class Screen
 		var screenSize:Point = getScreenSize();
 		var position:Point = new Point(screenSize.x / 2, screenSize.y / 2);
 
-		if (
-			normalizedPosition.x > 1 ||
-			normalizedPosition.x < -1 ||
-			normalizedPosition.y > 1 ||
-			normalizedPosition.y < -1
-		) {
+		if (Math.abs(normalizedPosition.x) > 1 || Math.abs(normalizedPosition.y) > 1) {
 			throw positionOutOfRangeException();
 		}
 
