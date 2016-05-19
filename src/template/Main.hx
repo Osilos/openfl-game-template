@@ -34,9 +34,9 @@ class Main extends Sprite {
 
 		Metadatas.load();
 		Game.start();
+		var test:MovieClip = Assets.getMovieClip('portrait-template:test');
 
-		var test:MovieClip = Assets.getMovieClip('portraitUi:screenportrait2048');
-		var scale:Float = Screen.getMaxScale(test);
+		var scale:Float = Screen.getSafeZoneScale();
 		addChild(test);
 		trace(scale);
 		test.scaleX = scale;

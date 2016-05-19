@@ -6,22 +6,21 @@ import template.utils.screen.const.ScreenPositions;
 import openfl.display.Sprite;
 import openfl.Lib;
 
-/**
- * ...
- * @author Flavien
- */
-class Screen {public static function getPositionAt(normalizedPosition:ScreenPositions):Point {
-	var screenSize:Point = getScreenSize();
-	var position:Point = new Point(screenSize.x / 2, screenSize.y / 2);
+class Screen {
+	public static var SAFEZONE:Point = new Point(1366, 2048);
 
-	if (Math.abs(normalizedPosition.x) > 1 || Math.abs(normalizedPosition.y) > 1) {
-		throw positionOutOfRangeException();
+	public static function getPositionAt(normalizedPosition:ScreenPositions):Point {
+		var screenSize:Point = getScreenSize();
+		var position:Point = new Point(screenSize.x / 2, screenSize.y / 2);
+
+		if (Math.abs(normalizedPosition.x) > 1 || Math.abs(normalizedPosition.y) > 1) {
+			throw positionOutOfRangeException();
+		}
+
+		position.setTo(position.x + position.x * normalizedPosition.x, position.y + position.y * normalizedPosition.y);
+
+		return position;
 	}
-
-	position.setTo(position.x + position.x * normalizedPosition.x, position.y + position.y * normalizedPosition.y);
-
-	return position;
-}
 
 	public static function getTargetScaleToFit(fitCoef:ScreenFits, target:Sprite):Point {
 		var screenSize:Point = getScreenSize();
@@ -36,17 +35,10 @@ class Screen {public static function getPositionAt(normalizedPosition:ScreenPosi
 		return new Point(scaleX, scaleY);
 	}
 
-	public static function getMaxScale(target:Sprite):Float {
+	public static function getSafeZoneScale():Float {
 		var screenSize:Point = getScreenSize();
-		var targetOriginalSize:Point = new Point(target.width / target.scaleX, target.height / target.scaleY );
-		var maxScale:Float;
-
-		var scale:Point = new Point(
-			screenSize.x / 2048,
-			screenSize.y / 1366
-		);
-
-		return Math.min(scale.x, scale.y);
+		var safeZoneRatio:Point = new Point(screenSize.x / SAFEZONE.x, screenSize.y / SAFEZONE.y);
+		return Math.min(safeZoneRatio.x, safeZoneRatio.y);
 	}
 
 	private static function getScreenSize():Point {
