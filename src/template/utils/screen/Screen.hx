@@ -48,8 +48,8 @@ class Screen
 
 	private static function getScreenSize () : Point {
 		return new Point(
-			Lib.current.stage.width,
-			Lib.current.stage.height
+			Lib.current.stage.stageWidth,
+			Lib.current.stage.stageHeight
 		);
 	}
 

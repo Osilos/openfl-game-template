@@ -22,7 +22,7 @@ class Debug {
 		var container:DisplayObjectContainer = getAvailableContainer(sourceContainer);
 		var debugPoint = new Sprite();
 		debugPoint.graphics.beginFill(color);
-		debugPoint.graphics.drawCircle(0, 0, 2);
+		debugPoint.graphics.drawCircle(0, 0, 20);
 		debugPoint.x = position.x;
 		debugPoint.y = position.y;
 		debugPoints.push(debugPoint);
