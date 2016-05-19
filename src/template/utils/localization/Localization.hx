@@ -72,13 +72,18 @@ class Localization
 	macro public static function getLocalizationSources() : Dynamic {
 		var sources:Dynamic = {};
 		var sourcesStringified;
+		var baseDirectory = '';
 
-		for (lang in FileSystem.readDirectory("assets/localization/")) {
+		#if ios
+		baseDirectory = '../';
+		#end
+
+		for (lang in FileSystem.readDirectory(baseDirectory + "assets/localization/")) {
 			if (Reflect.field(sources, lang) == null) {
 				Reflect.setField(sources, lang, {});
 			}
-			for (json in FileSystem.readDirectory("assets/localization/" + lang)) {
-				var keyValue = File.getContent("assets/localization/" + lang +"/" + json);
+			for (json in FileSystem.readDirectory(baseDirectory + "assets/localization/" + lang)) {
+				var keyValue = File.getContent(baseDirectory + "assets/localization/" + lang +"/" + json);
 				Reflect.setField(Reflect.field(sources, lang), json, keyValue);
 			}
 		}

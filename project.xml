@@ -13,7 +13,6 @@
 	
 	 <!-- Window configuration -->
 	<window fps="60" />
-	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 
 	<!-- sources path -->
 	<source path="src" />
@@ -32,7 +31,6 @@
 	<assets path="assets/fonts" rename="fonts" />
 	<assets path="assets/sounds" rename="sounds" />
 	<assets path="assets/swf" rename="swf" />
-
 	
 	<!-- swf -->
 
