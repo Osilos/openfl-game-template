@@ -23,6 +23,8 @@ Development base environment for OpenFL.
 - Windows (cpp) (.exe)
 - Mac (cpp) (.dmg)
 
+All of these platforms are tested for each pull request submission
+
 ## How to contribute
 
 You just have to submit us your pull request, each pull request is reviewed with much love
