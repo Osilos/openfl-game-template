@@ -41,7 +41,7 @@ class Main extends Sprite {
 		MultiScreenBuilder.create()
 						  .withTargetToHandle(test)
 						  .withPlacementPosition(ScreenPositions.CENTER)
-						  .withSafeZoneScaling(true)
+						  .withUsingSafeZoneScaling(true)
 						  .build();
 
 		#if showdebuginfo

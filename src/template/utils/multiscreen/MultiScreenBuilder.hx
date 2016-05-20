@@ -15,7 +15,7 @@ class MultiScreenBuilder {
 	'                  .withTargetToHandle(target:DisplayObject) (Required)\n' +
 	'                  .withPlacementPosition(position:ScreenPositions) (Optional)\n' +
 	'                  .withScreenFitting(fitType:ScreenFitsType) (Optional)\n' +
-	'                  .withSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)\n' +
+	'                  .withUsingSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)\n' +
 	'                  .withSafeZoneSize(safeZoneSize:Point) (Optional) (Default: DEFAULT_SAFEZONE_WIDTH, DEFAULT_SAFEZONE_HEIGHT)\n' +
 	'                  .build()';
 
@@ -34,7 +34,7 @@ class MultiScreenBuilder {
 	 * 				  	 .withTargetToHandle(target:DisplayObject) (Required)
 	 *	   				 .withPlacementPosition(position:ScreenPositions) (Optional)
 	 *	   				 .withScreenFitting(fitType:ScreenFitsType) (Optional)
-	 *	   				 .withSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)
+	 *	   				 .withUsingSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)
 	 *	   				 .withSafeZoneSize(safeZoneSize:Point) (Optional) (Default: DEFAULT_SAFEZONE_WIDTH, DEFAULT_SAFEZONE_HEIGHT)
 	 * 				   	 .build()
      **/
@@ -61,7 +61,7 @@ class MultiScreenBuilder {
 		return this;
 	}
 
-	public function withSafeZoneScaling(useSafeZoneScale:Bool):MultiScreenBuilder {
+	public function withUsingSafeZoneScaling(useSafeZoneScale:Bool):MultiScreenBuilder {
 		this.useSafeZoneScale = useSafeZoneScale;
 		return this;
 	}
