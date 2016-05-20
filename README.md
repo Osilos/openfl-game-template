@@ -9,7 +9,7 @@ Development base environment for OpenFL.
 - Localization
 - Containers management
 - Multiscreen system (SafeZone, DeadZone, Auto Resize, Object placement...)
-- State management of Movieclip
+- Movieclip state management
 - GameObject base class
 - Debug Utilities
 - Base .fla file templates with safeZone and deadZone. (Portrait and landscape template)
