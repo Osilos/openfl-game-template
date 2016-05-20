@@ -1,6 +1,6 @@
-# openfl-game-template
+# OpenFL Game Tempalte
 
-Development environment for OpenFL.
+Development base environment for OpenFL.
 
 The template includes:
 
