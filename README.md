@@ -2,7 +2,7 @@
 
 Development base environment for OpenFL.
 
-The template includes:
+### The template includes:
 
 - SWF lib that allows the MovieClip playback in flipbook
 - Sounds system (.ogg)
@@ -14,9 +14,14 @@ The template includes:
 - Debug Utilities
 - Base .fla file templates with safeZone and deadZone. (Portrait and landscape template)
 
-Guarantee compatibility with the following platforms:
+### Guarantee compatibility with the following platforms:
+
 - IOS (iPad, iPhone)
 - Android
 - Flash (.swf)
 - Windows (.exe)
 - Mac (.dmg)
+
+## How to contribute
+
+You just have to submit us your pull request, each pull request is reviewed with much love
