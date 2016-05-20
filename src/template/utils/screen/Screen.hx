@@ -1,9 +1,9 @@
 package template.utils.screen;
 
+import openfl.display.DisplayObject;
 import openfl.geom.Point;
 import template.utils.screen.const.ScreenFitsType;
 import template.utils.screen.const.ScreenPositions;
-import openfl.display.Sprite;
 import openfl.Lib;
 
 class Screen {
@@ -20,7 +20,7 @@ class Screen {
 		return position;
 	}
 
-	public static function getTargetFitScaleType(fitType:ScreenFitsType, target:Sprite):Point {
+	public static function getTargetFitScaleType(fitType:ScreenFitsType, target:DisplayObject):Point {
 		var screenSize:Point = getScreenSize();
 		var targetOriginalSize:Point = new Point(target.width / target.scaleX, target.height / target.scaleY );
 

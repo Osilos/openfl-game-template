@@ -1,5 +1,6 @@
 package template;
 
+import template.utils.multiscreen.MultiScreenBuilder;
 import template.utils.screen.const.ScreenFitsType;
 import openfl.geom.Point;
 import template.utils.screen.const.ScreenPositions;
@@ -34,14 +35,14 @@ class Main extends Sprite {
 
 		Metadatas.load();
 		Game.start();
-		var test:MovieClip = Assets.getMovieClip('portrait-template:test');
-
-//		var scale:Float = Screen.getSafeZoneScale();
-//		addChild(test);
-//		test.scaleX = scale;
-//		test.scaleY = scale;
-//		test.x = Screen.getPositionAt(ScreenPositions.CENTER).x;
-//		test.y = Screen.getPositionAt(ScreenPositions.CENTER).y;
+		var test:MovieClip = Assets.getMovieClip('portrait-template:screenportrait2048');
+		addChild(test);
+		
+		MultiScreenBuilder.create()
+						  .withTargetToHandle(test)
+						  .withPlacementPosition(ScreenPositions.CENTER)
+						  .withSafeZoneScaling(true)
+						  .build();
 
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();

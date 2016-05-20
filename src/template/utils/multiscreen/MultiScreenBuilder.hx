@@ -17,16 +17,14 @@ class MultiScreenBuilder {
 	'                  .withScreenFitting(fitType:ScreenFitsType) (Optional)\n' +
 	'                  .withSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)\n' +
 	'                  .withSafeZoneSize(safeZoneSize:Point) (Optional) (Default: DEFAULT_SAFEZONE_WIDTH, DEFAULT_SAFEZONE_HEIGHT)\n' +
-	'                  .withUnhandleCallback(unhandleCallback:Void->Void) (Optional)\n' +
 	'                  .build()';
 
 	private var target:DisplayObject;
 	private var position:ScreenPositions;
 	private var fitType:ScreenFitsType;
-	private var useSafeZoneScale:Bool;
 	private var safeZoneSize:Point;
-	private var unhandleCallback:Void->Void;
 
+	private var useSafeZoneScale:Bool;
 	private var mustSetPosition:Bool;
 	private var mustFitScreen:Bool;
 
@@ -38,7 +36,6 @@ class MultiScreenBuilder {
 	 *	   				 .withScreenFitting(fitType:ScreenFitsType) (Optional)
 	 *	   				 .withSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)
 	 *	   				 .withSafeZoneSize(safeZoneSize:Point) (Optional) (Default: DEFAULT_SAFEZONE_WIDTH, DEFAULT_SAFEZONE_HEIGHT)
-	 *	   				 .withUnhandleCallback(unhandleCallback:Void->Void) (Optional)
 	 * 				   	 .build()
      **/
 
@@ -74,24 +71,19 @@ class MultiScreenBuilder {
 		return this;
 	}
 
-	public function withUnhandleCallback(unhandleCallback:Void->Void):MultiScreenBuilder {
-		this.unhandleCallback = unhandleCallback;
-		return this;
-	}
-
 	public function build():MultiScreen {
+		if (target == null) {
+			throw missingParametersException();
+		}
 		setDefaultUsingFitParameter();
 		setDefaultPlacementPosition();
 		setDefaultSafeZoneUsing();
 		setDefaultSafeZoneSize();
-		setDefaultUnhandleCallback();
 		return new MultiScreen(this);
 	}
 
 	private function missingParametersException():String {
-		if (target == null) {
-			return MISSING_PARAMETERS_EXCEPTION;
-		}
+		return MISSING_PARAMETERS_EXCEPTION;
 	}
 
 	private function setDefaultUsingFitParameter():Void {
@@ -114,12 +106,6 @@ class MultiScreenBuilder {
 				MultiScreen.DEFAULT_SAFEZONE_WIDTH,
 				MultiScreen.DEFAULT_SAFEZONE_HEIGHT
 			);
-		}
-	}
-
-	private function setDefaultUnhandleCallback():Void {
-		if (unhandleCallback == null) {
-			unhandleCallback = function () {};
 		}
 	}
 }
