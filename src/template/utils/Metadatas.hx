@@ -1,4 +1,4 @@
-package template.utils.metadata;
+package template.utils;
 
 import Reflect;
 import haxe.Json;

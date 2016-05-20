@@ -14,7 +14,7 @@ import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
 import openfl.events.Event;
 import template.game.Game;
-import template.utils.metadata.Metadatas;
+import template.utils.Metadatas;
 
 /**
  * ...
@@ -37,7 +37,7 @@ class Main extends Sprite {
 		Game.start();
 		var test:MovieClip = Assets.getMovieClip('portrait-template:screenportrait2048');
 		addChild(test);
-		
+
 		MultiScreenBuilder.create()
 						  .withTargetToHandle(test)
 						  .withPlacementPosition(ScreenPositions.CENTER)
