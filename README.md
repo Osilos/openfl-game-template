@@ -16,12 +16,12 @@ Development base environment for OpenFL.
 
 ### Guarantee compatibility with the following platforms:
 
-- IOS (iPad, iPhone)
-- Android
-- HTML5
-- Flash (.swf)
-- Windows (.exe)
-- Mac (.dmg)
+- IOS (iPad, iPhone) (cpp)
+- Android (cpp)
+- HTML5 (js)
+- Flash (swf)
+- Windows (cpp) (.exe)
+- Mac (cpp) (.dmg)
 
 ## How to contribute
 
