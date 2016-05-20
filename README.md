@@ -4,7 +4,7 @@ Development base environment for OpenFL.
 
 ### The template includes:
 
-- SWF lib that allows the MovieClip playback in flipbook
+- SWF lib that allows MovieClips to play flipbook
 - Sounds system (.ogg)
 - Localization
 - Containers management
