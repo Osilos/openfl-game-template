@@ -45,7 +45,6 @@ class Main extends Sprite {
 						  .withUsingSafeZoneScaling(true)
 						  .build();
 
-
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();
 		addChild(debugInfo);

@@ -24,9 +24,9 @@ class MultiScreenBuilder {
 	private var fitType:ScreenFitsType;
 	private var safeZoneSize:Point;
 
-	private var useSafeZoneScale:Bool;
-	private var mustSetPosition:Bool;
-	private var mustFitScreen:Bool;
+	private var useSafeZoneScale:Bool = false;
+	private var mustSetPosition:Bool = false;
+	private var mustFitScreen:Bool = false;
 
 	/**
 	 * Usage :
@@ -77,7 +77,6 @@ class MultiScreenBuilder {
 		}
 		setDefaultUsingFitParameter();
 		setDefaultPlacementPosition();
-		setDefaultSafeZoneUsing();
 		setDefaultSafeZoneSize();
 		return new MultiScreen(this);
 	}
@@ -92,12 +91,6 @@ class MultiScreenBuilder {
 
 	private function setDefaultPlacementPosition():Void {
 		mustSetPosition = position != null;
-	}
-
-	private function setDefaultSafeZoneUsing():Void {
-		if (useSafeZoneScale == null) {
-			useSafeZoneScale = false;
-		}
 	}
 
 	private function setDefaultSafeZoneSize():Void {
