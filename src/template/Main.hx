@@ -1,15 +1,12 @@
 package template;
 
+import template.utils.game.Containers;
+import template.utils.Localization;
 import template.utils.multiscreen.MultiScreenBuilder;
-import template.utils.screen.const.ScreenFitsType;
-import openfl.geom.Point;
 import template.utils.screen.const.ScreenPositions;
-import template.utils.screen.Screen;
 import openfl.Assets;
 import openfl.display.MovieClip;
-import template.utils.localization.Localization;
 import openfl.display.Sprite;
-import template.utils.game.Containers;
 import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
 import openfl.events.Event;
@@ -35,14 +32,19 @@ class Main extends Sprite {
 
 		Metadatas.load();
 		Game.start();
+
 		var test:MovieClip = Assets.getMovieClip('portrait-template:screenportrait2048');
-		addChild(test);
+		Containers.game.addChild(test);
+
+		var test2:MovieClip = Assets.getMovieClip('portrait-template:test');
+		Containers.game.addChild(test2);
 
 		MultiScreenBuilder.create()
 						  .withTargetToHandle(test)
 						  .withPlacementPosition(ScreenPositions.CENTER)
 						  .withUsingSafeZoneScaling(true)
 						  .build();
+
 
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();

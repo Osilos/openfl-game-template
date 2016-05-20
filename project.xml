@@ -7,7 +7,7 @@
 	
 	<!-- output -->
 	<app main="template.Main" file="template" path="bin" 
-		 preloader="template.utils.preloader.CustomPreloader" if="html5"/>
+		 preloader="template.utils.CustomPreloader" if="html5"/>
 	
 	<app main="template.Main" file="template" path="bin" unless="html5"/>
 	
