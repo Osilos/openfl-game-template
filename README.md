@@ -1,4 +1,4 @@
-# OpenFL Game Tempalte
+# OpenFL Game Template
 
 Development base environment for OpenFL.
 
