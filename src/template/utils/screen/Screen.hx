@@ -1,7 +1,7 @@
 package template.utils.screen;
 
 import openfl.geom.Point;
-import template.utils.screen.const.ScreenFits;
+import template.utils.screen.const.ScreenFitsType;
 import template.utils.screen.const.ScreenPositions;
 import openfl.display.Sprite;
 import openfl.Lib;
@@ -22,12 +22,12 @@ class Screen {
 		return position;
 	}
 
-	public static function getTargetScaleToFit(fitCoef:ScreenFits, target:Sprite):Point {
+	public static function getTargetFitScaleType(fitType:ScreenFitsType, target:Sprite):Point {
 		var screenSize:Point = getScreenSize();
 		var targetOriginalSize:Point = new Point(target.width / target.scaleX, target.height / target.scaleY );
 
-		var scaleX:Float = (screenSize.x / targetOriginalSize.x) * fitCoef.x;
-		var scaleY:Float = (screenSize.y / targetOriginalSize.y) * fitCoef.y;
+		var scaleX:Float = (screenSize.x / targetOriginalSize.x) * fitType.x;
+		var scaleY:Float = (screenSize.y / targetOriginalSize.y) * fitType.y;
 
 		scaleX = scaleX == 0 ? 1 : scaleX;
 		scaleY = scaleY == 0 ? 1 : scaleY;

@@ -1,6 +1,6 @@
 package template;
 
-import template.utils.screen.const.ScreenFits;
+import template.utils.screen.const.ScreenFitsType;
 import openfl.geom.Point;
 import template.utils.screen.const.ScreenPositions;
 import template.utils.screen.Screen;
@@ -38,7 +38,6 @@ class Main extends Sprite {
 
 		var scale:Float = Screen.getSafeZoneScale();
 		addChild(test);
-		trace(scale);
 		test.scaleX = scale;
 		test.scaleY = scale;
 		test.x = Screen.getPositionAt(ScreenPositions.CENTER).x;
