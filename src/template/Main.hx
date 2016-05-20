@@ -36,12 +36,12 @@ class Main extends Sprite {
 		Game.start();
 		var test:MovieClip = Assets.getMovieClip('portrait-template:test');
 
-		var scale:Float = Screen.getSafeZoneScale();
-		addChild(test);
-		test.scaleX = scale;
-		test.scaleY = scale;
-		test.x = Screen.getPositionAt(ScreenPositions.CENTER).x;
-		test.y = Screen.getPositionAt(ScreenPositions.CENTER).y;
+//		var scale:Float = Screen.getSafeZoneScale();
+//		addChild(test);
+//		test.scaleX = scale;
+//		test.scaleY = scale;
+//		test.x = Screen.getPositionAt(ScreenPositions.CENTER).x;
+//		test.y = Screen.getPositionAt(ScreenPositions.CENTER).y;
 
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();

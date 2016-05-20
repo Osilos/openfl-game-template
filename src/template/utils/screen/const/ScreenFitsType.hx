@@ -5,7 +5,8 @@ import openfl.geom.Point;
  * ...
  * @author Flavien
  */
-class ScreenFitsType extends Point {public static var FIT_ALL:ScreenFitsType = new ScreenFitsType(1, 1);
+class ScreenFitsType extends Point {
+	public static var FIT_ALL:ScreenFitsType = new ScreenFitsType(1, 1);
 	public static var FIT_WIDTH:ScreenFitsType = new ScreenFitsType(1, 0);
 	public static var FIT_HEIGHT:ScreenFitsType = new ScreenFitsType(0, 1);
 

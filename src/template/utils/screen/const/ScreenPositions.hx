@@ -5,8 +5,7 @@ import openfl.geom.Point;
  * ...
  * @author Flavien
  */
-class ScreenPositions extends Point
-{
+class ScreenPositions extends Point {
 	public static var TOP_LEFT:ScreenPositions = new ScreenPositions( -1, -1);
 	public static var TOP_RIGHT:ScreenPositions = new ScreenPositions( 1, -1);
 	public static var TOP:ScreenPositions = new ScreenPositions( 0, -1);

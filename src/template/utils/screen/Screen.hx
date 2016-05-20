@@ -7,8 +7,6 @@ import openfl.display.Sprite;
 import openfl.Lib;
 
 class Screen {
-	public static var SAFEZONE:Point = new Point(1366, 2048);
-
 	public static function getPositionAt(normalizedPosition:ScreenPositions):Point {
 		var screenSize:Point = getScreenSize();
 		var position:Point = new Point(screenSize.x / 2, screenSize.y / 2);
@@ -35,9 +33,9 @@ class Screen {
 		return new Point(scaleX, scaleY);
 	}
 
-	public static function getSafeZoneScale():Float {
+	public static function getSafeZoneScale(safeZoneSize:Point):Float {
 		var screenSize:Point = getScreenSize();
-		var safeZoneRatio:Point = new Point(screenSize.x / SAFEZONE.x, screenSize.y / SAFEZONE.y);
+		var safeZoneRatio:Point = new Point(screenSize.x / safeZoneSize.x, screenSize.y / safeZoneSize.y);
 		return Math.min(safeZoneRatio.x, safeZoneRatio.y);
 	}
 
