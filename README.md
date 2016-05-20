@@ -18,6 +18,7 @@ Development base environment for OpenFL.
 
 - IOS (iPad, iPhone)
 - Android
+- HTML5
 - Flash (.swf)
 - Windows (.exe)
 - Mac (.dmg)
