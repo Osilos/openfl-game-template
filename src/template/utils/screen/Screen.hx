@@ -33,7 +33,7 @@ class Screen {
 		return new Point(scaleX, scaleY);
 	}
 
-	public static function getSafeZoneScale(safeZoneSize:Point):Float {
+	public static function getSafeZoneRatio(safeZoneSize:Point):Float {
 		var screenSize:Point = getScreenSize();
 		var safeZoneRatio:Point = new Point(screenSize.x / safeZoneSize.x, screenSize.y / safeZoneSize.y);
 		return Math.min(safeZoneRatio.x, safeZoneRatio.y);

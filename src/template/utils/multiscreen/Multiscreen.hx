@@ -68,7 +68,7 @@ class MultiScreen {
 
 	private function updateTargetScaleWithSafeZoneScale():Void {
 		if (useSafeZoneScale) {
-			var newScale:Float = Screen.getSafeZoneScale(safeZoneSize);
+			var newScale:Float = Screen.getSafeZoneRatio(safeZoneSize);
 			target.scaleX = newScale;
 			target.scaleY = newScale;
 		}
