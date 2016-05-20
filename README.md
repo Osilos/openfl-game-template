@@ -25,6 +25,13 @@ Development base environment for OpenFL.
 
 All of these platforms are tested for each pull request submission
 
+### Libraries used
+
+- openfl
+- actuate
+- swf
+- extension-facebook
+
 ## How to contribute
 
 You just have to submit us your pull request, each pull request is reviewed with much love
