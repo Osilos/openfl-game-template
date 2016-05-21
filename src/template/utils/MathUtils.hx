@@ -30,10 +30,10 @@ class MathUtils
 	}
 	
 	/**
-	 * Calcule la direction entre deux points
-	 * @param	pPointA point de référence
-	 * @param	pPointB point distance
-	 * @return Return l'angle de la direction entre A et B
+	 * Get the angle between pointA and pointB
+	 * @param	pointA
+	 * @param	pointB
+	 * @return a float between -Pi and Pi
 	 */
 	public static function getDirection(pointA:Point, pointB:Point):Float {
 		return Math.atan2(pointA.y - pointB.y, pointA.x - pointB.x);
