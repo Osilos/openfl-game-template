@@ -36,4 +36,4 @@ All of these platforms are tested for each pull request submission
 
 You just have to submit us your pull request, each pull request is reviewed with much love
 
-Be sure your pull request respect our code convention. You can see the code convention [here](https://github.com/Osilos/openfl-game-template/wiki/Code-convention).
+Be sure your pull request respect our [code convention](https://github.com/Osilos/openfl-game-template/wiki/Code-convention).
