@@ -33,18 +33,6 @@ class Main extends Sprite {
 		Metadatas.load();
 		Game.start();
 
-		var test:MovieClip = Assets.getMovieClip('portrait-template:screenportrait2048');
-		Containers.game.addChild(test);
-
-		var test2:MovieClip = Assets.getMovieClip('portrait-template:test');
-		Containers.game.addChild(test2);
-
-		MultiScreenBuilder.create()
-						  .withTargetToHandle(test)
-						  .withPlacementPosition(ScreenPositions.CENTER)
-						  .withUsingSafeZoneScaling(true)
-						  .build();
-
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();
 		addChild(debugInfo);
