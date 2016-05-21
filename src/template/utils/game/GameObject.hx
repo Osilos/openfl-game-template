@@ -62,7 +62,7 @@ class GameObject extends Sprite
 	 * Get the position of the GameObject as Point
 	 * @return
 	 */
-	public function getPositionAsPoint() : Point {
+	public function getPosition() : Point {
 		return new Point(x, y);
 	}
 	
