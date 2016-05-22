@@ -5,6 +5,16 @@ import template.utils.screen.const.ScreenFitsType;
 import template.utils.screen.const.ScreenPositions;
 import openfl.display.DisplayObject;
 
+/**
+ * Usage :
+ * MultiScreenBuilder.create()
+ * 				  	 .withTargetToHandle(target:DisplayObject) (Required)
+ *	   				 .withPlacementPosition(position:ScreenPositions) (Optional)
+ *	   				 .withScreenFitting(fitType:ScreenFitsType) (Optional)
+ *	   				 .withUsingSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)
+ *	   				 .withSafeZoneSize(safeZoneSize:Point) (Optional) (Default: DEFAULT_SAFEZONE_WIDTH, DEFAULT_SAFEZONE_HEIGHT)
+ * 				   	 .build()
+ **/
 @:access(template.utils.multiscreen.MultiScreen)
 class MultiScreenBuilder {
 	private static inline var MISSING_PARAMETERS_EXCEPTION:String =
@@ -27,17 +37,6 @@ class MultiScreenBuilder {
 	private var useSafeZoneScale:Bool = false;
 	private var mustSetPosition:Bool = false;
 	private var mustFitScreen:Bool = false;
-
-	/**
-	 * Usage :
-	 * MultiScreenBuilder.create()
-	 * 				  	 .withTargetToHandle(target:DisplayObject) (Required)
-	 *	   				 .withPlacementPosition(position:ScreenPositions) (Optional)
-	 *	   				 .withScreenFitting(fitType:ScreenFitsType) (Optional)
-	 *	   				 .withUsingSafeZoneScaling(useSafeZoneScale:Bool) (Optional) (Default: false)
-	 *	   				 .withSafeZoneSize(safeZoneSize:Point) (Optional) (Default: DEFAULT_SAFEZONE_WIDTH, DEFAULT_SAFEZONE_HEIGHT)
-	 * 				   	 .build()
-     **/
 
 	public function new() {
 	}

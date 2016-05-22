@@ -6,14 +6,14 @@ import openfl.Lib;
 class AppRating {
 	private static inline var IOS_LINK:String = 'itms://itunes.apple.com/us/app/apple-store/id';
 
-	public static function request():Void {
+	public static function execute():Void {
 		iosRequest();
-
+		androidRequest();
 	}
 
 	private static function iosRequest():Void {
 		#if ios
-		if (Metadatas.application.appleAppId == '-') {
+		if (Metadatas.application.appleAppId == null) {
 			throw appIdNotFoundException();
 		}
 		Lib.getURL(new URLRequest(IOS_LINK + Metadatas.application.appleAppId));

@@ -1,10 +1,6 @@
 package template;
 
-import template.utils.mobile.AppRating;
 import template.utils.debug.DebugInfo;
-import haxe.Timer;
-import openfl.net.URLRequest;
-import openfl.Lib;
 import template.utils.game.Containers;
 import template.utils.Localization;
 import openfl.display.Sprite;
@@ -32,12 +28,6 @@ class Main extends Sprite {
 
 		Metadatas.load();
 		Game.start();
-//		https://play.google.com/store/apps/details?id=com.rovio.angrybirds
-//		var url:String = 'https://play.google.com/store/apps/details?id=com.rovio.angrybirds';
-
-		Timer.delay(function() {
-			AppRating.request();
-		}, 5000);
 
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();
