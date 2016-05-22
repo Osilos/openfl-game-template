@@ -5,6 +5,7 @@ import openfl.Lib;
 
 class AppRating {
 	private static inline var IOS_LINK:String = 'itms://itunes.apple.com/us/app/apple-store/id';
+	private static inline var ANDROID_LINK:String = 'market://details?id=';
 
 	public static function execute():Void {
 		iosRequest();
@@ -21,8 +22,12 @@ class AppRating {
 	}
 
 	private static function androidRequest():Void {
-		#if android
 		// todo
+		#if android
+		if (Metadatas.application.androidPackageName == null) {
+			throw appIdNotFoundException();
+		}
+		Lib.getURL(new URLRequest(ANDROID_LINK + Metadatas.application.androidPackageName));
 		#end
 	}
 

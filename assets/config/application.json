@@ -1,6 +1,7 @@
 {
   "name": "template",
   "appleAppId": null,
+  "androidPackageName": null,
   "shareInformation": {
     "text": "Ceci est un test",
     "subject": "Ceci est un sujet",
