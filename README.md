@@ -12,6 +12,7 @@ Development base environment for OpenFL.
 - Movieclip state management
 - GameObject base class
 - Debug Utilities
+- AppRating request system
 - Base .fla file templates with safeZone and deadZone. (Portrait and landscape template)
 
 ### Guarantee compatibility with the following platforms:
