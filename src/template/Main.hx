@@ -1,13 +1,13 @@
 package template;
 
+import template.utils.mobile.AppRating;
+import template.utils.debug.DebugInfo;
+import haxe.Timer;
+import openfl.net.URLRequest;
+import openfl.Lib;
 import template.utils.game.Containers;
 import template.utils.Localization;
-import template.utils.multiscreen.MultiScreenBuilder;
-import template.utils.screen.const.ScreenPositions;
-import openfl.Assets;
-import openfl.display.MovieClip;
 import openfl.display.Sprite;
-import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
 import openfl.events.Event;
 import template.game.Game;
@@ -32,6 +32,12 @@ class Main extends Sprite {
 
 		Metadatas.load();
 		Game.start();
+//		https://play.google.com/store/apps/details?id=com.rovio.angrybirds
+//		var url:String = 'https://play.google.com/store/apps/details?id=com.rovio.angrybirds';
+
+		Timer.delay(function() {
+			AppRating.request();
+		}, 5000);
 
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();

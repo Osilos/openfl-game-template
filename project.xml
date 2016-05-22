@@ -30,6 +30,7 @@
 	<icon path="assets/openfl.svg" />
 	<assets path="assets/fonts" rename="fonts" />
 	<assets path="assets/sounds" rename="sounds" />
+	<assets path="assets/config" rename="config" />
 	<assets path="assets/swf" rename="swf" />
 
 	<!-- swf -->
