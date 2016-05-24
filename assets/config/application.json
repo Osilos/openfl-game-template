@@ -1,0 +1,10 @@
+{
+  "name": "template",
+  "appleAppId": null,
+  "androidPackageName": null,
+  "defaultShareInformation": {
+    "text": null,
+    "subject": null,
+    "email": null
+  }
+}

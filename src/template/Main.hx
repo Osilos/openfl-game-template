@@ -1,13 +1,12 @@
 package template;
 
+import template.utils.mobile.AppSharing;
+import haxe.Timer;
+import template.utils.mobile.AppRating;
+import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
 import template.utils.Localization;
-import template.utils.multiscreen.MultiScreenBuilder;
-import template.utils.screen.const.ScreenPositions;
-import openfl.Assets;
-import openfl.display.MovieClip;
 import openfl.display.Sprite;
-import template.utils.debug.DebugInfo;
 import template.utils.debug.Debug;
 import openfl.events.Event;
 import template.game.Game;

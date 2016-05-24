@@ -14,6 +14,11 @@ Development base environment for OpenFL.
 - Debug Utilities
 - Base .fla file templates with safeZone and deadZone. (Portrait and landscape template)
 
+Mobiles utilities (iOS + Android) :
+
+- Basic share system (Sms, e-mail, etc.)
+- AppRating request system
+
 ### Guarantee compatibility with the following platforms:
 
 - IOS (iPad, iPhone) (cpp)
