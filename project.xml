@@ -26,6 +26,7 @@
     <haxelib name="actuate"/>
     <haxelib name="swf"/>
     <haxelib name="extension-share"/>
+    <haxelib name="extension-apprating"/>
 
     <!-- assets -->
     <icon path="assets/openfl.svg"/>
