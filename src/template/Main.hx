@@ -1,6 +1,6 @@
 package template;
 
-import template.utils.mobile.Share;
+import template.utils.mobile.AppSharing;
 import haxe.Timer;
 import template.utils.mobile.AppRating;
 import template.utils.debug.DebugInfo;
