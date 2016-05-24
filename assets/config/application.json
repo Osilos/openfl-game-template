@@ -2,11 +2,9 @@
   "name": "template",
   "appleAppId": null,
   "androidPackageName": null,
-  "shareInformation": {
-    "text": "Ceci est un test",
-    "subject": "Ceci est un sujet",
-    "image": "http://blog.openclassrooms.com/wp-content/uploads/2015/07/logo_blog.png",
-    "email": "migra87@gmail.com",
-    "url": "http://openclassrooms.com"
+  "defaultShareInformation": {
+    "text": null,
+    "subject": null,
+    "email": null
   }
 }

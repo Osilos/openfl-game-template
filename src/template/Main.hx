@@ -1,8 +1,8 @@
 package template;
 
-import extension.apprate.AppRate;
-import template.utils.mobile.AppRating;
 import template.utils.mobile.Share;
+import haxe.Timer;
+import template.utils.mobile.AppRating;
 import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
 import template.utils.Localization;
@@ -27,10 +27,6 @@ class Main extends Sprite {
 
 		#if !html5
 		Localization.init();
-		#end
-
-		#if android
-		AppRate.execute("123");
 		#end
 
 		Metadatas.load();
