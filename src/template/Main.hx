@@ -1,5 +1,6 @@
 package template;
 
+import template.utils.game.GameObject;
 import template.utils.mobile.AppSharing;
 import haxe.Timer;
 import template.utils.mobile.AppRating;
@@ -28,6 +29,9 @@ class Main extends Sprite {
 		#if !html5
 		Localization.init();
 		#end
+
+		var test = new GameObject('portraitUi', 'screenportrait2048');
+		addChild(test);
 
 		Metadatas.load();
 		Game.start();

@@ -4,6 +4,7 @@ import template.utils.config.ApplicationDef;
 import Reflect;
 import haxe.Json;
 import openfl.Assets;
+
 class Metadatas {
 	private static inline var APPLICATION_PATH = 'config/application.json';
 	private static inline var DATA_SOUND_PATH = 'sounds/sounds.json';

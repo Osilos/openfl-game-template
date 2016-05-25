@@ -4,7 +4,8 @@ import openfl.media.SoundTransform;
 import openfl.media.SoundChannel;
 import openfl.Assets;
 
-class Sound {private inline static var SOUND_EXTENSION:String = "ogg";
+class Sound {
+	private inline static var SOUND_EXTENSION:String = "ogg";
 	private inline static var SOUND_PATH:String = "sounds";
 	private inline static var MUSIC_PATH:String = "musics";
 	private inline static var SFX_PATH:String = "sfxs";

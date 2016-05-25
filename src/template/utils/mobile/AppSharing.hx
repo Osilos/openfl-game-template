@@ -1,6 +1,6 @@
 package template.utils.mobile;
 
-import extension.share.AppSharing;
+import extension.share.Share;
 
 class AppSharing {
 	public static function openShareDialog(?text:String, ?subject:String, ?email:String):Void {
@@ -8,6 +8,6 @@ class AppSharing {
 		subject = subject == null ? Metadatas.application.shareInformation.subject : subject;
 		email = email == null ? Metadatas.application.shareInformation.email : email;
 
-		extension.share.AppSharing.share(text, subject, '', '', email, '');
+		Share.share(text, subject, '', '', email, '');
 	}
 }

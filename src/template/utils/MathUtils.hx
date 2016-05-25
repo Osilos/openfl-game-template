@@ -7,7 +7,6 @@ import openfl.geom.Point;
  */
 class MathUtils
 {
-
 	/**
 	 * Return the sign of a Float
 	 * @param	number

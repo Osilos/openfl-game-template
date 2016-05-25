@@ -58,7 +58,7 @@ class Localization {private static var localizationSource:Map<String, Map<String
 
 	private static function parseSource():Void {
 		var sources:String = Localization.getLocalizationSources();
-		var parsedSources:Json = Json.parse(sources);
+		var parsedSources:Dynamic = Json.parse(sources);
 
 		for (lang in Reflect.fields(parsedSources)) {
 			localizationSource.set(lang, new Map<String, Dynamic>());
