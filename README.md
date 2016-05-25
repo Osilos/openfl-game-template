@@ -35,6 +35,8 @@ All of these platforms are tested for each pull request submission
 - openfl
 - actuate
 - swf
+- extension-share
+- extension-apprating
 
 ## How to contribute
 
