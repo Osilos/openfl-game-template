@@ -30,9 +30,6 @@ class Main extends Sprite {
 		Localization.init();
 		#end
 
-		var test = new GameObject('portraitUi', 'screenportrait2048');
-		addChild(test);
-
 		Metadatas.load();
 		Game.start();
 
