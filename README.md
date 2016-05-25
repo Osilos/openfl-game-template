@@ -24,6 +24,7 @@ Mobiles utilities (iOS + Android) :
 - IOS (iPad, iPhone) (cpp)
 - Android (cpp)
 - HTML5 (js)
+- flash (swf)
 - Windows (cpp) (.exe)
 - Mac (cpp) (.dmg)
 
