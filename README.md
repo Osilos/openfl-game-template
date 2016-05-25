@@ -47,5 +47,3 @@ For more informations about template features, have look to our [documentation](
 ## How to contribute
 
 You just have to submit us your pull request, each pull request is reviewed with much love
-
-Be sure your pull request respect our [code convention](https://github.com/Osilos/openfl-game-template/wiki/Code-convention).
