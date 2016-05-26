@@ -24,7 +24,7 @@ Mobiles utilities (iOS + Android) :
 - IOS (iPad, iPhone) (cpp)
 - Android (cpp)
 - HTML5 (js)
-- Flash (swf)
+- flash (swf)
 - Windows (cpp) (.exe)
 - Mac (cpp) (.dmg)
 
@@ -38,8 +38,12 @@ All of these platforms are tested for each pull request submission
 - extension-share
 - extension-apprating
 
+## Getting Started
+
+First, clone template directory and replace com.template package name by your, after that, you just have to install template dependencies.
+
+For more informations about template features, have look to our [documentation](https://github.com/Osilos/openfl-game-template/wiki).
+
 ## How to contribute
 
 You just have to submit us your pull request, each pull request is reviewed with much love
-
-Be sure your pull request respect our [code convention](https://github.com/Osilos/openfl-game-template/wiki/Code-convention).
