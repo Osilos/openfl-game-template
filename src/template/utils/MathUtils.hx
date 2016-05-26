@@ -79,19 +79,15 @@ class MathUtils
 	 * @param	limiteB
 	 * @return
 	 */
-	public static function getRandomNumberBetween(limiteA:Float, limiteB:Float) : Float {
-		if (limiteA > limiteB) {
-			throwExceptionRandomNumberBetween();
+	public static function getRandomNumberBetween(min:Float, max:Float) : Float {
+		if (min > max) {
+			throw "MathUtils.getRandomNumberBetween : max should be greater than min";
 			return 0;
 		}
 		
-		var deltaBetweenLimites:Float = limiteB - limiteA;
-		var randomNumber:Float = Math.round(Math.random() * deltaBetweenLimites);
-		return randomNumber + limiteA;
-	}
-	
-	private static function throwExceptionRandomNumberBetween() : Void {
-		throw "MathUtils.getRandomNumberBetween : limiteB should be greater than limiteA";
+		var deltaMinMax:Float = max - min;
+		var randomNumber:Float = Math.round(Math.random() * deltaMinMax);
+		return randomNumber + min;
 	}
 	
 }

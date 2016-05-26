@@ -5,7 +5,7 @@ import openfl.geom.Rectangle;
 import template.utils.game.Containers;
 
 /**
- * Provide some collision abstractions functions
+ * Provide collisions functions
  * @author Flavien
  */
 class Collision {
@@ -16,7 +16,7 @@ class Collision {
     * @param MovieClip objectB
     * @return the result of collision
     **/
-    public static function hasMovieClipCollision (objectA:MovieClip, objectB:MovieClip) : Bool {
+    public static function betweenTwoMovieClip (objectA:MovieClip, objectB:MovieClip) : Bool {
         var rectangleA:Rectangle = objectA.getRect(Containers.main);
         var rectangleB:Rectangle = objectB.getRect(Containers.main);
         return rectangleA.intersects(rectangleB);
@@ -28,7 +28,7 @@ class Collision {
     * @param Point point
     * @return the result of collision
     **/
-    public static function hasPointtoMovieClipCollision(object:MovieClip, point:Point) : Bool {
+    public static function betweenPointAndMovieClip(object:MovieClip, point:Point) : Bool {
         var rectangle:Rectangle = object.getRect(Containers.main);
         return rectangle.containsPoint(point);
     }
