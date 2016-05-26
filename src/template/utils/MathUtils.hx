@@ -2,11 +2,12 @@ package template.utils;
 import openfl.geom.Point;
 
 /**
- * ...
+ * Provide some math abstractions functions
  * @author Flavien
  */
 class MathUtils
 {
+
 	/**
 	 * Return the sign of a Float
 	 * @param	number
@@ -16,7 +17,21 @@ class MathUtils
 		if (number == 0) return 0;
 		return number / Math.abs(number);
 	}
-	
+
+	/**
+	* Convert radian to degree value
+	**/
+	public static function radianToDegrees(radian:Float) : Float {
+		return 180 * radian / Math.PI;
+	}
+
+	/**
+	* Convert degree to radian value
+	**/
+	public static function degreesToRadian (degrees:Float) : Float {
+		return Math.PI * degrees / 180;
+	}
+
 	/**
 	 * Get Distance Between two point
 	 * @param	pPointA
@@ -67,7 +82,7 @@ class MathUtils
 	public static function getRandomNumberBetween(limiteA:Float, limiteB:Float) : Float {
 		if (limiteA > limiteB) {
 			throwExceptionRandomNumberBetween();
-			return null;
+			return 0;
 		}
 		
 		var deltaBetweenLimites:Float = limiteB - limiteA;
