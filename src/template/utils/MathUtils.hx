@@ -21,14 +21,14 @@ class MathUtils
 	/**
 	* Convert radian to degree value
 	**/
-	public static function radianToDegrees(radian:Float) : Float {
+	public static function radiansToDegrees(radian:Float) : Float {
 		return 180 * radian / Math.PI;
 	}
 
 	/**
 	* Convert degree to radian value
 	**/
-	public static function degreesToRadian (degrees:Float) : Float {
+	public static function degreesToRadians (degrees:Float) : Float {
 		return Math.PI * degrees / 180;
 	}
 
