@@ -21,15 +21,15 @@ class MathUtils
 	/**
 	* Convert radian to degree value
 	**/
-	public static function radiansToDegrees(radian:Float) : Float {
+	public static function radianToDegree(radian:Float) : Float {
 		return 180 * radian / Math.PI;
 	}
 
 	/**
 	* Convert degree to radian value
 	**/
-	public static function degreesToRadians (degrees:Float) : Float {
-		return Math.PI * degrees / 180;
+	public static function degreeToRadian (degree:Float) : Float {
+		return Math.PI * degree / 180;
 	}
 
 	/**
@@ -82,7 +82,6 @@ class MathUtils
 	public static function getRandomNumberBetween(min:Float, max:Float) : Float {
 		if (min > max) {
 			throw "MathUtils.getRandomNumberBetween : max should be greater than min";
-			return 0;
 		}
 		
 		var deltaMinMax:Float = max - min;
