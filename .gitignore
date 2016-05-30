@@ -3,3 +3,4 @@ bin
 *.hxproj
 *.iml
 compile.sh
+*.bat
