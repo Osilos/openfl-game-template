@@ -54,8 +54,6 @@ class Main extends Sprite {
 //			NetworkInfos.isWifi()
 //		);
 
-
-
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();
 		addChild(debugInfo);
