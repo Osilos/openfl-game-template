@@ -20,6 +20,7 @@
     <!-- options vars -->
     <set name="openfl-legacy" if="mac"/>
     <set name="openfl-legacy" if="ios"/>
+    <set name="openfl-legacy" if="android"/>
 
     <!-- Libraries -->
     <haxelib name="openfl"/>
