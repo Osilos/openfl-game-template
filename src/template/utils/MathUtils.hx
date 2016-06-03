@@ -2,11 +2,12 @@ package template.utils;
 import openfl.geom.Point;
 
 /**
- * ...
+ * Provide some math abstractions functions
  * @author Flavien
  */
 class MathUtils
 {
+
 	/**
 	 * Return the sign of a Float
 	 * @param	number
@@ -16,7 +17,21 @@ class MathUtils
 		if (number == 0) return 0;
 		return number / Math.abs(number);
 	}
-	
+
+	/**
+	* Convert radian to degree value
+	**/
+	public static function radianToDegree(radian:Float) : Float {
+		return 180 * radian / Math.PI;
+	}
+
+	/**
+	* Convert degree to radian value
+	**/
+	public static function degreeToRadian (degree:Float) : Float {
+		return Math.PI * degree / 180;
+	}
+
 	/**
 	 * Get Distance Between two point
 	 * @param	pPointA
@@ -64,19 +79,14 @@ class MathUtils
 	 * @param	limiteB
 	 * @return
 	 */
-	public static function getRandomNumberBetween(limiteA:Float, limiteB:Float) : Float {
-		if (limiteA > limiteB) {
-			throwExceptionRandomNumberBetween();
-			return null;
+	public static function getRandomNumberBetween(min:Float, max:Float) : Float {
+		if (min > max) {
+			throw "MathUtils.getRandomNumberBetween : max should be greater than min";
 		}
 		
-		var deltaBetweenLimites:Float = limiteB - limiteA;
-		var randomNumber:Float = Math.round(Math.random() * deltaBetweenLimites);
-		return randomNumber + limiteA;
-	}
-	
-	private static function throwExceptionRandomNumberBetween() : Void {
-		throw "MathUtils.getRandomNumberBetween : limiteB should be greater than limiteA";
+		var deltaMinMax:Float = max - min;
+		var randomNumber:Float = Math.round(Math.random() * deltaMinMax);
+		return randomNumber + min;
 	}
 	
 }
