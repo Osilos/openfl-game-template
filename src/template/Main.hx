@@ -1,9 +1,5 @@
 package template;
 
-import template.utils.game.GameObject;
-import template.utils.mobile.AppSharing;
-import haxe.Timer;
-import template.utils.mobile.AppRating;
 import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
 import template.utils.Localization;
