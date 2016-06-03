@@ -1,5 +1,9 @@
 package template;
 
+import template.utils.game.StateObject;
+import template.utils.screen.Screen;
+import template.utils.screen.const.ScreenPositions;
+import template.utils.multiscreen.MultiScreenBuilder;
 import String;
 import openfl.geom.Point;
 import hypsystem.net.NetworkInfos;
@@ -23,6 +27,8 @@ import template.utils.Metadatas;
  */
 class Main extends Sprite {
 
+	var coins:Array<GameObject> = new Array<GameObject>();
+
 	public function new() {
 		super();
 
@@ -37,11 +43,6 @@ class Main extends Sprite {
 		Metadatas.load();
 		Game.start();
 
-		var test:String = Localization.getText('loading');
-
-		Debug.addDebugTextAt(new Point(150, 150), test);
-
-
 //		Debug.addDebugTextAt(new Point(150, 150),
 //			Device.getLanguageCode() + '\n' +
 //			Device.getName() + '\n'
@@ -53,6 +54,8 @@ class Main extends Sprite {
 //			NetworkInfos.isConnected() + '\n' +
 //			NetworkInfos.isWifi()
 //		);
+
+
 
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();
