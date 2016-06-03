@@ -1,5 +1,6 @@
 {
   "name": "template",
+  "debug": true,
   "appleAppId": null,
   "androidPackageName": null,
   "defaultShareInformation": {
