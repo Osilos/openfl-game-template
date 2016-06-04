@@ -11,6 +11,7 @@ Development base environment for OpenFL.
 - Multiscreen system (SafeZone, DeadZone, Auto Resize, Object placement...)
 - Movieclip state management
 - GameObject base class
+- Device Utilities (device default lang, uuid, name, connection status ...)  
 - Debug Utilities
 - Base .fla file templates with safeZone and deadZone. (Portrait and landscape template)
 
@@ -37,6 +38,7 @@ All of these platforms are tested for each pull request submission
 - swf
 - extension-share
 - extension-apprating
+- hyp-system-last
 
 ## Getting Started
 

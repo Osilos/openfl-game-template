@@ -20,6 +20,7 @@
     <!-- options vars -->
     <set name="openfl-legacy" if="mac"/>
     <set name="openfl-legacy" if="ios"/>
+    <set name="openfl-legacy" if="android"/>
 
     <!-- Libraries -->
     <haxelib name="openfl"/>
@@ -27,6 +28,7 @@
     <haxelib name="swf"/>
     <haxelib name="extension-share"/>
     <haxelib name="extension-apprating"/>
+    <haxelib name="hyp-system-last"/>
 
     <!-- assets -->
     <icon path="assets/openfl.svg"/>
@@ -34,6 +36,7 @@
     <assets path="assets/sounds" rename="sounds"/>
     <assets path="assets/config" rename="config"/>
     <assets path="assets/swf" rename="swf"/>
+    <assets path="assets/localization" rename="localization"/>
 
     <!-- swf -->
 
