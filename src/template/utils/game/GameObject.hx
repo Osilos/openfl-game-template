@@ -13,10 +13,16 @@ import openfl.Lib;
  */
 class GameObject extends Sprite
 {
-	private var libraryName:String;
-	private var movieClipName:String;
+	private static inline var BOX_SUFFIX:String = "Box";
+	
+	private var animLibraryName:String;
+	private var animName:String;
+	private var boxLibraryName:String;
+	private var boxName:String;
 	
 	private var anim:MovieClip;
+	private var box:MovieClip;
+	
 	
 	/**
 	 * Create a GameObect
@@ -26,8 +32,8 @@ class GameObject extends Sprite
 	public function new(libraryName:String, movieClipName:String) {
 		super();
 		
-		this.libraryName = libraryName;
-		this.movieClipName = movieClipName;
+		this.animLibraryName = libraryName;
+		this.animName = movieClipName;
 		
 		anim = createAnim(libraryName, movieClipName);
 		addChild(anim);
@@ -67,8 +73,12 @@ class GameObject extends Sprite
 	}
 	
 	private function createAnim (libraryName:String, movieClipName:String) : MovieClip {
-		var movieClip:MovieClip = Assets.getMovieClip(libraryName + ":" + movieClipName);
-		if (movieClip == null) throwRessourceNotFoundException(libraryName + ":" + movieClipName);
+		
+	}
+	
+	private function createAnim (animLibraryName:String, animName:String) : MovieClip {
+		var movieClip:MovieClip = Assets.getMovieClip(animLibraryName + ":" + animName);
+		if (movieClip == null) throwRessourceNotFoundException(animLibraryName + ":" + animName);
 		return movieClip;
 	}
 	
@@ -76,5 +86,21 @@ class GameObject extends Sprite
 		throw "Resource : " + resourceName + " don't find in any load ressource";
 	}
 	
+	private function destroyAnim() : Void {
+		if (anim == null) return;
+		anim.parent.removeChild(anim);
+		anim = null;
+	}
+	
+	private function destroyBox() : Void {
+		if (box = null) return;
+		box.parent.removeChild(box);
+		box = null;
+	}
+	
+	public function destroy () : Void {
+		destroyAnim();
+		destroyBox();
+	}
 
 }
