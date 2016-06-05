@@ -8,7 +8,7 @@ import openfl.display.Sprite;
  */
 class StateObject extends GameObject
 {
-	public static inline var DEFAULT_STATE:String = "Default";
+	public static inline var DEFAULT_STATE:String = "default";
 	
 	private var currentState:String;
 	
@@ -30,13 +30,17 @@ class StateObject extends GameObject
 	public function setState(state:String) : Void {
 		if (state == currentState) return;
 		
-		movieClipName = getMovieClipNameWithoutState() + "_" + state;
+		animName = getAnimNameWithoutState() + "_" + state;
 		
-		removeChild(anim);
-		anim = createAnim(libraryName, movieClipName);
+		destroyAnim();
+		anim = createMovieClip(animLibraryName, animName);
 		addChild(anim);
 		
 		currentState = state;
+		
+		if (box == null) return;
+		
+		createBox(boxLibraryName);
 	}
 	
 	/**
@@ -47,8 +51,15 @@ class StateObject extends GameObject
 		return currentState;
 	}
 	
-	private function getMovieClipNameWithoutState () : String {
-		return movieClipName.substring(0, movieClipName.indexOf("_"));
+	override function changeCurrentBoxesNames(boxLibraryName:String, ?boxName:String = null):Void 
+	{
+		this.boxLibraryName = boxLibraryName;
+		this.boxName = boxName == null ? 
+			getAnimNameWithoutState() + GameObject.BOX_SUFFIX + "_" + currentState 
+			: boxName;
 	}
 	
+	private function getAnimNameWithoutState () : String {
+		return animName.substring(0, animName.indexOf("_"));
+	}
 }

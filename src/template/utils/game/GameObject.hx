@@ -53,12 +53,14 @@ class GameObject extends Sprite
 	 * @param	boxLibraryName where the movieClip has to be load
 	 * @param	boxName = animName + BOX_SUFFIX. The name of the MovieClip to load
 	 */
-	public function createBox (boxLibraryName:String, ?boxName = null) : Void {
-		this.boxLibraryName = boxLibraryName;
-		this.boxName = boxName == null ? animName + BOX_SUFFIX : boxName;
+	public function createBox (boxLibraryName:String, ?boxName:String = null) : Void {
+		destroyBox();
 		
-		box = createMovieClip(boxLibraryName, boxName);
+		changeCurrentBoxesNames(boxLibraryName, boxName);
+		
+		box = createMovieClip(this.boxLibraryName, this.boxName);
 		addChild(box);
+		
 		box.visible = false;
 		
 		#if showdebuginfo
@@ -103,9 +105,14 @@ class GameObject extends Sprite
 		return new Point(x, y);
 	}
 	
+	private function changeCurrentBoxesNames (boxLibraryName:String, ?boxName:String = null) : Void {
+		this.boxLibraryName = boxLibraryName;
+		this.boxName = boxName == null ? animName + BOX_SUFFIX : boxName;
+	}
+	
 	private function createMovieClip (libraryName:String, movieClipName:String) : MovieClip {
-		var movieClip:MovieClip = Assets.getMovieClip(animLibraryName + ":" + animName);
-		if (movieClip == null) throw ressourceNotFoundException(animLibraryName + ":" + animName);
+		var movieClip:MovieClip = Assets.getMovieClip(libraryName + ":" + movieClipName);
+		if (movieClip == null) throw ressourceNotFoundException(libraryName + ":" + movieClipName);
 		return movieClip;
 	}
 	
@@ -124,7 +131,7 @@ class GameObject extends Sprite
 	}
 	
 	private function destroyBox() : Void {
-		if (box = null) return;
+		if (box == null) return;
 		box.parent.removeChild(box);
 		box = null;
 	}
