@@ -30,7 +30,7 @@ class StateObject extends GameObject
 	public function setState(state:String) : Void {
 		if (state == currentState) return;
 		
-		animName = getAnimNameWithoutState() + "_" + state;
+		animName = getNameWithoutState(animName) + "_" + state;
 		
 		destroyAnim();
 		anim = createMovieClip(animLibraryName, animName);
@@ -51,15 +51,21 @@ class StateObject extends GameObject
 		return currentState;
 	}
 	
-	override function changeCurrentBoxesNames(boxLibraryName:String, ?boxName:String = null):Void 
+	override private function changeCurrentBoxesNames(boxLibraryName:String, ?boxName:String = null):Void 
 	{
-		this.boxLibraryName = boxLibraryName;		
-		this.boxName = boxName == null ? 
-			getAnimNameWithoutState() + GameObject.BOX_SUFFIX + "_" + currentState 
-			: boxName;
+		this.boxLibraryName = boxLibraryName;
+		
+		if (this.boxName != null) {
+			this.boxName = getNameWithoutState(this.boxName) + "_" + currentState;
+		} else {
+			this.boxName = boxName == null ? 
+				getNameWithoutState(animName) + GameObject.BOX_SUFFIX + "_" + currentState 
+				: boxName + "_" + currentState;
+		}
 	}
 	
-	private function getAnimNameWithoutState () : String {
-		return animName.substring(0, animName.indexOf("_"));
+	
+	private function getNameWithoutState (name:String) : String {
+		return name.substring(0, name.indexOf("_"));
 	}
 }

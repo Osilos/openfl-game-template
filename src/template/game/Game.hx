@@ -19,9 +19,10 @@ class Game {
 		
 		
 		var sO:StateObject = new StateObject(LibrariesNames.ASSETS, "Player");
-		sO.createBox(LibrariesNames.BOXES, "WallBox");
+		sO.createBox(LibrariesNames.BOXES, "PlayerBox");
 		sO.setPositionAt(new Point(200, 200));
 		Containers.game.addChild(sO);
+		
 		sO.setState("run");
 		
 		
