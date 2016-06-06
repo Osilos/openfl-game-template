@@ -17,8 +17,8 @@ class StateObject extends GameObject
 	 * @param	libraryName
 	 * @param	movieClipName
 	 */
-	public function new(libraryName:String, movieClipName:String) {
-		super(libraryName, movieClipName + "_" + DEFAULT_STATE);
+	public function new(animLibraryName:String, animName:String) {
+		super(animLibraryName, animName + "_" + DEFAULT_STATE);
 
 		currentState = DEFAULT_STATE;
 	}
@@ -53,7 +53,7 @@ class StateObject extends GameObject
 	
 	override function changeCurrentBoxesNames(boxLibraryName:String, ?boxName:String = null):Void 
 	{
-		this.boxLibraryName = boxLibraryName;
+		this.boxLibraryName = boxLibraryName;		
 		this.boxName = boxName == null ? 
 			getAnimNameWithoutState() + GameObject.BOX_SUFFIX + "_" + currentState 
 			: boxName;
