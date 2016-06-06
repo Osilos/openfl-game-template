@@ -10,13 +10,11 @@ class Game {
 	public static function start():Void {
 		var go:GameObject = new GameObject(LibrariesNames.ASSETS, "Wall");
 		go.createBox(LibrariesNames.BOXES);
-		
 		Containers.game.addChild(go);
 		
 		var god:GameObject = new GameObject(LibrariesNames.ASSETS, "Wall");
 		god.createBox(LibrariesNames.BOXES);
 		god.setPositionAt(new Point(0, 100));
-		
 		Containers.game.addChild(god);
 		
 		
@@ -24,8 +22,9 @@ class Game {
 		sO.createBox(LibrariesNames.BOXES, "WallBox");
 		sO.setPositionAt(new Point(200, 200));
 		Containers.game.addChild(sO);
-		
 		sO.setState("run");
+		
+		
 	}
 
 	public static function gameloop(event:Dynamic):Void {
