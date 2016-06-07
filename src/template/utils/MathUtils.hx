@@ -89,4 +89,39 @@ class MathUtils
 		return randomNumber + min;
 	}
 	
+	    /**
+	 * Get position list between two point
+	 * @param	startPosition the position where the pointList Begin
+	 * @param	endPosition the position where the pointList End
+	 * @param   pixelPrecsion step between each position
+	 * @return
+	 */
+	public static function getPointListBetweenTwoPosition(
+			startPosition:Point,
+			endPosition:Point,
+			?pixelPrecision:Float = 1
+		) : Array<Point> {
+		var pointList:Array<Point> = new Array<Point> ();
+
+		var distance:Float = getDistance(startPosition, endPosition);
+		var numberPoints:Int = Std.int(Math.ceil( distance / pixelPrecision));
+
+		var deltaBetweenPoints:Point = new Point (
+			Math.round((endPosition.x - startPosition.x) / numberPoints),
+			Math.round((endPosition.y - startPosition.y) / numberPoints)
+		);
+
+		for (i in 0...numberPoints) {
+			startPosition.setTo(
+				startPosition.x + deltaBetweenPoints.x,
+				startPosition.y + deltaBetweenPoints.y
+			);
+			pointList.push(
+				startPosition.clone()
+			);
+		}
+
+		return pointList;
+	}
+	
 }
