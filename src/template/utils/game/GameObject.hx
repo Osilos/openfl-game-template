@@ -5,7 +5,6 @@ import openfl.display.DisplayObject;
 import openfl.display.MovieClip;
 import openfl.display.Sprite;
 import openfl.geom.Point;
-import openfl.Lib;
 
 /**
  * ...

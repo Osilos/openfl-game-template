@@ -12,7 +12,7 @@
     <app main="template.Main" file="template" path="bin" unless="html5"/>
 
     <!-- Window configuration -->
-    <window fps="60"/>
+    <window fps="60" vsync="true" hardware="true"/>
 
     <!-- sources path -->
     <source path="src"/>
@@ -53,6 +53,6 @@
     <!--<library path="Assets/pnj.swf" type="swflite" if="html5" preload="true" />-->
     <!--<library path="Assets/pnj.swf" type="swf" unless="html5" preload="true" />-->
 
-    <!-- optimize output
-    <haxeflag name="-dce full" /> -->
+    <!-- optimize output -->
+    <!--<haxeflag name="-dce full" />-->
 </project>
