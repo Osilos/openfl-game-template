@@ -16,7 +16,7 @@ class Screen {
 		return position;
 	}
 
-	public static function getTargetFitScaleType(fitType:ScreenFitsType, target:DisplayObject):Point {
+	public static function getTargetFitScale(fitType:ScreenFitsType, target:DisplayObject):Point {
 		var screenSize:Point = getScreenSize();
 		var targetOriginalSize:Point = new Point(target.width / target.scaleX, target.height / target.scaleY );
 

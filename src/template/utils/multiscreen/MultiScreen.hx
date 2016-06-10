@@ -84,7 +84,7 @@ class MultiScreen {
 
 	private function updateTargetScaleToFitScreen():Void {
 		if (mustFitScreen) {
-			var newScale:Point = Screen.getTargetFitScaleType(fitType, target);
+			var newScale:Point = Screen.getTargetFitScale(fitType, target);
 			target.scaleX = newScale.x;
 			target.scaleY = newScale.y;
 		}
