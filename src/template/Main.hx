@@ -1,9 +1,7 @@
 package template;
 
 import template.utils.Advertising;
-import haxe.Timer;
 import extension.admob.GravityMode;
-import extension.admob.AdMob;
 import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
 import template.utils.Localization;

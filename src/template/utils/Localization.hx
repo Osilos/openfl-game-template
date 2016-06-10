@@ -1,31 +1,33 @@
 package template.utils;
 
+import openfl.geom.Point;
 import haxe.Json;
 import Reflect;
 
 #if macro
 import sys.io.File;
 import sys.FileSystem;
+#else
+import hypsystem.system.Device;
 #end
 
 /**
  * ...
  * @author Flavien
  */
-class Localization {private static var localizationSource:Map<String, Map<String, Dynamic>> = new Map<String, Map<String, Dynamic>> ();
+class Localization {
+	private static var localizationSource:Map<String, Map<String, Dynamic>> = new Map<String, Map<String, Dynamic>> ();
 
+	private static inline var DEFAULT_LABEL:String = 'TEXT NOT FOUND';
+	private static inline var DEFAULT_LANGUAGE:String = 'en';
 	private static var language:String;
 
 	/**
 	 * Init the localization source
 	 */
-
 	public static function init():Void {
 		parseSource();
-		// TO DO get language from Device language/config file
-		// FallBack to "en" language if don't find
-		changeSelectLanguage("en");
-
+		changeSelectLanguage(getDeviceLang());
 	}
 
 	/**
@@ -45,15 +47,21 @@ class Localization {private static var localizationSource:Map<String, Map<String
 	 */
 
 	public static function getText(label:String):String {
+		var languageToUse:String = language;
 
-		for (source in localizationSource.get(language)) {
+		if (!localizationSource.exists(language)) {
+			languageToUse = DEFAULT_LANGUAGE;
+			trace("Localization : langage " + language + " does not exist, fallback to " + DEFAULT_LANGUAGE);
+		}
+
+		for (source in localizationSource.get(languageToUse)) {
 			if (Reflect.hasField(source, label))
 				return Reflect.field(source, label);
 		}
 
 		trace("Localization : get Text, try to access label do not exists");
 
-		return label;
+		return DEFAULT_LABEL;
 	}
 
 	private static function parseSource():Void {
@@ -69,13 +77,21 @@ class Localization {private static var localizationSource:Map<String, Map<String
 		}
 	}
 
+	private static function getDeviceLang():String {
+		#if !macro
+		return Device.getLanguageCode().substr(0, 2);
+		#else
+		return DEFAULT_LANGUAGE;
+		#end
+	}
+
 	macro public static function getLocalizationSources():Dynamic {
 		var sources:Dynamic = {};
 		var sourcesStringified;
 		var baseDirectory = '';
 
 		#if ios
-		baseDirectory = '../';
+			baseDirectory = '../';
 		#end
 
 		for (lang in FileSystem.readDirectory(baseDirectory + "assets/localization/")) {
