@@ -1,5 +1,6 @@
 package template;
 
+import template.utils.Advertising;
 import haxe.Timer;
 import extension.admob.GravityMode;
 import extension.admob.AdMob;
@@ -29,21 +30,12 @@ class Main extends Sprite {
 		Localization.init();
 		#end
 
+		if (Metadatas.application.advertising.enabled) {
+			Advertising.init(GravityMode.BOTTOM);
+		}
+
 		Metadatas.load();
 		Game.start();
-
-//		AdMob.enableTestingAds();
-//		AdMob.initIOS('ca-app-pub-4254723393059263/3604002133', 'ca-app-pub-4254723393059263/1164592937', GravityMode.BOTTOM);
-//		AdMob.showBanner();
-//
-//		Timer.delay(function () {
-//			trace('will show !');
-//		}, 4000);
-//
-//		Timer.delay(function () {
-//			AdMob.showInterstitial(0);
-//		}, 5000);
-
 
 		#if showdebuginfo
 		var debugInfo:DebugInfo = new DebugInfo();
