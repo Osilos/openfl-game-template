@@ -15,7 +15,8 @@ import hypsystem.system.Device;
  * ...
  * @author Flavien
  */
-class Localization {private static var localizationSource:Map<String, Map<String, Dynamic>> = new Map<String, Map<String, Dynamic>> ();
+class Localization {
+	private static var localizationSource:Map<String, Map<String, Dynamic>> = new Map<String, Map<String, Dynamic>> ();
 
 	private static inline var DEFAULT_LABEL:String = 'TEXT NOT FOUND';
 	private static inline var DEFAULT_LANGUAGE:String = 'en';
