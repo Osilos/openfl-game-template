@@ -4,3 +4,4 @@ bin
 *.iml
 compile.sh
 *.bat
+*.exe
