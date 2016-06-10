@@ -3,7 +3,7 @@
   "appleAppId": null,
   "androidPackageName": null,
   "advertising": {
-    "enabled": false,
+    "enabled": true,
     "sandbox": true,
     "bannerId": "ca-app-pub-4254723393059263/3604002133",
     "interstitialId": "ca-app-pub-4254723393059263/1164592937"

@@ -27,12 +27,12 @@ class Main extends Sprite {
 		#if !html5
 		Localization.init();
 		#end
+		Metadatas.load();
 
 		if (Metadatas.application.advertising.enabled) {
 			Advertising.init(GravityMode.BOTTOM);
 		}
 
-		Metadatas.load();
 		Game.start();
 
 		#if showdebuginfo
