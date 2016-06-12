@@ -16,16 +16,16 @@ class Metadatas {
 	}
 
 	public static function load():Void {
-		initApplication();
-		initSound();
+		loadConfiguration();
+		loadSound();
 	}
 
-	private static function initApplication():Void {
+	private static function loadConfiguration():Void {
 		var configurationData:String = Assets.getText(CONFIGURATION_PATH);
 		configuration = Json.parse(configurationData);
 	}
 
-	private static function initSound():Void {
+	private static function loadSound():Void {
 		var datas:String = Assets.getText(DATA_SOUND_PATH);
 		var datasParsed:Dynamic = Json.parse(datas);
 
