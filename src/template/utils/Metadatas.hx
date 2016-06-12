@@ -1,15 +1,15 @@
 package template.utils;
 
-import template.utils.config.ApplicationDef;
+import template.utils.config.ConfigurationDef;
 import Reflect;
 import haxe.Json;
 import openfl.Assets;
 
 class Metadatas {
-	private static inline var APPLICATION_PATH = 'config/application.json';
+	private static inline var CONFIGURATION_PATH = 'config/configuration.json';
 	private static inline var DATA_SOUND_PATH = 'sounds/sounds.json';
 
-	public static var application:ApplicationDef;
+	public static var configuration:ConfigurationDef;
 	public static var sound:Map<String, Float> = new Map<String, Float>();
 
 	public function new() {
@@ -21,8 +21,8 @@ class Metadatas {
 	}
 
 	private static function initApplication():Void {
-		var applicationData:String = Assets.getText(APPLICATION_PATH);
-		application = Json.parse(applicationData);
+		var configurationData:String = Assets.getText(CONFIGURATION_PATH);
+		configuration = Json.parse(configurationData);
 	}
 
 	private static function initSound():Void {

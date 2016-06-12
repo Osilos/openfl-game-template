@@ -1,6 +1,6 @@
 package template.utils.config;
 
-typedef ApplicationDef = {
+typedef ConfigurationDef = {
 	var name:String;
 	var debug:Bool;
 	var appleAppId:String;
