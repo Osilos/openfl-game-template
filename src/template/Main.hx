@@ -1,5 +1,6 @@
 package template;
 
+import template.utils.game.Containers;
 import template.utils.game.GameObject;
 import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
@@ -34,7 +35,7 @@ class Main extends Sprite {
 
 		if (Metadatas.application.debug) {
 			var debugInfo:DebugInfo = new DebugInfo();
-			addChild(debugInfo);
+			Containers.debug.addChild(debugInfo);
 		}
 	}
 }

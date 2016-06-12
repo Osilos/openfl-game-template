@@ -35,7 +35,7 @@ class Game {
 
 	public static function start():Void {
 		coinCountTextfield = createCoinCountTextfield();
-		for (i in 0...15) {
+		for (i in 0...50) {
 			createCoin();
 		}
 	}
@@ -66,8 +66,8 @@ class Game {
 //		coin.graphics.beginFill(0x00FF00);
 //		coin.graphics.drawCircle(0, 0, 15);
 
-		coin.x = 1000;
-		coin.y = 500;
+		coin.x = 600;
+		coin.y = 300;
 
 		layer.addTile(coin);
 
@@ -111,7 +111,7 @@ class Game {
 		textField.y = 50;
 		textField.text = '...';
 		textField.width = 9999;
-		Containers.game.addChild(textField);
+		Containers.debug.addChild(textField);
 		return textField;
 	}
 }
