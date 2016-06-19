@@ -14,7 +14,6 @@ import template.utils.Metadatas;
  * @author Flavien
  */
 class Main extends Sprite {
-
 	public function new() {
 		super();
 

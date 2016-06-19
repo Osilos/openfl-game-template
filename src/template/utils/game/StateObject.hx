@@ -1,4 +1,6 @@
 package template.utils.game;
+import template.utils.multiscreen.MultiScreenBuilder;
+import template.utils.multiscreen.MultiScreenBuilder;
 import openfl.display.MovieClip;
 import openfl.display.Sprite;
 
@@ -17,8 +19,8 @@ class StateObject extends GameObject
 	 * @param	libraryName
 	 * @param	movieClipName
 	 */
-	public function new(libraryName:String, movieClipName:String) {
-		super(libraryName, movieClipName + "_" + DEFAULT_STATE);
+	public function new(libraryName:String, movieClipName:String, ?multiScreenBuilder:MultiScreenBuilder) {
+		super(libraryName, movieClipName + "_" + DEFAULT_STATE, multiScreenBuilder);
 
 		currentState = DEFAULT_STATE;
 	}

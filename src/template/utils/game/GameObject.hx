@@ -1,5 +1,7 @@
 package template.utils.game;
 
+import template.utils.multiscreen.MultiScreen;
+import template.utils.multiscreen.MultiScreenBuilder;
 import openfl.Assets;
 import openfl.display.DisplayObject;
 import openfl.display.MovieClip;
@@ -17,20 +19,24 @@ class GameObject extends Sprite
 	private var movieClipName:String;
 	
 	private var anim:MovieClip;
+	private var multiScreen:MultiScreen;
 	
 	/**
 	 * Create a GameObect
 	 * @param	library where the movieClip has to be load
 	 * @param	movieClipName the name of the MovieClip to load
 	 */
-	public function new(libraryName:String, movieClipName:String) {
+	public function new(libraryName:String, movieClipName:String, ?multiScreenBuilder:MultiScreenBuilder) {
 		super();
-		
+
+
 		this.libraryName = libraryName;
 		this.movieClipName = movieClipName;
-		
+
 		anim = createAnim(libraryName, movieClipName);
 		addChild(anim);
+
+		applyMultiScreen(multiScreenBuilder);
 	}
 	
 	/**
@@ -64,6 +70,17 @@ class GameObject extends Sprite
 	 */
 	public function getPosition() : Point {
 		return new Point(x, y);
+	}
+
+	private function applyMultiScreen(multiScreenBuilder:MultiScreenBuilder):Void {
+		if (multiScreenBuilder != null) {
+			multiScreenBuilder.withTargetToHandle(getAnim()).build();
+		} else {
+//			multiScreen = MultiScreenBuilder.create()
+//											.withTargetToHandle(getAnim())
+//											.withUsingSafeZoneScaling(true)
+//											.build();
+		}
 	}
 	
 	private function createAnim (libraryName:String, movieClipName:String) : MovieClip {
