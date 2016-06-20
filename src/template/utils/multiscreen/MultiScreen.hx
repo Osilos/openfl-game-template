@@ -40,15 +40,16 @@ class MultiScreen {
 
 	public function destroy():Void {
 		target.removeEventListener(Event.ADDED_TO_STAGE, subscribeResizeEvent);
+		target.removeEventListener(Event.ADDED_TO_STAGE, updateTarget);
 		target.removeEventListener(Event.REMOVED_FROM_STAGE, unsubscribeResizeEvent);
 	}
 
 	private function handleTarget():Void {
 		target.addEventListener(Event.ADDED_TO_STAGE, subscribeResizeEvent);
+		target.addEventListener(Event.ADDED_TO_STAGE, updateTarget);
 		target.addEventListener(Event.REMOVED_FROM_STAGE, unsubscribeResizeEvent);
 		if (target.stage != null) {
 			subscribeResizeEvent();
-			updateTarget();
 		}
 	}
 

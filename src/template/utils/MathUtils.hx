@@ -85,7 +85,7 @@ class MathUtils
 		}
 		
 		var deltaMinMax:Float = max - min;
-		var randomNumber:Float = Math.round(Math.random() * deltaMinMax);
+		var randomNumber:Float = Math.random() * deltaMinMax;
 		return randomNumber + min;
 	}
 	
