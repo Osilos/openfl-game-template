@@ -23,8 +23,7 @@ class Game {
 		square.x = position.x;
 		square.y = position.y;
 		Containers.game.addChild(square);
-
-		trace(position);
+		
 		Debug.addDebugPointAt(position);
 	}
 

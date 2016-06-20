@@ -1,5 +1,6 @@
 package template.utils.screen;
 
+import openfl.system.Capabilities;
 import openfl.display.DisplayObject;
 import openfl.geom.Point;
 import template.utils.screen.const.ScreenFitsType;
@@ -36,6 +37,11 @@ class Screen {
 	}
 
 	private static function getScreenSize():Point {
+		#if html5
 		return new Point(Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
+		#end
+		#if ios
+		return new Point(Capabilities.screenResolutionX, Capabilities.screenResolutionY);
+		#end
 	}
 }

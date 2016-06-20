@@ -1,5 +1,8 @@
 package template;
 
+import openfl.system.Capabilities;
+import openfl.display.StageDisplayState;
+import openfl.Lib;
 import haxe.Timer;
 import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
@@ -25,7 +28,7 @@ class Main extends Sprite {
 		#if !html5
 		Localization.init();
 		#end
-
+		
 		Metadatas.load();
 		Game.start();
 
