@@ -48,7 +48,6 @@ class MultiScreen {
 		target.addEventListener(Event.REMOVED_FROM_STAGE, unsubscribeResizeEvent);
 		if (target.stage != null) {
 			subscribeResizeEvent();
-			updateTarget();
 		}
 	}
 
