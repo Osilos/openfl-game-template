@@ -1,5 +1,6 @@
 package template;
 
+import haxe.Timer;
 import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
 import template.utils.Localization;

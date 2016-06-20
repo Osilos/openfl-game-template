@@ -1,5 +1,7 @@
 package template.game;
 
+import haxe.Timer;
+import template.utils.debug.Debug;
 import template.utils.screen.Screen;
 import openfl.geom.Point;
 import template.utils.screen.const.ScreenPositions;
@@ -20,8 +22,10 @@ class Game {
 		var position:Point = Screen.getPositionAt(ScreenPositions.CENTER);
 		square.x = position.x;
 		square.y = position.y;
-		square.scaleX = 1;
 		Containers.game.addChild(square);
+
+		trace(position);
+		Debug.addDebugPointAt(position);
 	}
 
 	public static function gameloop(event:Dynamic):Void {
