@@ -59,7 +59,6 @@ class MultiScreen {
 
 	private function unsubscribeResizeEvent(?event:Dynamic):Void {
 		target.stage.removeEventListener(Event.RESIZE, updateTarget);
-		updateTarget();
 	}
 
 	private function updateTarget(?event:Dynamic):Void {
