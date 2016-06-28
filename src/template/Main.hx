@@ -1,5 +1,7 @@
 package template;
 
+import template.utils.Advertising;
+import extension.admob.GravityMode;
 import template.utils.debug.DebugInfo;
 import template.utils.game.Containers;
 import template.utils.Localization;
@@ -25,8 +27,12 @@ class Main extends Sprite {
 		#if !html5
 		Localization.init();
 		#end
-
 		Metadatas.load();
+
+		if (Metadatas.application.advertising.enabled) {
+			Advertising.init(GravityMode.BOTTOM);
+		}
+
 		Game.start();
 
 		#if showdebuginfo
