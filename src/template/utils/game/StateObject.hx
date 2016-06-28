@@ -38,7 +38,7 @@ class StateObject extends GameObject
 		
 		currentState = state;
 		
-		if (box == null) return;
+		if (collisionBox == null) return;
 		
 		createBox(boxLibraryName);
 	}
@@ -51,14 +51,14 @@ class StateObject extends GameObject
 		return currentState;
 	}
 	
-	override private function changeCurrentBoxesNames(boxLibraryName:String, ?boxName:String = null):Void 
+	override private function setCollisionBoxInformation(boxLibraryName:String, ?boxName:String = null):Void 
 	{
 		this.boxLibraryName = boxLibraryName;
 		
-		if (this.boxName != null) {
-			this.boxName = getNameWithoutState(this.boxName) + "_" + currentState;
+		if (this.collisionBoxName != null) {
+			this.collisionBoxName = getNameWithoutState(this.collisionBoxName) + "_" + currentState;
 		} else {
-			this.boxName = boxName == null ? 
+			this.collisionBoxName = collisionBoxName == null ? 
 				getNameWithoutState(animName) + GameObject.BOX_SUFFIX + "_" + currentState 
 				: boxName + "_" + currentState;
 		}

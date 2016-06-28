@@ -19,10 +19,10 @@ class GameObject extends Sprite
 	private var boxLibraryName:String;
 	
 	private var animName:String;
-	private var boxName:String;
+	private var collisionBoxName:String;
 	
 	private var anim:MovieClip;
-	private var box:MovieClip;
+	private var collisionBox:MovieClip;
 	
 	
 	/**
@@ -56,15 +56,15 @@ class GameObject extends Sprite
 	public function createBox (boxLibraryName:String, ?boxName:String = null) : Void {
 		destroyBox();
 		
-		changeCurrentBoxesNames(boxLibraryName, boxName);
+		setCollisionBoxInformation(boxLibraryName, boxName);
 		
-		box = createMovieClip(this.boxLibraryName, this.boxName);
-		addChild(box);
+		collisionBox = createMovieClip(this.boxLibraryName, this.collisionBoxName);
+		addChild(collisionBox);
 		
-		box.visible = false;
+		collisionBox.visible = false;
 		
 		#if showdebuginfo
-		box.visible = true;
+		collisionBox.visible = true;
 		#end
 	}
 	
@@ -83,9 +83,9 @@ class GameObject extends Sprite
 	 * @return
 	 */
 	public function getBox () : MovieClip {
-		if (box == null)
+		if (collisionBox == null)
 			throw objectNotSetException("box");
-		return box;
+		return collisionBox;
 	}
 	
 	/**
@@ -105,9 +105,9 @@ class GameObject extends Sprite
 		return new Point(x, y);
 	}
 	
-	private function changeCurrentBoxesNames (boxLibraryName:String, ?boxName:String = null) : Void {
+	private function setCollisionBoxInformation (boxLibraryName:String, ?boxName:String = null) : Void {
 		this.boxLibraryName = boxLibraryName;
-		this.boxName = boxName == null ? animName + BOX_SUFFIX : boxName;
+		this.collisionBoxName = boxName == null ? animName + BOX_SUFFIX : boxName;
 	}
 	
 	private function createMovieClip (libraryName:String, movieClipName:String) : MovieClip {
@@ -125,14 +125,16 @@ class GameObject extends Sprite
 	}
 	
 	private function destroyAnim() : Void {
-		if (anim == null) return;
-		anim.parent.removeChild(anim);
-		anim = null;
+		destroyChild(anim);
 	}
 	
 	private function destroyBox() : Void {
-		if (box == null) return;
-		box.parent.removeChild(box);
-		box = null;
+		destroyChild(collisionBox);
+	}
+	
+	private function destroyChild (child:MovieClip) : Void {
+		if (child == null) return;
+		child.parent.removeChild(child);
+		child = null;
 	}
 }

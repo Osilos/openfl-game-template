@@ -96,32 +96,32 @@ class MathUtils
 	 * @param   pixelPrecsion step between each position
 	 * @return
 	 */
-	public static function getPointListBetweenTwoPosition(
+	public static function getPointsBetweenTwoPositions(
 			startPosition:Point,
 			endPosition:Point,
 			?pixelPrecision:Float = 1
 		) : Array<Point> {
-		var pointList:Array<Point> = new Array<Point> ();
+		var points:Array<Point> = new Array<Point> ();
 
 		var distance:Float = getDistance(startPosition, endPosition);
-		var numberPoints:Int = Std.int(Math.ceil( distance / pixelPrecision));
+		var pointCount:Int = Std.int(Math.ceil( distance / pixelPrecision));
 
 		var deltaBetweenPoints:Point = new Point (
-			Math.round((endPosition.x - startPosition.x) / numberPoints),
-			Math.round((endPosition.y - startPosition.y) / numberPoints)
+			Math.round((endPosition.x - startPosition.x) / pointCount),
+			Math.round((endPosition.y - startPosition.y) / pointCount)
 		);
 
-		for (i in 0...numberPoints) {
+		for (i in 0...pointCount) {
 			startPosition.setTo(
 				startPosition.x + deltaBetweenPoints.x,
 				startPosition.y + deltaBetweenPoints.y
 			);
-			pointList.push(
+			points.push(
 				startPosition.clone()
 			);
 		}
 
-		return pointList;
+		return points;
 	}
 	
 }
