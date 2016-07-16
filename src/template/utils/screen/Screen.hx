@@ -39,8 +39,7 @@ class Screen {
 	private static function getScreenSize():Point {
 		#if html5
 		return new Point(Lib.current.stage.stageWidth, Lib.current.stage.stageHeight);
-		#end
-		#if ios
+		#else
 		return new Point(Capabilities.screenResolutionX, Capabilities.screenResolutionY);
 		#end
 	}
