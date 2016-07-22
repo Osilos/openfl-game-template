@@ -13,23 +13,30 @@ import openfl.Lib;
  */
 class GameObject extends Sprite
 {
-	private var libraryName:String;
-	private var movieClipName:String;
+	private static inline var BOX_SUFFIX:String = "Box";
+	
+	private var animLibraryName:String;
+	private var boxLibraryName:String;
+	
+	private var animName:String;
+	private var collisionBoxName:String;
 	
 	private var anim:MovieClip;
+	private var collisionBox:MovieClip;
+	
 	
 	/**
 	 * Create a GameObect
-	 * @param	library where the movieClip has to be load
-	 * @param	movieClipName the name of the MovieClip to load
+	 * @param	animLibraryName where the movieClip has to be load
+	 * @param	animName the name of the MovieClip to load
 	 */
-	public function new(libraryName:String, movieClipName:String) {
+	public function new(animLibraryName:String, animName:String) {
 		super();
 		
-		this.libraryName = libraryName;
-		this.movieClipName = movieClipName;
+		this.animLibraryName = animLibraryName;
+		this.animName = animName;
 		
-		anim = createAnim(libraryName, movieClipName);
+		anim = createMovieClip(animLibraryName, animName);
 		addChild(anim);
 	}
 	
@@ -37,8 +44,28 @@ class GameObject extends Sprite
 	 * Destroy the GameObejct
 	 */
 	public function destroy () : Void  {
-		removeChild(anim);
-		anim = null;
+		destroyAnim();
+		destroyBox();
+	}
+	
+	/**
+	 * Create the Box of the GameObject
+	 * @param	boxLibraryName where the movieClip has to be load
+	 * @param	boxName = animName + BOX_SUFFIX. The name of the MovieClip to load
+	 */
+	public function createBox (boxLibraryName:String, ?boxName:String = null) : Void {
+		destroyBox();
+		
+		setCollisionBoxInformation(boxLibraryName, boxName);
+		
+		collisionBox = createMovieClip(this.boxLibraryName, this.collisionBoxName);
+		addChild(collisionBox);
+		
+		collisionBox.visible = false;
+		
+		#if showdebuginfo
+		collisionBox.visible = true;
+		#end
 	}
 	
 	/**
@@ -46,7 +73,19 @@ class GameObject extends Sprite
 	 * @return anim
 	 */
 	public function getAnim () : MovieClip {
+		if (anim == null)
+			throw objectNotSetException("anim");
 		return anim;
+	}
+	
+	/**
+	 * Get the Box of the GameObject
+	 * @return
+	 */
+	public function getBox () : MovieClip {
+		if (collisionBox == null)
+			throw objectNotSetException("box");
+		return collisionBox;
 	}
 	
 	/**
@@ -66,15 +105,36 @@ class GameObject extends Sprite
 		return new Point(x, y);
 	}
 	
-	private function createAnim (libraryName:String, movieClipName:String) : MovieClip {
+	private function setCollisionBoxInformation (boxLibraryName:String, ?boxName:String = null) : Void {
+		this.boxLibraryName = boxLibraryName;
+		this.collisionBoxName = boxName == null ? animName + BOX_SUFFIX : boxName;
+	}
+	
+	private function createMovieClip (libraryName:String, movieClipName:String) : MovieClip {
 		var movieClip:MovieClip = Assets.getMovieClip(libraryName + ":" + movieClipName);
-		if (movieClip == null) throwRessourceNotFoundException(libraryName + ":" + movieClipName);
+		if (movieClip == null) throw ressourceNotFoundException(libraryName + ":" + movieClipName);
 		return movieClip;
 	}
 	
-	private function throwRessourceNotFoundException (resourceName:String) : Void {
-		throw "Resource : " + resourceName + " don't find in any load ressource";
+	private function objectNotSetException (object:String) : String {
+		return "GameObject : no " + object + " is create ";
 	}
 	
-
+	private function ressourceNotFoundException (resourceName:String) : String {
+		return "Resource : " + resourceName + " don't find in any load ressource";
+	}
+	
+	private function destroyAnim() : Void {
+		destroyChild(anim);
+	}
+	
+	private function destroyBox() : Void {
+		destroyChild(collisionBox);
+	}
+	
+	private function destroyChild (child:MovieClip) : Void {
+		if (child == null) return;
+		child.parent.removeChild(child);
+		child = null;
+	}
 }

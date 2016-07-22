@@ -8,7 +8,7 @@ import openfl.display.Sprite;
  */
 class StateObject extends GameObject
 {
-	public static inline var DEFAULT_STATE:String = "Default";
+	public static inline var DEFAULT_STATE:String = "default";
 	
 	private var currentState:String;
 	
@@ -17,8 +17,8 @@ class StateObject extends GameObject
 	 * @param	libraryName
 	 * @param	movieClipName
 	 */
-	public function new(libraryName:String, movieClipName:String) {
-		super(libraryName, movieClipName + "_" + DEFAULT_STATE);
+	public function new(animLibraryName:String, animName:String) {
+		super(animLibraryName, animName + "_" + DEFAULT_STATE);
 
 		currentState = DEFAULT_STATE;
 	}
@@ -30,13 +30,17 @@ class StateObject extends GameObject
 	public function setState(state:String) : Void {
 		if (state == currentState) return;
 		
-		movieClipName = getMovieClipNameWithoutState() + "_" + state;
+		animName = getNameWithoutState(animName) + "_" + state;
 		
-		removeChild(anim);
-		anim = createAnim(libraryName, movieClipName);
+		destroyAnim();
+		anim = createMovieClip(animLibraryName, animName);
 		addChild(anim);
 		
 		currentState = state;
+		
+		if (collisionBox == null) return;
+		
+		createBox(boxLibraryName);
 	}
 	
 	/**
@@ -47,8 +51,21 @@ class StateObject extends GameObject
 		return currentState;
 	}
 	
-	private function getMovieClipNameWithoutState () : String {
-		return movieClipName.substring(0, movieClipName.indexOf("_"));
+	override private function setCollisionBoxInformation(boxLibraryName:String, ?boxName:String = null):Void 
+	{
+		this.boxLibraryName = boxLibraryName;
+		
+		if (this.collisionBoxName != null) {
+			this.collisionBoxName = getNameWithoutState(this.collisionBoxName) + "_" + currentState;
+		} else {
+			this.collisionBoxName = collisionBoxName == null ? 
+				getNameWithoutState(animName) + GameObject.BOX_SUFFIX + "_" + currentState 
+				: boxName + "_" + currentState;
+		}
 	}
 	
+	
+	private function getNameWithoutState (name:String) : String {
+		return name.substring(0, name.indexOf("_"));
+	}
 }

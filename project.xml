@@ -45,6 +45,12 @@
 
     <library path="assets/swf/landscapeUi.swf" type="swflite" if="html5" preload="true"/>
     <library path="assets/swf/landscapeUi.swf" type="swf" unless="html5" preload="true"/>
+	
+	<library path="assets/swf/assets.swf" type="swflite" if="html5" preload="true"/>
+    <library path="assets/swf/assets.swf" type="swf" unless="html5" preload="true"/>
+	
+	<library path="assets/swf/boxes.swf" type="swflite" if="html5" preload="true"/>
+    <library path="assets/swf/boxes.swf" type="swf" unless="html5" preload="true"/>
 
     <!--Example :-->
     <!--<library path="assets/swf/TitleCard.swf" id="TitleCard" type="swflite" preload="true"/>-->
