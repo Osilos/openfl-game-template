@@ -29,9 +29,9 @@ class Main extends Sprite {
 		Metadatas.load();
 		Game.start();
 
-		#if showdebuginfo
-		var debugInfo:DebugInfo = new DebugInfo();
-		addChild(debugInfo);
-		#end
+		if (Metadatas.configuration.debug) {
+			var debugInfo:DebugInfo = new DebugInfo();
+			addChild(debugInfo);
+		}
 	}
 }
